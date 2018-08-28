@@ -10,13 +10,12 @@ Contents:
   该系统主要用于提供bicenter产品帮助文档
 
 .. toctree::
-   :maxdepth: 2 
+   :maxdepth: 4
 
 
 Indices and tables
 =====================================
 
-* :ref:`genindex`
 * :ref:`datashow_help`
 * :ref:`search`
 
