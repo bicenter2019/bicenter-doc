@@ -1,4 +1,5 @@
-.. datashow_help:     
+.. _datashow_help:    
+See :download:`this example script <../example.py>`
                                          
 前言
 ===========================
