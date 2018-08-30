@@ -1,6 +1,6 @@
 .. _Python:
 
- Python 3.7
+Python 3.7
 =======================
 
 :Editor: Elvis Pranskevichus <elvis@magic.io>
