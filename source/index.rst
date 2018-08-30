@@ -15,7 +15,8 @@ Contents:
 
 Indices and tables
 =====================================
-* :ref:`Python 3.7`
-* :ref:`datashow_help <dataShow>`
-* :ref:`search`
+* :ref:`Python`
+* :ref:`BICENTER_DataShow <dataShow>`
+* :ref:`BICENTER帮助手册 <bicenter>`
+
 
