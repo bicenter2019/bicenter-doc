@@ -7,7 +7,7 @@ Welcome to bicenter's documentation!
 ==================================================================================================================
 
 Contents:
-  该系统主要用于提供bicenter产品帮助文档
+  该系统主要用于提供bicenter产品帮助文档以及产品常见问题解决方法
 
 .. toctree::
    :maxdepth: 5
@@ -15,8 +15,8 @@ Contents:
 
 Indices and tables
 =====================================
-* :ref:`Python`
 * :ref:`BICENTER_DataShow <dataShow>`
 * :ref:`BICENTER帮助手册 <bicenter>`
+* :ref:`BICENTER常见问题解决方案 <bicenter_list>`
 
 
