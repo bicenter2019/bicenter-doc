@@ -16,6 +16,6 @@ Contents:
 Indices and tables
 =====================================
 
-* :ref:`datashow_help`
+* :ref:`dataShow`
 * :ref:`search`
 
