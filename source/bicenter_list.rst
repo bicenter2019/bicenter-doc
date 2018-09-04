@@ -9,5 +9,5 @@ BICENTER常用下载
 -----------------------
  * 原因：缺少字符集，下载字符增量文件，将.ZIP文件解压以后的拷贝到$JAVA_HOME/jre/lib/fonts目录下(注意，拷贝时须包含fallback文件夹)
  .. only:: html
- * :download:`点击下载字体增量 <https://github.com/bicenter2018/bicenter-build/blob/master/source/_static/downloadRes/chinese.font.patch.zip>`
+ * :ref:`点击下载字体增量 <https://github.com/bicenter2018/bicenter-build/blob/master/source/_static/downloadRes/chinese.font.patch.zip>`
  
