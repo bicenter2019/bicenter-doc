@@ -12,7 +12,7 @@
 
 BICENTER-DataShow是以.zip格式发布的安装包，以jetty内置容器方式启动，运行依赖java，在部署时只需将安装包解压到一个任意目录文件夹，
 在安装了java并配置好了java环境变量的的客户端直接启动，否则需要安装java，解压以后如下图:
- .. image :: _static/images/1.1.png   
+ .. image :: _static/images/datashow/1.1.png   
 
 
 配置
@@ -23,7 +23,7 @@ BICENTER-DataShow的所有配置是通过文件config.properties配置的，主�
  * 报表文件存放目录（webroot）
  * 数据源，可配置多个数据源
  * 配置完成以后的文件如下：
-  .. image :: _static/images/1.2.png  
+  .. image :: _static/images/datashow/1.2.png  
 
 
 启动
@@ -37,7 +37,7 @@ BICENTER-DataShow的所有配置是通过文件config.properties配置的，主�
 设计全局属性 
 --------------------
 全局属性是设置看板的全局外观属性，	在设计面板，点击【全局属性】，显示全局属性面板如下：
-  .. image :: _static/images/2.1.png
+  .. image :: _static/images/datashow/2.1.png
 * 像素宽，像素高：根据需要展示的屏幕分辨率设置，手动拖动调整或者输入分辨率数值
 * 水平网格数：主要组织组件的布局
 * 背景颜色：画布背景颜色，通过点击选择适合的背景颜色
@@ -46,14 +46,14 @@ BICENTER-DataShow的所有配置是通过文件config.properties配置的，主�
 组件列表
 --------------------
 组件列表展示了看板支持的组件，每个组件对应不同的图形展示，在设计页面点击【组件列表】，可以看到支持的组件如下：
-  .. image :: _static/images/2.2.1.png
+  .. image :: _static/images/datashow/2.2.1.png
 使用时，设计者可以任意拖动对应的组件到设计器页面位置，当鼠标变成双向箭头时则可以拖动组件大小。
- .. image :: _static/images/2.2.2.png
+ .. image :: _static/images/datashow/2.2.2.png
   
 设置组件外框属性
 --------------------
 组件的外框属性，定义了每个组件的外观属性，通过设置可以改变组件的外观。双击组件，即显示每个组件各自对应的组件属性面板，显示如下:
- .. image :: _static/images/2.3.png
+ .. image :: _static/images/datashow/2.3.png
 * 标题栏：设置组件的标题信息
 * 背景：设置组件背景颜色，如果勾选了背景透明，则显示设计页面的背景色
 * 框线：设置组件边框属性，可以拖动或者输入框线范围值
@@ -65,45 +65,45 @@ BICENTER-DataShow的所有配置是通过文件config.properties配置的，主�
 HTML片段
 ~~~~~~~~~~~~
 一般用来展示某个指标，标记某个信息等，属性面板包括以下设置:
- .. image :: _static/images/2.4.1.1.png
+ .. image :: _static/images/datashow/2.4.1.1.png
 * 字体：设置组件要展示的字体样式
 * html模板：输入自定义html样式，取变量的方式是${变量名}
 * 数据：绑定数据
 例如：展示监控报警系统报警的次数，组织SQL查询如下：
 select  count(*)  as  count  from  tbl_ci_base_info 
 点击数据后面【....】弹出数据绑定对话框进行数据绑定，在数据绑定选择要展示的数据字段名称
- .. image :: _static/images/2.4.1.2.png
+ .. image :: _static/images/datashow/2.4.1.2.png
 查看数据绑定结果如下：
- .. image :: _static/images/2.4.1.3.png
+ .. image :: _static/images/datashow/2.4.1.3.png
 
 饼图
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 平铺饼图
 ..............................
 饼图展示的数据只能是单序列数据，一般用于展示比例百分比，属性面板包括如下设置：
- .. image :: _static/images/2.4.2.1.png
+ .. image :: _static/images/datashow/2.4.2.1.png
 * 图例：选择图例显示在组件上的位置，可以选择不显示或者居右，底部，居上或者居左
 * 数据：绑定数据
 例如：展示监控报警系统排名前10的设备报警的次数所占比例，组织SQL查询：
 SELECT t2.name jobName,SUM(t1.event_count) counts FROM alert_event_summary t1,job t2 WHERE t1.major_ver IN (1,2,3,4,5,7,8,9)
 AND t1.job_id = t2.job_id AND t1.node_id  = t2.node_id GROUP BY t1.job_id  ORDER BY counts DESC LIMIT 10
 点击数据后面【...】弹出数据绑定对话框，数据绑定时，“指标名称”可以是自定义的指标名称，可以不填，“值字段”对应的饼图的数值，“名称字段”对应饼图的类别，“位置”对应图形在页面的显示的位置
- .. image :: _static/images/2.4.2.2.png
+ .. image :: _static/images/datashow/2.4.2.2.png
 查看绑定结果如下:
- .. image :: _static/images/2.4.2.3.png
+ .. image :: _static/images/datashow/2.4.2.3.png
  
 
 同心圆
 ..................................
 如果要展示为同心圆的图形，在数据绑定时，填写位置栏，数字小在内圈，数字大的在外圈，例如：
- .. image :: _static/images/2.4.2.4.png
+ .. image :: _static/images/datashow/2.4.2.4.png
 展示结果为：
- .. image :: _static/images/2.4.2.5.png
+ .. image :: _static/images/datashow/2.4.2.5.png
  
 色带仪表
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 色带仪表组件可以制作仪表和色带两种图形，设计时根据需求在属性面板选择不同的图形类别：
- .. image :: _static/images/2.4.3.1.png
+ .. image :: _static/images/datashow/2.4.3.1.png
 * 图形：可以选择仪表和色带两种图形展示，如果选择仪表则设置仪表属性
 * 最小值：仪表刻度的最小刻度值
 * 最大值：仪表刻度的最大刻度值
