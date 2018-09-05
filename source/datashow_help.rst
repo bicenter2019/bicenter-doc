@@ -69,8 +69,10 @@ HTML片段
 * 字体：设置组件要展示的字体样式
 * html模板：输入自定义html样式，取变量的方式是${变量名}
 * 数据：绑定数据
-例如：展示监控报警系统报警的次数，组织SQL查询如下：
-select  count(*)  as  count  from  tbl_ci_base_info 
+例如：展示监控报警系统报警的次数，组织SQL查询如下::
+
+	select  count(*)  as  count  from  tbl_ci_base_info 
+	
 点击数据后面【....】弹出数据绑定对话框进行数据绑定，在数据绑定选择要展示的数据字段名称
  .. image :: _static/images/datashow/2.4.1.2.png
 查看数据绑定结果如下：
@@ -84,9 +86,11 @@ select  count(*)  as  count  from  tbl_ci_base_info
  .. image :: _static/images/datashow/2.4.2.1.png
 * 图例：选择图例显示在组件上的位置，可以选择不显示或者居右，底部，居上或者居左
 * 数据：绑定数据
-例如：展示监控报警系统排名前10的设备报警的次数所占比例，组织SQL查询：
-SELECT t2.name jobName,SUM(t1.event_count) counts FROM alert_event_summary t1,job t2 WHERE t1.major_ver IN (1,2,3,4,5,7,8,9)
-AND t1.job_id = t2.job_id AND t1.node_id  = t2.node_id GROUP BY t1.job_id  ORDER BY counts DESC LIMIT 10
+例如：展示监控报警系统排名前10的设备报警的次数所占比例，组织SQL查询::
+
+	SELECT t2.name jobName,SUM(t1.event_count) counts FROM alert_event_summary t1,job t2 WHERE 	t1.major_ver IN (1,2,3,4,5,7,8,9)
+	AND t1.job_id = t2.job_id AND t1.node_id  = t2.node_id GROUP BY t1.job_id  ORDER BY counts DESC LIMIT 10
+	
 点击数据后面【...】弹出数据绑定对话框，数据绑定时，“指标名称”可以是自定义的指标名称，可以不填，“值字段”对应的饼图的数值，“名称字段”对应饼图的类别，“位置”对应图形在页面的显示的位置
  .. image :: _static/images/datashow/2.4.2.2.png
 查看绑定结果如下:
