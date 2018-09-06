@@ -226,7 +226,7 @@ HTML片段
 地理坐标组件支持一般散点和动效散点图，这两种图形绑定数据的方式是一样的，如果要显示动态效果，图形类别选择动效散点
 例如展示全国主要城市分布，组织查询SQL::
 
-select * from testGeo
+	 select * from testGeo
 
 查询结果如下：
  .. image :: _static/images/datashow/2.4.6.2.png
@@ -251,13 +251,13 @@ select * from testGeo
 * 数据：绑定数据
 例如：组织查询SQL如下::
 
-SELECT DISTINCT  concat(t.ID) as id,  t.INC_NO AS INC_NO,  t.INC_TOPIC AS INC_TOPIC, 
- v.CATEGORY_NAME AS CATEGORY_NAME,  v.TYPE_NAME AS TYPE_NAME,  v.ITEM_NAME AS ITEM_NAME, 
- g.GROUP_NAME AS GROUP_NAME,  dict.DICT_NAME AS STATUS   FROM tbl_itsm_incident_info t 
- LEFT JOIN   VIEW_SYSTEM_ITSM_CTIINFO v  ON t.inc_class = v.item_id  LEFT JOIN   
- TBL_ITSM_GROUP_INFO g  ON g.id = t.DEAL_GROUP_ID   LEFT JOIN   tbl_system_dict_info dict
- ON dict.DICT_VALUE = t.INC_STATUS AND dict.dict_type='ITSM_HPD_STATUS'  AND dict.edit_status=0   
- where t.inc_type=20
+	 SELECT DISTINCT  concat(t.ID) as id,  t.INC_NO AS INC_NO,  t.INC_TOPIC AS INC_TOPIC, 
+	 v.CATEGORY_NAME AS CATEGORY_NAME,  v.TYPE_NAME AS TYPE_NAME,  v.ITEM_NAME AS ITEM_NAME, 
+	 g.GROUP_NAME AS GROUP_NAME,  dict.DICT_NAME AS STATUS   FROM tbl_itsm_incident_info t 
+	 LEFT JOIN   VIEW_SYSTEM_ITSM_CTIINFO v  ON t.inc_class = v.item_id  LEFT JOIN   
+	 TBL_ITSM_GROUP_INFO g  ON g.id = t.DEAL_GROUP_ID   LEFT JOIN   tbl_system_dict_info dict
+	 ON dict.DICT_VALUE = t.INC_STATUS AND dict.dict_type='ITSM_HPD_STATUS'  AND dict.edit_status=0   
+	 where t.inc_type=20
  
 查询结果如下:
  .. image :: _static/images/datashow/2.4.7.2.png
@@ -267,9 +267,9 @@ SELECT DISTINCT  concat(t.ID) as id,  t.INC_NO AS INC_NO,  t.INC_TOPIC AS INC_TO
 例如：标记标题列为蓝色：color:#07e2ff
 标记状态列中的数据，显示已解决为绿色，处理中为红色，已分派为黄色，添加如下jsos串::
 
-[{"value":"已解决" ,"style":"color:#fff;background:#007aff;padding:1px  5px;border-radius: 2px;"},
-{"value":"处理中" ,"style":"color:#fff;background:red;padding:1px 5px;border-radius: 2px;"}, 
-{"value":"已分派" ,"style":"color:#fff;background:#f0ad4e;padding:1px 5px;border-radius: 2px;"} ]
+	 [{"value":"已解决" ,"style":"color:#fff;background:#007aff;padding:1px  5px;border-radius: 2px;"},
+	 {"value":"处理中" ,"style":"color:#fff;background:red;padding:1px 5px;border-radius: 2px;"}, 
+	 {"value":"已分派" ,"style":"color:#fff;background:#f0ad4e;padding:1px 5px;border-radius: 2px;"} ]
 
 数据绑定结果为：
  .. image :: _static/images/datashow/2.4.7.4.png
@@ -284,12 +284,10 @@ SELECT DISTINCT  concat(t.ID) as id,  t.INC_NO AS INC_NO,  t.INC_TOPIC AS INC_TO
 * 数据：绑定数据
 例如：按日期统计工单的来源数量，组织SQL如下::
 
-select date_format(prob_create_date,'%Y-%m') as date, 
-count(PROB_ORIGIN=10 or null) as '事件流程升级',
-count(PROB_ORIGIN=20 OR null) as  '主动事件分析',
-count(PROB_ORIGIN=30 OR null) as  '日常运维发现'
-from tbl_itsm_problem_info where date_format(prob_create_date,'%Y%m') between '201801' and '201805'
-group by date_format(prob_create_date,'%Y-%m')
+	 select date_format(prob_create_date,'%Y-%m') as date, count(PROB_ORIGIN=10 or null) as '事件流程升级',
+	 count(PROB_ORIGIN=20 OR null) as  '主动事件分析',count(PROB_ORIGIN=30 OR null) as  '日常运维发现'
+	 from tbl_itsm_problem_info where date_format(prob_create_date,'%Y%m') between '201801' and '201805'
+	 group by date_format(prob_create_date,'%Y-%m')
 
 查询结果:
  .. image :: _static/images/datashow/2.4.8.2.png
@@ -305,7 +303,7 @@ group by date_format(prob_create_date,'%Y-%m')
 * 列数：设置每行显示几个图标
 例如：要显示机器运行状态情况，准备SQL如下::
 
-select * from testHtmlList
+	 select * from testHtmlList
 
 查询结果如下：
  .. image :: _static/images/datashow/2.4.9.2.png
@@ -319,10 +317,10 @@ select * from testHtmlList
 环形嵌套图主要是用于展示有层级关系的数据，数据绑定参考饼图，需要注意的是，在查询数据时，需要查询多列指标且指标之间有层级关系展示才有意义，
 例如::
 
-select t.num, v.item_id, v.category_name as 一级,v.type_name as 二级, v.ITEM_NAME as 三级 
-from (select count(id) as num ,inc_class from tbl_itsm_incident_info  
-where inc_class is not null group by inc_class)t left join  view_system_itsm_ctiinfo v
-on t.inc_class = v.item_id   where v.category_name is not null  and v.item_id!=19 order by v.category_name
+	 select t.num, v.item_id, v.category_name as 一级,v.type_name as 二级, v.ITEM_NAME as 三级 
+	 from (select count(id) as num ,inc_class from tbl_itsm_incident_info  
+	 where inc_class is not null group by inc_class)t left join  view_system_itsm_ctiinfo v
+	 on t.inc_class = v.item_id   where v.category_name is not null  and v.item_id!=19 order by v.category_name
 
 查询结果如下：
  .. image :: _static/images/datashow/2.4.9.5.png
@@ -334,8 +332,8 @@ on t.inc_class = v.item_id   where v.category_name is not null  and v.item_id!=1
 圆环其实是饼图的变形，区别在于圆环可以设置图例的位置和文字大小，且可以针对圆环做具体的颜色设定。
 例如要查看网络设备的使用情况，准备数据如下::
 
-select count(*) as num,ci_status,(select status_name from tbl_ci_status_define where id= ci_status) 
-as status_name  from tbl_ci_base_info where geog_id=100002  group by ci_status
+	 select count(*) as num,ci_status,(select status_name from tbl_ci_status_define where id= ci_status) 
+	 as status_name  from tbl_ci_base_info where geog_id=100002  group by ci_status
 
 查询结果下:
  .. image :: _static/images/datashow/2.4.9.7.png
@@ -347,8 +345,8 @@ as status_name  from tbl_ci_base_info where geog_id=100002  group by ci_status
 分组框
 ~~~~~~~~~~~~~~~~~~~~~
 分组框主要用于将不同的组件组合在一起，方便组件移动和布局。分组框有个
-锁的状态，用来控制组件是否为一个组合，当.. image :: _static/images/datashow/lock.png处于打开状态时，
-组件未锁定，单个组件可以自由拖动，当.. image :: _static/images/datashow/locked.png处于关闭状态时，组件锁定为一个组合，只能一起移动。
+锁的状态，用来控制组件是否为一个组合，当 .. image :: _static/images/datashow/lock.png处于打开状态时，
+组件未锁定，单个组件可以自由拖动，当 .. image :: _static/images/datashow/locked.png处于关闭状态时，组件锁定为一个组合，只能一起移动。
 
 定制圆环
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -356,7 +354,7 @@ as status_name  from tbl_ci_base_info where geog_id=100002  group by ci_status
 
 删除组件
 =====================
-组件的删除有两种方式，一是页面删除，双击选择要删除的组件，组件右上角出现.. image :: _static/images/datashow/del.png 删除图标，点击删除即删除。
+组件的删除有两种方式，一是页面删除，双击选择要删除的组件，组件右上角出现 .. image :: _static/images/datashow/del.png 删除图标，点击删除即删除。
 二是快捷键删除，双击选择要删除的组件，按住键盘的【Ctrl】+【Delete】键删除组件。
 
 复制组件
