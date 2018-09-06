@@ -127,7 +127,7 @@ HTML片段
 属性面板选择图形类别为“仪表”，点击数据后面【...】弹出数据绑定对话框
 准备查询SQL::
 
-select  count(*)  as  count  from  tbl_ci_base_info 
+	select  count(*)  as  count  from  tbl_ci_base_info 
 
 数据绑定时，“指标名称”可以是自定义或者不填，“值字段” 选择仪表显示的数值来源，“分段设置”填写是比例值，填写0到1之间的连惯数，表示把指标分成几个等级 ，例如设置0.2,0.6,1，表示的是按0-20%，20%-60%，60%-100%将指标分成3段，代表3个等级
  .. image :: _static/images/datashow/2.4.3.2.png
@@ -158,10 +158,10 @@ select  count(*)  as  count  from  tbl_ci_base_info
 * 数据：绑定数据
 例如：展示网络的拓扑关系图，组织查询SQL，需要查询出数据的关联关系::
 
-select c.node_width,c.node_name  ,
-(SELECT node_name from ic_res_node_position WHERE node_id = a.uplink_node_id LIMIT 1) as uplink_name ,
- c.node_type   from ic_res_topo_line a  LEFT JOIN ic_res_node_position c on a.node_id = c.node_id 
-or a.uplink_node_id = c.node_id  WHERE a.topo_id = 4 and a.line_type = 2 and c.node_name != ""
+	select c.node_width,c.node_name  ,
+	(SELECT node_name from ic_res_node_position WHERE node_id = a.uplink_node_id LIMIT 1) as uplink_name ,
+	 c.node_type   from ic_res_topo_line a  LEFT JOIN ic_res_node_position c on a.node_id = c.node_id 
+	or a.uplink_node_id = c.node_id  WHERE a.topo_id = 4 and a.line_type = 2 and c.node_name != ""
 
 数据绑定时，“source名称”表示关系图形起点，“target名称”表示关系图形终点，“值字段”表示节点的数值，“类目名称”表示用于图形的类别
  .. image :: _static/images/datashow/2.4.4.2.png
@@ -181,10 +181,10 @@ or a.uplink_node_id = c.node_id  WHERE a.topo_id = 4 and a.line_type = 2 and c.n
 ....................
 需要明确横纵左边的属性，例如，要展示一周内的监控报警趋势，组织查询sql::
 
-SELECT tttt,COUNT(1) counts FROM  (
-SELECT DATE_FORMAT(create_time,'%Y-%m-%d') tttt FROM alert_event_list WHERE  major_ver IN (1,2,3,4,5,7,8,9) and priority!=1
-and DATE_SUB('2018-05-25', INTERVAL 7 DAY) <= DATE(create_time)
-) temp_table GROUP BY tttt 
+	SELECT tttt,COUNT(1) counts FROM  (
+	SELECT DATE_FORMAT(create_time,'%Y-%m-%d') tttt FROM alert_event_list WHERE  major_ver IN (1,2,3,4,5,7,8,9) and priority!=1
+	and DATE_SUB('2018-05-25', INTERVAL 7 DAY) <= DATE(create_time)
+	) temp_table GROUP BY tttt 
 
 数据绑定时，设置横坐标为类目，纵坐标为数值，根据查询结果设置如下：
  .. image :: _static/images/datashow/2.4.5.2.png
@@ -203,9 +203,9 @@ and DATE_SUB('2018-05-25', INTERVAL 7 DAY) <= DATE(create_time)
 .....................
 堆叠图一般用于有多个指标展示时，指标可以进行堆叠展示，组织查询SQL::
 
-SELECT t2.name jobName,SUM(t1.event_count) counts,avg(t1.event_count) as avg FROM alert_event_summary t1,
-job t2 WHERE t1.major_ver IN (1,2,3,4,5,7,8,9)AND t1.job_id = t2.job_id AND t1.node_id  = t2.node_id
-GROUP BY t1.job_id  ORDER BY counts DESC LIMIT 10
+	SELECT t2.name jobName,SUM(t1.event_count) counts,avg(t1.event_count) as avg FROM alert_event_summary t1,
+	job t2 WHERE t1.major_ver IN (1,2,3,4,5,7,8,9)AND t1.job_id = t2.job_id AND t1.node_id  = t2.node_id
+	GROUP BY t1.job_id  ORDER BY counts DESC LIMIT 10
 
 绑定数据时选择条形堆叠：
  .. image :: _static/images/datashow/2.4.5.6.png
@@ -267,10 +267,9 @@ SELECT DISTINCT  concat(t.ID) as id,  t.INC_NO AS INC_NO,  t.INC_TOPIC AS INC_TO
 例如：标记标题列为蓝色：color:#07e2ff
 标记状态列中的数据，显示已解决为绿色，处理中为红色，已分派为黄色，添加如下jsos串::
 
-[{"value":"已解决" ,"style":"color:#fff;background:#007aff;padding:1px  5px;
-border-radius: 2px;"}, {"value":"处理中" ,"style":"color:#fff;background:red;padding:
-1px 5px;border-radius: 2px;"}, {"value":"已分派" ,"style":"color:#fff;
-background:#f0ad4e;padding:1px 5px;border-radius: 2px;"} ]
+[{"value":"已解决" ,"style":"color:#fff;background:#007aff;padding:1px  5px;border-radius: 2px;"},
+{"value":"处理中" ,"style":"color:#fff;background:red;padding:1px 5px;border-radius: 2px;"}, 
+{"value":"已分派" ,"style":"color:#fff;background:#f0ad4e;padding:1px 5px;border-radius: 2px;"} ]
 
 数据绑定结果为：
  .. image :: _static/images/datashow/2.4.7.4.png
@@ -286,11 +285,10 @@ background:#f0ad4e;padding:1px 5px;border-radius: 2px;"} ]
 例如：按日期统计工单的来源数量，组织SQL如下::
 
 select date_format(prob_create_date,'%Y-%m') as date, 
- count(PROB_ORIGIN=10 or null) as '事件流程升级',
- count(PROB_ORIGIN=20 OR null) as  '主动事件分析',
- count(PROB_ORIGIN=30 OR null) as  '日常运维发现'
-from tbl_itsm_problem_info
-where date_format(prob_create_date,'%Y%m') between '201801' and '201805'
+count(PROB_ORIGIN=10 or null) as '事件流程升级',
+count(PROB_ORIGIN=20 OR null) as  '主动事件分析',
+count(PROB_ORIGIN=30 OR null) as  '日常运维发现'
+from tbl_itsm_problem_info where date_format(prob_create_date,'%Y%m') between '201801' and '201805'
 group by date_format(prob_create_date,'%Y-%m')
 
 查询结果:
@@ -320,6 +318,7 @@ select * from testHtmlList
 ~~~~~~~~~~~~~~~~~~~
 环形嵌套图主要是用于展示有层级关系的数据，数据绑定参考饼图，需要注意的是，在查询数据时，需要查询多列指标且指标之间有层级关系展示才有意义，
 例如::
+
 select t.num, v.item_id, v.category_name as 一级,v.type_name as 二级, v.ITEM_NAME as 三级 
 from (select count(id) as num ,inc_class from tbl_itsm_incident_info  
 where inc_class is not null group by inc_class)t left join  view_system_itsm_ctiinfo v
