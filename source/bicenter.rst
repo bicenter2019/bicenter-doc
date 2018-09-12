@@ -908,9 +908,8 @@ editableAreas:["C13","E6:F9"]，表示在浏览页面此处的单元格是可以
     COMMENTS    VARCHAR2(1000 CHAR),
     USER_ID      VARCHAR2(50 CHAR),
     STATUS      NUMBER,
-    LAST_MODIFY_DATE  DATE
-);
-CREATE  INDEX  FIN_REPORT_MODIFY_01  ON FIN_REPORT_MODIFY(REPORT_CODE);
+    LAST_MODIFY_DATE  DATE); 
+CREATE  INDEX  FIN_REPORT_MODIFY_01  ON FIN_REPORT_MODIFY(REPORT_CODE)；
 CREATE  INDEX  FIN_REPORT_MODIFY_02  ON FIN_REPORT_MODIFY(REPORT_DATE);
 CREATE  INDEX  FIN_REPORT_MODIFY_03  ON FIN_REPORT_MODIFY(BRANCH);
 CREATE  INDEX  F IN_REPORT_MODIFY_04  ON FIN_REPORT_MODIFY(FREQ);
@@ -1309,7 +1308,7 @@ print:"10cm,0cm,1em,0.5cm"，
 10.1	数据源设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 我们要在配置文件中预先设置好数据源，以便报表获取数据库信息。一般，在jdbcDomain.properties的起始部分（data source setting部分）就是配置数据源的位置。接着，介绍三种常用的数据源配置：
-.. 第一种：oracle数据源::
+第一种：oracle数据源::
 
 SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
 SW.jdbc.url=jdbc:oracle:thin:@192.168.198.123:1521:sw
@@ -1319,7 +1318,7 @@ SW.jdbc.password=oracle
 具体含义见下表：
  .. image :: _static/images/bicenter/tab7.png
  
-.. 第二种：sql server数据源::
+第二种：sql server数据源::
 
 JX.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
 JX.jdbc.url=jdbc:sqlserver://192.168.198.123:1433;databaseName=SW;SelectMethod=cursor
@@ -1327,7 +1326,7 @@ JX.jdbc.username=sa
 JX.jdbc.password=123456
 具体含义与oracle数据源相似，只是数据库的名称在databaseName中设置
 
-.. 第三种：mysql数据源::
+第三种：mysql数据源::
 ZZBB.jdbc.driverClassName=org.gjt.mm.mysql.Driver
 ZZBB.jdbc.url=jdbc:mysql://192.168.198.99:3306/tcpdev
 ZZBB.jdbc.username=root
