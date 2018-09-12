@@ -42,17 +42,17 @@ BICENTER 自由报表帮助手册
 2.1	报表文件标签页说明
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 报表文件标签页说明列表如下:	
-	1.基本要求:	必填,定义报表的基本属性（如温馨提示的内容），按模板填写
-	2.查询定义:	必填,定义SQL查询
-	3.查询条件:	必填,定义报表的查询参数及录入界面布局
-	4.define(表样定义)：必填,定义表样及填数规则
-	5.其它设置：选填,控制报表在界面显示效果和缓存等信息
-	6.打印设置：选填,定义打印（导出PDF）的缺省字体、纸张类型等
-	7.chart(图形定义):选填,使用图表时定义
-	8.引用报表定义：选填,引用其他报表单元格时使用
-	9.存储定义：选填,有补录需求的报表，定义如何在数据库中存储补录数据
-	10.套表目录：选填,在做套表的时候需要用此页签代替define
-	11.校验规则：选填,和套表目录同时定义，配合使用
+	* 基本要求:	必填,定义报表的基本属性（如温馨提示的内容），按模板填写
+	* 查询定义:	必填,定义SQL查询
+	* 查询条件:	必填,定义报表的查询参数及录入界面布局
+	* define(表样定义)：必填,定义表样及填数规则
+	* 其它设置：选填,控制报表在界面显示效果和缓存等信息
+	* 打印设置：选填,定义打印（导出PDF）的缺省字体、纸张类型等
+	* chart(图形定义):选填,使用图表时定义
+	* 引用报表定义：选填,引用其他报表单元格时使用
+	* 存储定义：选填,有补录需求的报表，定义如何在数据库中存储补录数据
+	* 套表目录：选填,在做套表的时候需要用此页签代替define
+	* 校验规则：选填,和套表目录同时定义，配合使用
 下面我们将逐一介绍标签页的具体用法
 
 2.2	基本要求 
@@ -87,8 +87,7 @@ BICENTER 自由报表帮助手册
 
 2.3.3.1	单位转换
 '''''''''''''''''''''''
-用作数据转换的查询参数，仅用于实现数据转换，如单位转换，它们对应的报表都是同一份数据。如：某报表的数据在数据库中都是以元为单位，而用户希望同时看到以万元为单位的报表。这里，无论下拉框以元为单位，还是以万元为单位，我们对应的都是同一份以元为单位的数据，只是我们以万元为单位时，所有数据乘上了一个转换因子（对万元而言，我们乘了0.0001）。
-在“取值范围”列，数据转换的转换因子，按“显示名（转换因子）”的语法定义。例：
+用作数据转换的查询参数，仅用于实现数据转换，如单位转换，它们对应的报表都是同一份数据。如：某报表的数据在数据库中都是以元为单位，而用户希望同时看到以万元为单位的报表。这里，无论下拉框以元为单位，还是以万元为单位，我们对应的都是同一份以元为单位的数据，只是我们以万元为单位时，所有数据乘上了一个转换因子（对万元而言，我们乘了0.0001）。在“取值范围”列，数据转换的转换因子，按“显示名（转换因子）”的语法定义。例：
  .. image :: _static/images/bicenter/2.3.3.1.1.png
 单位转换可以和数据精度结合起来用，实现用单位控制小数位数。
  .. image :: _static/images/bicenter/2.3.1.1.2.png
@@ -99,14 +98,12 @@ BICENTER 自由报表帮助手册
 用作录入校验时，可不填写变量名， 在“取值范围”列，需要填写录入有效性验证的布尔表达式，在“默认值”列填写有效性验证失败时的提示信息。
 目前只支持calendar时间控件和text控件的录入校验。如图：
  .. image :: _static/images/bicenter/2.3.3.2.1.png
-要实现录入校验，只需填四列，详情填法见下表：
-序列	列名称	描述
-====    ======  ========
-1	条件名称	填写校验名称（不能重名）
-2	用法	填写“录入校验”
-3	默认值	填写验证失败时系统的提示信息
-4	取值范围	填写用于录入校验规则的布尔表达式
-==  ========    =======================================
+要实现录入校验，只需填四列：
+
+	* 条件名称:	填写校验名称（不能重名）
+	* 用法:填写“录入校验”
+	* 默认值:填写验证失败时系统的提示信息
+	* 取值范围:	填写用于录入校验规则的布尔表达式
 
 :支持如下函数:
 * ${DATEDIFF("day",var.day1,var.day)<100} ：表示以天为单位的变量 day1 与 day的差，变量day1和day应为Date 类型。
@@ -122,10 +119,9 @@ BICENTER 自由报表帮助手册
 必须填写，用户录入的参数，可通过“${var.变量名}”方式在报表上下文中引用。
 如在查询定义中的SQL使用::
 
-SELECT SUM(RKSE) AS Z,HY_DM FROM CDQ_RKSK WHERE
-FSRQ='${var.day}'  GROUP BY  HY_DM
+SELECT SUM(RKSE) AS Z,HY_DM FROM CDQ_RKSK WHERE FSRQ='${var.day}'  GROUP BY  HY_DM
 
-注意，变量名不能为下列名称（大小写不敏感）** code、op、today、rundate、type **
+-- 注意，变量名不能为下列名称（大小写不敏感) ``code、op、today、rundate、type`` 
 
 2.3.5	取值范围
 ..................
@@ -135,13 +131,13 @@ FSRQ='${var.day}'  GROUP BY  HY_DM
 2.3.5.1	静态取值
 '''''''''''''''''''''''''''''''''''
 静态取值是控制输入参数值的范围。有以下几种方法:
-1.罗列法
+* 罗列法
 以“显示值1（值1），显示值2（值2）……”方式，将备选项罗列在取值范围单元格。若显示值与值相同，则可直接以“值1，值2……”方式填写。如下图：
  .. image :: _static/images/bicenter/2.3.5.1.1.png
-#.范围法
+* 范围法
 以“起始值，截止值” 格式限制该参数的取数范围。如下图显示的报表日期就是用范围法取的值。在取值范围内填写的是“20100331，20130331”,由于该参数表示的是日期，则它的取值范围是2010年3月31日到2013年3月31日。该方法一般用于datepicker和Calendar录入控件。
  .. image :: _static/images/bicenter/2.3.5.1.2.png
-#.参数调用法
+* 参数调用法
 这种方法是通过调用其它参数来实现自身参数的取值。该方法一般用于datepicker控件。倘若在界面上定义两个参数：起始日期和截至日期，为了保证截止日期大于等于起始日期就会用到这种方法。
  .. image :: _static/images/bicenter/2.3.5.1.3.png
 在起始时间的取值范围中，引用了截止时间变量：eday。它的取值范围就是1997年1月1日到截止时间的最后一天。
@@ -162,12 +158,14 @@ SelectableValue是bicenter内部定义的一个类，可直接引用，字符串
 Public static SelectableValue[] getBranches(HttpServletRequest request, String baobiaolidu)
 实例如取值范围：
  .. image :: _static/images/bicenter/2.3.5.2.1.png
-**自定义方法在如果注册了，直接在报表使用eel表达式调用：${方法名 ()}** 
+自定义方法在如果注册了，直接在报表使用eel表达式调用: ``${方法名 ()}`` 
 
 2.3.5.3	select语句
 '''''''''''''''''''''''''''''''''''
 可以通过一个select语句定义下拉选择框的备选项，要求select语句具备如下规范::
+
 Select  caption, value from … where …
+
 即：返回数据集中，每行含两列数据，其中，第一列为显示值，第二列为值，每行数据代表一个备选项。
 Select语句统一在“查询定义”标签页中定义，“取值范围”单元格中，只需填写查询名称：QUERY（查询名称）。例： 
  .. image :: _static/images/bicenter/2.3.5.3.1.png
@@ -178,19 +176,11 @@ Select语句统一在“查询定义”标签页中定义，“取值范围”�
 '''''''''''''''''''''''''''''''''''
 倘若用户希望在界面上选多层次外部参数时，首先需要在jdbcDomain.properties文件中配置维度。一般有对两种表进行配置，一种是父子关系（自相关）表，一种是上级字段冗余表。
 父子关系（自相关）表的示例如下：
-			机构表
-======================================
-上级机构_id	 机构_id	机构名称
-===========   ==========   ===========
-null	1	总公司
-1	2	北京分公司
-2	3	中关村办事处
-1	4	成都分公司
-4	5	高新区办事处
-4	6	武侯区办事处
-== ===   ===============
+ .. image :: _static/images/bicenter/tab1.png
+ 
 该表结构的主要特征是：每条数据库记录中，包含一个指定其上级机构的ID。如果该机构是顶层机构（没有上级机构），则其上级机构ID则置为空或一个约定的值如：-1,0 等。
-:父子关系（自相关）表的配置项如下:
+父子关系（自相关）表的配置项如下::
+
  维度名称.hierarchy.datasource=foodmart     //包含该表的数据源名称
  维度名称.hierarchy.store.type=parent.children.table  //该表的存储类型为父子关系（自相关）表
  维度名称.hierarchy.table.name=机构表 //表名（也可为一句sql查询出来的结果集）
@@ -201,18 +191,13 @@ null	1	总公司
  维度名称.hierarchy.child.name=机构名称 //存储本级名称的字段名称
  维度名称.hierarchy.caption.pattern={id} - {name}  //显示本级机构时的字符串模式
  维度名称.hierarchy.parent.id=上级机构_id  //存储上级ID的字段
- 维度名称.hierarchy.parent.id.null.val=null  //顶层机构的上级ID的值
-:上级字段冗余表的示例如下:
-						机构表
-======================================================================
-总公司_id	总公司_name	分公司_id	分公司_name	办事处_id	办事处名称
-========== =======================            ============       ===============
-0	总公司	1	北京分公司	11	中关村办事处
-0	总公司	2	成都分公司	12	高新区办事处
-0	总公司	2	成都分公司	13	武侯区办事处
-================= ============ =========== ===========
+ 维度名称.hierarchy.parent.id.null.val=null  //顶层机构的上级ID的值 
+ 
+上级字段冗余表的示例如下:
+ .. image :: _static/images/bicenter/tab2.png
 该类表的主要特征是：每条记录都将所有上下级关系存在相应的字段中。显而易见，该表结构中，所有非底层的字段都是有冗余的。
-:上级字段冗余表的配置如下:
+上级字段冗余表的配置如下::
+
  维度名称.hierarchy.datasource=foodmart //包含该表的数据源名称
  维度名称.hierarchy.store.type=flat.table //该表的存储类型为“上级字段冗余表”
  维度名称.hierarchy.cache.durance=1H  //缓存时长
@@ -223,7 +208,10 @@ null	1	总公司
  维度名称.hierarchy.level.member.id=总公司_id, 分公司_id, 办事处_id  //存储各层次id的字段，由高至低，逗号分隔
  维度名称.hierarchy.level.member.name=总公司_name, 分公司_name, 办事处名称 //存储各层次名称的字段，由高至低，逗号分隔
  在“取值范围”中指定：hierarchy(配置的维度名称)即可。
-:Hierarchy + multiSelect写法:
+ 
+ 
+Hierarchy + multiSelect写法::
+
 	在jdbcDomain.properties配置文件中， #hierarchy define中添加上级字段冗余表维度配置：
 	shuiwuhy.hierarchy.datasource=MSW    //MSW数据源
 	shuiwuhy.hierarchy.store.type=flat.table //该表的存储类型为“上级字段冗余表”shuiwuhy.hierarchy.cache.durance=1H      //缓存时长1小时
@@ -233,13 +221,15 @@ null	1	总公司
 	shuiwuhy.hierarchy.level.name=产业,行业门类,行业     //三级分层
 	shuiwuhy.hierarchy.level.member.id=cy_mc,hyml_mc,hy_mc  //显示名称
 	shuiwuhy.hierarchy.level.member.name=cy_mc,hyml_mc,hy_mc  //ID名称
+	
 查询条件标签页：
  .. image :: _static/images/bicenter/2.3.5.4.1.png
 层次多选的录入控件用：multiSelect,取值范围为：hierarchy(配置的维度名称)。上图紫色框中部分数据格式设为111，表示第一二三层均可选，“0”表示不可选，“1”表示可选，不填时默认最底层可选。
 
 2.3.5.5	预定义字典设置
 '''''''''''''''''''''''''''''''''''
-预定义字典设置定义了一个表中键值与其它值的对应关系，使用时可通过键值，获得相应的其它值，同样在jdbcDomain.properties文件中配置，配置语法如下：
+预定义字典设置定义了一个表中键值与其它值的对应关系，使用时可通过键值，获得相应的其它值，同样在jdbcDomain.properties文件中配置，配置语法如下::
+
  字典名称.dictionary.datasource=数据源      //配置数据源名
  字典名称.dictionary.store.type=table    //目前仅支持对数据库的表进行配置
  #flat table xml sql
@@ -248,7 +238,9 @@ null	1	总公司
  字典名称.dictionary.name.field=字段名   //名称所在字段名
  字典名称.dictionary.caption.pattern={id} - {name}   //显示名称的模式
  字典名称.cache.durance=1H       //缓存时长
- 例：
+ 
+ .. 例::
+ 
  sjhy.dictionary.datasource=MSW
  sjhy.dictionary.store.type=table
  sjhy.dictionary.table.name=select * from DIM_DM_HY
@@ -256,11 +248,13 @@ null	1	总公司
  sjhy.dictionary.name.field=HY_MC
  sjhy.dictionary.caption.pattern={id} - {name}
  sjhy.cache.durance=1H
+ 
 配置好的字典，在条件中，可以为选择控件提供取值，在“取值范围”一栏以：dictionary（字典名称）格式定义即可。当作为选择控件时，缺省情况下，显示值默认为 “名称所在字段”，实际值默认为“键值所在字段”。
 
 2.3.5.6	预定义分析工具维度层次
 '''''''''''''''''''''''''''''''''''
-预定义分析工具维度层次，是BI-CENTER分析工具已经做好的层次信息，通过配置直接拿过来使用。同样在jdbcDomain.properties文件中配置，配置语法如下：
+预定义分析工具维度层次，是BI-CENTER分析工具已经做好的层次信息，通过配置直接拿过来使用。同样在jdbcDomain.properties文件中配置，配置语法如下::
+
  维度名称.hierarchy.datasource=数据来源  //定义连接分析工具数据源的地址，数据源名称，取值维度等
  维度名称.hierarchy.store.type=url      //以下写法讲解同上面几种
  维度名称.hierarchy.caption.pattern={id} - {name}
@@ -272,7 +266,9 @@ null	1	总公司
  #decimal,time
  维度名称.hierarchy.caption.sort.type=time   //目前只支持时间
  维度名称.hierarchy.caption.sort.parttern=yyyy年MM月dd日  //时间最底层的格式
- 例：
+ 
+ .. 例::
+ 
  olaptime.hierarchy.datasource=http://10.126.3.77:7001/olap/op/memberData?dsnId=/public/dsn/SW业务场景.dsn&cubeName=SW业务场景&hierName=[DIM_DM_TIME]&user=admin&_code=汉语
  olaptime.hierarchy.store.type=url
  olaptime.hierarchy.caption.pattern={name}
@@ -283,6 +279,7 @@ null	1	总公司
  #decimal,time
  olaptime.hierarchy.caption.sort.type=time
  olaptime.hierarchy.caption.sort.parttern=yyyy年MM月dd日
+ 
  配置好的维度层次，在条件中，可以为选择控件提供取值，在“取值范围”一栏以：hierarchy（维度名称）格式定义即可。当作为选择控件时，缺省情况下，显示值默认为 “层次名称字段”，实际值默认为“层次标识字段”。
  .. image :: _static/images/bicenter/2.3.5.6.1.png
  
@@ -334,15 +331,8 @@ ${var.被依赖的变量名}
 '''''''''''''''''''''''''''''''''''
 日期选择控件提供多种粒度的时间选择，包括：年、年半年、年季、年月、年月旬、年月日等。
 日期选择控件也有“显示值”，“隐含值”之分。日期选择控件的“隐含值”，是预定义的编码，编码规则如下表：
-时间粒度	编码方式	位数	格式	说明	示例
-======= =================== ============================
-年	yyyy	4	y		2011
-年半年	yyyy5,yyyy6	5	ys	5表示上半年，6表示下半年	20115,20116
-年季	yyyy[1-4]	5	yq	1-4表示1-4季度	20114
-年月	yymm	6	ym	前4位表示年，后2位表示月，前9月数字前填零	201103
-年月旬	yyyymm[1-3]	7	ymt	最后一位只能取1、2、3；分别表示上、中、下旬	2011032
-年月日	yyyymmdd	8	ymd	最后两位表示日，前9日数字前填零	20110303
-============== ============== ============ ========= =================
+ .. image :: _static/images/bicenter/tab3.png
+ 
 日期选择控件由“数据格式”栏控制其时间粒度，具体写法见“数据格式”。
 例如：年季数据格式为：yyq；年月数据格式为：yymm。
 日期选择控件同样支持以当前时间为基准定义的“默认值”，具体语法见下一节“日期选择控件的缺省值”部分。
@@ -394,22 +384,22 @@ String：字符串，Number：数值，Date：日期
 
 2.3.12.1	日期选择控件的缺省值
 '''''''''''''''''''''''''''''''''''
-对于日期选择控件的缺省值定义，涉及到取当前时间或当前数据更新时间，因此语法较为特殊：
-${var.today( [+|-] n [d|t|m|q|s|y] )}
-或
-${var.rundate([+|-] n [d|t|m|q|s|y] )}
-其中，${var.today} 、${var.rundate}为报表上下文的全局变量，分别为当前自然时间及当前数据更新时间的值。
+对于日期选择控件的缺省值定义，涉及到取当前时间或当前数据更新时间，因此语法较为特殊： ``${var.today( [+|-] n [d|t|m|q|s|y] )}`` 
+或 ``${var.rundate([+|-] n [d|t|m|q|s|y] )}``其中， ``${var.today} 、${var.rundate}`` 为报表上下文的全局变量，分别为当前自然时间及当前数据更新时间的值。
 +表示当前时间加，-表示当前时间减。
 n 为数值。
 d表示天，t表示旬，m表示月，q表示季，s表示半年，y表示年。
-例： ${today("-1d")} 表示当前时间上一天， ${today("-2t")}表示上一旬， ${today("-3m")}表示三个月前……
+.. seealso::
+
+ ${today("-1d")} 表示当前时间上一天， ${today("-2t")}表示上一旬， ${today("-3m")}表示三个月前……
+ 
 要使${rundate("-nm")}有意义，需要额外的配置，否则其等于系统当前时间（与today一致）。参见 “数据更新时间获取方法设置”部分。
 
 2.3.12.2	取Http Session或Http Request上下文中的参数值
-'''''''''''''''''''''''''''''''''''‘’''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 当报表中需要引用Http Session 或 http request 中的字符串类型的参数值（注意：只能是字符串类型）时，可通过定义一个变量，通过定义缺省值，获取该参数，语法如下： 
-session（“key”）   ：Http Session 中，名称为“key”的参数值
-request（“key”）  ： Http Request中，名称为“key”的参数值
+	* session（“key”）   ：Http Session 中，名称为“key”的参数值
+	* request（“key”）  ： Http Request中，名称为“key”的参数值
 
 2.3.12.3	下拉选择框默认值
 '''''''''''''''''''''''''''''''''''
@@ -424,8 +414,10 @@ request（“key”）  ： Http Request中，名称为“key”的参数值
 按需填写。 对于日历控件，可在此栏定义格式。默认格式为yymmdd，格式串含义如下：
 yymmdd  一个y（11）表示两位年，两个y表示4位年（2011）
 一个m表示一位月份，两个m表示两位月份， 一个d表示一位日期，两位d表示两位日期。
-示例： 
+.. 例:: 
+
 yymmdd        20110101
+
 如果日期变量与显示变量格式不一致，按如下写法分别给出：
 显示变量格式（值变量格式）
 2.Datepicker 控件的数据格式
@@ -455,29 +447,35 @@ Datepicker 控件可提供年、年半年、年季、年月旬、年月日等多
 2.4.1	基本规则
 ..............................
 查询定义是表样define需要的query信息，说明如下：
-1.	“查询名称”，“数据源”，“查询定义”是必须的。数据源可以支持从多个数据库   读取数据。
-2.	每个查询须定义一个不重复的名称。以便报表的其它部分对其进行引用。
-3.	此处的SQL语句结束时不需要使用“；”。
-4.	查询语句使用数据源的名称，在此处定义。数据源名称须与配置文件jdbcDomain.properties中数据库连接的设置保持一致。
-如上图中数据源rwa就与下面它的配置文件jdbcDomain.properties中的设置的数据源名称保持一致。
+ * “查询名称”，“数据源”，“查询定义”是必须的。数据源可以支持从多个数据库   读取数据。
+ * 每个查询须定义一个不重复的名称。以便报表的其它部分对其进行引用。
+ * 此处的SQL语句结束时不需要使用“；”。
+ * 查询语句使用数据源的名称，在此处定义。数据源名称须与配置文件jdbcDomain.properties中数据库连接的设置保持一致。
+如上图中数据源rwa就与下面它的配置文件jdbcDomain.properties中的设置的数据源名称保持一致::
+
 rwa.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
 rwa.jdbc.url=jdbc:sqlserver://10.6.10.40:1433;databaseName=RWA;SelectMethod=cursor
 rwa.jdbc.username=sa
 rwa.jdbc.password=123456
-5.	报表上下文变量是指由报表引擎传入的参数，以“${var.变量名}”引用。需要注意的是，无论变量的数据类型如何，报表引擎都只能将其替换为文本串，因此，用户需自行决定是否需要加引号。如： 
+
+报表上下文变量是指由报表引擎传入的参数，以“${var.变量名}”引用。需要注意的是，无论变量的数据类型如何，报表引擎都只能将其替换为文本串，因此，用户需自行决定是否需要加引号。如::
+ 
 select * from people where name=’${var.name}’   (${var.name}为字符串，需加‘’)
 select * from people where age=${var.age}      (${var.age} 为数值)
 
 2.4.2	用法
 ..............................
-Sql查询语句可有如下用法：“数据查询”、“前置处理”及“参数值”。
-1.	用于“数据查询”的SQL语句用于从数据库中提取数据，填写到报表中.
-2.	“前置处理”须在所有查询发生之前率先进行查询，它通常用于执行一个或多个存储过程，其书写语法如下：
+Sql查询语句可有如下用法：``“数据查询”、“前置处理”及“参数值”`` 
+ * 用于“数据查询”的SQL语句用于从数据库中提取数据，填写到报表中.
+ * “前置处理”须在所有查询发生之前率先进行查询，它通常用于执行一个或多个存储过程，其书写语法如下::
+ 
 { call 存储过程名称(${var.参数1}，${var.参数2}…)}
-例：
+.. seealso::
+
 {call SYMBOLS.TP_AM_REPORT.TP_AM_SUBJECT_LIMIT ( ${var.branch}, 
 ${var.subcode}, ${var.userid})}
-3.	“参数值”查询用于填充报表查询条件中某参数的备选项，在“查询条件”标签页中，相应变量通过查询名称对其进行引用。
+
+ * “参数值”查询用于填充报表查询条件中某参数的备选项，在 ``“查询条件”`` 标签页中，相应变量通过查询名称对其进行引用。
 
 2.4.3	选择参数
 ..............................
@@ -513,13 +511,13 @@ http://[ip]:[port]/应用名称/RegularReport?type=office2007/msw/mswqing2.xlsx&
 
 2.5.2	定义报表的过程
 ..............................
-通常，定义一张报表的基本步骤如下：
-1)	定义表样（所见即所得）
-2)	标注左上单元格
-3)	标注右下单元格
-4)	填写单元格，确定取数逻辑
-5)	特殊功能批注
-6)	完成
+通常，定义一张报表的基本步骤如下:
+ * 定义表样（所见即所得）
+ * 标注左上单元格
+ * 标注右下单元格
+ * 填写单元格，确定取数逻辑
+ * 特殊功能批注
+ * 完成
 
 2.5.3	EEL语法
 ..............................
@@ -631,17 +629,7 @@ session参数引用格式：${session[paraName]}
 可以使用一些特定的聚合函数来快速的分组求和等操作。
 一般写法：$(group.查询名称(分组字段名).分组函数名(公式字段名))。
 支持的函数如下：
-函数名	用途	上下文敏感
-=====   =====   ============
-AggrSum(字段名)	分组求和	是
-AggrNo(分组名)、Count(分组名)	分组计数	是
-AggrAvg(字段名)	分组平均	是
-AggrMax(字段名)	分组求最大值	是
-AggrMin(字段名)	分组求最小值	是
-AggrCurrentFirstRow(字段名)	取分组第一行某字段的值	是
-AggrFirstRow(字段名) 、AggrNextFirstRow(字段名)	取下一分组第一行某字段的值	否
-AggrLastRow(字段名)	取分组最后一行某字段的值	是
-============   =============           ============
+ .. image :: _static/images/bicenter/tab4.png
 其中，上下文敏感的函数，是指根据其出现位置的不同，会得到不同结果的函数，如：当分组求和函数出现在分组尾时，得到的是该分组所有行的和；当其出现在查询语句所在行时，其结果是从第一行到当前行的和；当其出现在表头时，得到的是第一行的值。其它上下文敏感函数的行为也是同样的。例如：
  .. image :: _static/images/bicenter/3.2.1.3.1.png
  界面显示：
@@ -652,14 +640,7 @@ AggrLastRow(字段名)	取分组最后一行某字段的值	是
 除分组聚合外，BI-CENTER还支持对整个查询结果集的某个字段进行聚合运算。
 一般写法：$(aggrds.查询名称.分组函数名(字段名))。
 支持的函数列表如下：
-函数名	用途	上下文敏感
-====== =====   ===========
-aggrSum(字段名)	求和	是
-aggrCount()、count()	计数	是
-aggrAvg(字段名)	平均	是
-aggrMax(字段名)	求最大值	是
-aggrMin(字段名)	求最小值	是
-============ ========= ========
+ .. image :: _static/images/bicenter/tab5.png
 使用以上函数时，都需定义一个分组，此分组可以不使用。
  	我们程序还有一些自定义的函数：
   ${dcLastDay(var.day,"yyyy年MM月dd日")}    显示“day”的最后一天
@@ -673,7 +654,6 @@ d表示天，t表示旬，m表示月，q表示季，s表示半年，y表示年�
 还可以进一步用format 函数控制最终的显示效果，如：
 ${format(calcDate(dcToDate(var.day),"-12m"),"yyyy年MM月")}
   还可以转换时间格式：${dcConvertDate(var.day,"yq")}   把“day”的格式转为年季。
-
 
 3.2.2	第二种 数据库分组汇总
 ....................................
@@ -742,20 +722,20 @@ ${format(calcDate(dcToDate(var.day),"-12m"),"yyyy年MM月")}
 ............................
 统计图通过增加标签页“chart”定义。 如下图所示：
  .. image :: _static/images/bicenter/3.6.1.1.png
-1.	名称：用于定义统计图的名称。
-2.	标题：显示在统计图上的标题。
-3.	数据单位：填写后放在副标题的位置。
-4.	数据精度：小数位数。
-5.	自动进位：|前面为数据缩进的位数，|后面为图上所带对应位数的单位。
+ * 名称：用于定义统计图的名称。
+ * 标题：显示在统计图上的标题。
+ * 数据单位：填写后放在副标题的位置。
+ * 数据精度：小数位数。
+ * 自动进位：|前面为数据缩进的位数，|后面为图上所带对应位数的单位。
 如设1000，不满1000的，保持原值显示，大于等于1000的数据会自动转换成K,M类数据；如设1|千，不满1000的，保持原值显示，大于等于1000的数据会自动转换成格式：N千；如设10,10,10,10|十,百,千,万,数据会按照自身的大小转化成N十,N百,N千，N万显示。
-6.	横坐标轴说明：横坐标名称。
-7.	纵坐标轴说明：纵坐标名称。
-8.	三维显示：是否3D图形，否为2D图。
-9.	类型：定义统计图的类型。
+ * 横坐标轴说明：横坐标名称。
+ * 纵坐标轴说明：纵坐标名称。
+ * 三维显示：是否3D图形，否为2D图。
+ * 类型：定义统计图的类型。
 目前支持饼图,散点图,条形图,柱状图,堆叠图,线图,面积图,累积图,漏斗图,金字塔图,。
-10.	色系：定义统计图使用的颜色系列（jdbcDomain内可预定义）
-11.	数据序列名称： 定义数据序列的名称， 一个数据序列对应报表数据的一列（或几列），当一幅图中包含多个数据序列时，用“，”分隔，如：序列1，序列2，序列3……和下面的“数据序列所在的列或行”对应。
-12.	数据序列所在的列或行：指定数据序列对应的报表数据列，使用Excel列坐标（大写字母）表示，多个数据序列使用“，”分隔。
+ * 色系：定义统计图使用的颜色系列（jdbcDomain内可预定义）
+ * 数据序列名称： 定义数据序列的名称， 一个数据序列对应报表数据的一列（或几列），当一幅图中包含多个数据序列时，用“，”分隔，如：序列1，序列2，序列3……和下面的“数据序列所在的列或行”对应。
+ * 数据序列所在的列或行：指定数据序列对应的报表数据列，使用Excel列坐标（大写字母）表示，多个数据序列使用“，”分隔。
 一些类型的统计图（如散点图），一个数据序列需要多个值，这时，使用“|”分隔。 如： A|B， C|D， 表示统计图显示两个序列，一个序列的横坐标数据来源于数据列B，纵坐标数据来源于数据列A；另一个横坐标数据来源于数据列D，纵坐标数据来源于数据列C。
 13.	数据点名称：  指定数据序列中每个数据点的名称所在数据列。
 对于柱图、线图，数据点的名称即为横坐标的值， 对于饼图，数据点名称则对应每个分瓣的名称。
@@ -765,55 +745,55 @@ ${format(calcDate(dcToDate(var.day),"-12m"),"yyyy年MM月")}
 ............................
 3.6.2.1	柱图实例
 ''''''''''''''''''''''''''''''''''''''
-1.	chart标签页
+ * chart标签页
  .. image :: _static/images/bicenter/3.6.2.1.1.png
 A列时间作为横坐标，B列入库税额作为纵坐标。这里的色系ll对应于配置文件jdbcDomain.properties配置的色系名，* :ref:`详情参见统计图序列颜色设置 <color>`
  .. image :: _static/images/bicenter/3.6.2.1.2.png
-2.	define标签页
+ * define标签页
  .. image :: _static/images/bicenter/3.6.2.1.2.png
-3.	界面图形效果
+ * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.1.3.png
 由于在chart标签页中“图上是否显示数据原始值”设置为是，所以值显示在图上。单位设的从千元到亿，则小于1千的数据保持原值，其余数据均会转换成相应单位。由于数据精度设为0，则图上所有数据均会是整数
  
 .. _line:
 3.6.2.2	线图实例
 ''''''''''''''''''''''''''''''''''''''
-1.	把chart标签页柱状图改为线图
+ * 把chart标签页柱状图改为线图
  .. image :: _static/images/bicenter/3.6.2.2.1.png
 A列（时间）作为横坐标，B（入库税额）、C（提退税额）列作为纵坐标。
-2.	define标签页如下
+ * define标签页如下
  .. image :: _static/images/bicenter/3.6.2.2.2.png
-3.	界面图形效果
+ * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.2.3.png
 由于在chart标签页中“图上是否显示数据原始值”设置为否，所以值不显示在图上。单位设的10000000|千万，则小于1千万的数据保持原值，大于1千万的数据转换成千万数据显示。由于数据精度设为2，则图上所有数据均会保留两位显示。 
 
 3.6.2.3	散点图实例
 ''''''''''''''''''''''''''''''''''''''
-1.	把chart标签页改为散点图
+ * 把chart标签页改为散点图
  .. image :: _static/images/bicenter/3.6.2.3.1.png
  数据点名称可以不定义，A列时间作为横坐标，B列，C列数量作为纵坐标。
-2.	:ref:define标签页同`线图实例 <line>`
-3.	界面图形效果
+ * :ref:define标签页同`线图实例 <line>`
+ * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.3.2.png 
 由于在chart标签页中“图上是否显示数据原始值”设置为否，所以值不显示在图上。单位没有设，则默认转成K、M类数据。由于数据精度没设，则图上所有数据默认均会保留两位显示。
 
 3.6.2.4	饼图实例
 ''''''''''''''''''''''''''''''''''''''
-1.	把chart标签页改为饼图
+ * 把chart标签页改为饼图
  .. image :: _static/images/bicenter/3.6.2.4.1.png
 A列时间作为每个分瓣的名称，B列入库税额作为每个分瓣的大小。
-2.	:ref:define标签页同`线图实例 <line>`
-3.	界面图形效果
+ * :ref:define标签页同`线图实例 <line>`
+ * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.4.2.png
 由于在chart标签页中“图上是否显示数据原始值”设置为是，所以值不显示在图上。单位设的10000000|千万，则小于1千万的数据保持原值，大于1千万的数据转换成千万数据显示。由于数据精度为0，则图上所有数据均是整数。图例位置设为无，则不在图上显示图例。
 
 3.6.2.5	条形图实例
 ''''''''''''''''''''''''''''''''''''''
-1.	把chart标签页改为条形图
+ * 把chart标签页改为条形图
  .. image :: _static/images/bicenter/3.6.2.5.1.png
 B列时间作为纵坐标，B列入库税额和C列提退税额作为横坐标。
-2.	:ref:define标签页同`线图实例 <line>`
-3.	界面图形效果
+ * :ref:define标签页同`线图实例 <line>`
+ * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.5.2.png
 由于在chart标签页中“图上是否显示数据原始值”设置为是，所以值不显示在图上。单位设的10000000|千万，则小于1千万的数据保持原值，大于1千万的数据转换成千万数据显示。由于数据精度为0，则图上所有数据均是整数。图例位置设为右，则显示在图形的右边，由于三维显示设为否，则图形不进行三维展示。
 
@@ -839,10 +819,10 @@ embed:{col:1,row:2}
  .. image :: _static/images/bicenter/3.8.3.png
 界面显示：
  .. image :: _static/images/bicenter/3.8.4.png
-还有一种报表的合并，需要根据前面的某列数据为依据合并。例：
+还有一种报表的合并，需要根据前面的某列数据为依据合并,例：
  .. image :: _static/images/bicenter/3.8.5.png
-   mergeRow:true   这句是合并相同的数据，和以前的帮助文档用法相同。
-   mergeRowBy:-4   这句是以哪一行为合并列的标准。如“-4”就是以“贷款人”这一列来合并的“占贷款总额比例”。“-5” 就是以“贷款人”这一列来合并的“本期增减”。“-6”就是以“贷款人”这一列来合并的“欠息金额”。
+mergeRow:true   这句是合并相同的数据，和以前的帮助文档用法相同。
+mergeRowBy:-4   这句是以哪一行为合并列的标准。如“-4”就是以“贷款人”这一列来合并的“占贷款总额比例”。“-5” 就是以“贷款人”这一列来合并的“本期增减”。“-6”就是以“贷款人”这一列来合并的“欠息金额”。
 “-N”的N是当前要合并的列到“所依据列”的列距离数。负数代表向左，正数代表向右。一旦写为mergeRowBy后，无论该列的数据是否有差异，均取第一个数据。
 界面显示：
  .. image :: _static/images/bicenter/3.8.6.png
@@ -865,11 +845,13 @@ ${iif(ds.HZ[NSRSBH=ds.SK[NSRSBH]][Y]="",0,ds.HZ[NSRSBH=ds.SK[NSRSBH]][Y])}
  
 第5章	固定行列型报表定义的说明
 ---------------------------------------
+
  .. image :: _static/images/bicenter/5.1.png
 固定型报表的标题，左上表头，右下单元格和单元格格式等基本的定义同清单型报表，下面介绍固定型报表的一些特殊定义。
  
 5.1	固定型报表的数据区
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
  .. image :: _static/images/bicenter/5.1.1.png 
 把查询出来的结果集填入数据区。
 解释：
@@ -877,17 +859,10 @@ hy              ：query的名称/结果集，必须与查询定义相对应。
 .                ：分隔符，必须使用
 [HYMLDM=01]   ：条件，多个条件时，前后中括号是必须的；等号后面的条件无视数据类型
 RKSE           ：结果集的列名；用法同清单型报表。
-1、${ds.查询名[字段名1=值][字段名2=值]…][字段名3]}
+ * ${ds.查询名[字段名1=值][字段名2=值]…][字段名3]}
 在固定行列报表中，一般用这种方法填充数据，字段名3的取值必须满足前面[字段名1=值][字段名2=值]的条件。例：
-代码	项目	发生额
-===== =====    =========
-100	(一)经常项目	${ds.query[col4=100][amount]}
-110	1.货物贸易	${ds.query[col4=110][amount]}
-120	2.服务贸易	${ds.query[col4=120][amount]}
-130	3.收益和经常转移	${ds.query[col4=130][amount]}
-200	(二)资本与金融项目	${ds.query[col4=200][amount]}
-===== =============== ===========================
-2、如果需要两个查询字段做加减乘除等运算，可以使用如下格式：
+ .. image :: _static/images/bicenter/tab6.png
+ * 如果需要两个查询字段做加减乘除等运算，可以使用如下格式：
 ${(ds.oa[CY_DM=01][RKSE]-ds.od[CY_DM=02][RKSE])/ds.od[CY_DM=01][RKSE]}
 一个${}内包含的运算作为一个结果集。
 固定行列型报表比清单型报表定义较为直观，逻辑不复杂。也可以通过以下标注实现其他功能。
@@ -898,11 +873,11 @@ ${(ds.oa[CY_DM=01][RKSE]-ds.od[CY_DM=02][RKSE])/ds.od[CY_DM=01][RKSE]}
 
 5.2.1	标注补录区域
 ...................................
-1.	左上表头定义中的补录区域 
+ * 左上表头定义中的补录区域 
  .. image :: _static/images/bicenter/5.2.1.1.png
-editableAreas:["C13", "E6:F9"]，表示在浏览页面此处的单元格是可以补录的。C10是指一个单元格，E6:F9是指矩形范围内的单元格。默认为只能输入数字，如果想要此单元格可以输入字母，中文等信息，在后面添加：validatePattern:'none'。如：
+editableAreas:["C13","E6:F9"]，表示在浏览页面此处的单元格是可以补录的。C10是指一个单元格，E6:F9是指矩形范围内的单元格。默认为只能输入数字，如果想要此单元格可以输入字母，中文等信息，在后面添加：validatePattern:'none'。如：
  .. image :: _static/images/bicenter/5.2.1.2.png
-2.	还可以在特定单元格上做批注：
+ * 还可以在特定单元格上做批注：
  .. image :: _static/images/bicenter/5.2.1.3.png
 说明此单元格在界面上可以补录。
  .. image :: _static/images/bicenter/5.2.1.4.png 
@@ -915,9 +890,10 @@ editableAreas:["C13", "E6:F9"]，表示在浏览页面此处的单元格是可�
 下图为“存储定义”中，数据序号、格式、说明列可不填写，其余均为必填。
  .. image :: _static/images/bicenter/5.2.2.1.png
 举例说明需要保存的数据库及表：
-1.	在有ORACLE的机器上新建一个oracle的数据库叫sw，表名叫 FIN_REPORT_MODIFY
-2.	新建的字段有：
-每张需要补录的数据报表名称由引擎自动识别保存。
+ * 在有ORACLE的机器上新建一个oracle的数据库叫sw，表名叫 FIN_REPORT_MODIFY
+ * 新建的字段有：
+每张需要补录的数据报表名称由引擎自动识别保存::
+
   CREATE TABLE FIN_REPORT_MODIFY (
     REPORT_CODE  VARCHAR2(100 CHAR),-----这句必须有，存储补录数据的报表名称
     REPORT_DATE  VARCHAR2(100 CHAR), ---用来唯一区别该补录表内的特殊行
@@ -944,30 +920,32 @@ CREATE  INDEX  FIN_REPORT_MODIFY_07  ON FIN_REPORT_MODIFY(CHUNK_IDX);
 CREATE  INDEX  FIN_REPORT_MODIFY_08  ON FIN_REPORT_MODIFY(USER_ID);
 CREATE  INDEX  F IN_REPORT_MODIFY_09  ON FIN_REPORT_MODIFY(STATUS);
 
-3.	在jdbcDomain.properties新加的数据连接信息：
+3.	在jdbcDomain.properties新加的数据连接信息::
+
  fin.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
-fin.jdbc.url=jdbc:oracle:thin:@192.168.198.123:1521:sw
-fin.jdbc.username=sw
-fin.jdbc.password=oracle
-    补录的数据就存放在FIN_REPORT_MODIFY表里，这里的表名不可以更改。
+ fin.jdbc.url=jdbc:oracle:thin:@192.168.198.123:1521:sw
+ fin.jdbc.username=sw
+ fin.jdbc.password=oracle
+ 
+补录的数据就存放在FIN_REPORT_MODIFY表里，这里的表名不可以更改。
 
 5.2.3	界面演示
 ...................................
-1.	在表样定义：
+ * 在表样定义：
  .. image :: _static/images/bicenter/5.2.3.1.png
-2.	界面显示：
+ * 界面显示：
  .. image :: _static/images/bicenter/5.2.3.2.png
-3.	点击补录图标后 .. image :: _static/images/bicenter/5.2.3.3.png
+ * 点击补录图标后 .. image :: _static/images/bicenter/5.2.3.3.png
  .. image :: _static/images/bicenter/5.2.3.4.png
 有红线的地方表示可以补录。
-4.	填写好数据补录提交后,点击右下角的提交按钮
-5.	点击补录审核图标后： .. image :: _static/images/bicenter/5.2.3.5.png
+ * 填写好数据补录提交后,点击右下角的提交按钮
+ * 点击补录审核图标后： .. image :: _static/images/bicenter/5.2.3.5.png
  .. image :: _static/images/bicenter/5.2.3.6.png
-6.	有小标识的地方是补录过的数据。鼠标停留在小标识处提示：
+ * 有小标识的地方是补录过的数据。鼠标停留在小标识处提示：
  .. image :: _static/images/bicenter/5.2.3.7.png
-7.	点击同意，提示操作完成，结束补录。
-8.	补录后打印，导出的数据都是补录后的数据。
-9.	该补录必需通过审核功能后才能使用，需要有应用框架的权限体系提供具体的权限分配情况。
+ * 点击同意，提示操作完成，结束补录。
+ * 补录后打印，导出的数据都是补录后的数据。
+ * 该补录必需通过审核功能后才能使用，需要有应用框架的权限体系提供具体的权限分配情况。
 
 5.3	固定型报表填充值设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1037,12 +1015,12 @@ ${  bicenter支持的运算公式 }
  .. image :: _static/images/bicenter/8.1.1.png
 “数字”的定义是有效的，可以定义成不同分类。
 目前，系统可识别及重现Excel单元格中的如下信息：
-1.	填入单元格内的文本、数值及运算公式（目前仅支持加减乘除四则运算等简单公式），查询结果引用
-2.	单元格格式信息
-3.	单元格左中右对齐
-4.	文字横排、竖排
-5.	单元格背景色、是否显示边框
-6.	单元格字体是否使用粗体
+ * 填入单元格内的文本、数值及运算公式（目前仅支持加减乘除四则运算等简单公式），查询结果引用
+ * 单元格格式信息
+ * 单元格左中右对齐
+ * 文字横排、竖排
+ * 单元格背景色、是否显示边框
+ * 单元格字体是否使用粗体
 
 8.2	特殊人民币格式
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1123,10 +1101,13 @@ IF(Con,R1,R2) ，假设Con示例为R1>= R2（标准的excel公式格式都可以
 为支持由一张报表向相关报表的跳转，可通过在触发跳转的单元格中做如下标注：
 {href: url}
 url字符串中，可引用报表上下文变量（$变量名）及查询结果
-例：{href："RegularReport?type=T0_new.xls &op=view&branch=${var.branch}&day=${var.day}&cltno=${ds.data[SEQ_NO]}&cltname=${ds.data[PAYER_NAME]}"}
-type=T0_new.xls   这里的T0_new.xls是跳转的目标报表。
+.. 例::
+
+ {href："RegularReport?type=T0_new.xls &op=view&branch=${var.branch}&day=${var.day}&cltno=${ds.data[SEQ_NO]}&cltname=${ds.data[PAYER_NAME]}"}
+    type=T0_new.xls   这里的T0_new.xls是跳转的目标报表。
      branch=${var.branch}  第一个branch为连接接收报表的参数，第二个branch为本报表传出参数
      cltno=${ds.data[SEQ_NO]}    cltno为连接接收报表的参数，${ds.data[SEQ_NO]}为本报表的查询结果。
+	 
 如图简单的URL：
  .. image :: _static/images/bicenter/8.7.1.png
 在界面上：
@@ -1135,10 +1116,12 @@ type=T0_new.xls   这里的T0_new.xls是跳转的目标报表。
 
 8.8	标注列表头最小宽度
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-在需要控制的列表头单元格中，添加标注：
+在需要控制的列表头单元格中，添加标注::
+
 {
    minWidth:”Nem”
 }
+
 表示N 个字符宽度，其中， N 为任意数字，可为小数。
 
 8.9	其它设置
@@ -1166,8 +1149,8 @@ type=T0_new.xls   这里的T0_new.xls是跳转的目标报表。
 在行为控制中，“查询操作时自动清除缓存”，缺省为“否”, 当设置为”是”时，点击报表“查看”按钮时，将自动更新缓存，与“刷新”按钮等同。
 注意：查询操作时自动清除缓存设置为“是”时，须确保：1、无并发操作；2、查询较轻。对应查询负荷重的报表，请谨慎使用该设置。
 在行为控制中，“无值单元格填充值”只适用于固定行列型报表。
-在行为控制中，“主动提示时长”，用来控制V3.5老版本的温馨提示显示的时间长短。
-在行为控制中，“清单型报表导出Excel算法”有两种取值：内容优先和格式优先。当选择内容优先，导出某张清单型报表，打开时，显示效果：
+“主动提示时长”，用来控制V3.5老版本的温馨提示显示的时间长短。
+“清单型报表导出Excel算法”有两种取值：内容优先和格式优先。当选择内容优先，导出某张清单型报表，打开时，显示效果：
  .. image :: _static/images/bicenter/8.9.2.1.png
 当选择格式优先，导出某张清单型报表，打开时，显示效果：
  .. image :: _static/images/bicenter/8.9.2.2.png
@@ -1195,11 +1178,10 @@ ${ref.报表引用名称[单元格坐标]}。
 通过打印设置标签页，我们可以定义报表的打印（导出到PDF）字体，纸张信息。
  .. image :: _static/images/bicenter/9.1.1.png
 调整excel表样上的打印设置页签：
-1.	调整字体大小，根据实际情况在打印设置页签，把表头，表内，表尾的字体放大或缩小。
-2.	与客户确定好打印纸的纸型，在上图中的“打印规格”上面设置。
-3.	设置页边距，常见报表右半边打印不上，把右页边距的值调小。
-例：
-   把上图的左右页边距，上下页边距填好。打印时，打印设置页面会自动读出已有设置。打印纸张默认为套打。例：
+ * 调整字体大小，根据实际情况在打印设置页签，把表头，表内，表尾的字体放大或缩小。
+ * 与客户确定好打印纸的纸型，在上图中的“打印规格”上面设置。
+ * 设置页边距，常见报表右半边打印不上，把右页边距的值调小。
+例:把上图的左右页边距，上下页边距填好。打印时，打印设置页面会自动读出已有设置。打印纸张默认为套打。
  .. image :: _static/images/bicenter/9.1.2.png
 用户可以根据自身需要控制打印内容和打印范围。如下：
  .. image :: _static/images/bicenter/9.1.3.png
@@ -1259,11 +1241,13 @@ print:"10cm,0cm,1em,0.5cm"，
 并且需要将分组的标注添加到这里。如果不添加分组在这里，只添加套打标注，套打时，会出现只有第一个分组打印出“xxx公司产品明帐”。 添加分组的目的就是使这个单元格显示在每一个分组里面。
 如下面的标注分别如下：
  .. image :: _static/images/bicenter/9.3.2.4.png
- 在产品名称的标注需要注意的是：   
+ 在产品名称的标注需要注意的是::
+ 
  printRow:{
             pos:'1.5cm',
             height:'0.5cm'
            }
+		   
 表示在离纸张上端1.5cm处，高度0.5cm的范围打印这一行。上面标注该行字段的打印范围是为了实现在套打中，这一行能在该位置上被打印出来。
 在打印柜员：小明批注需要注意的是：
  .. image :: _static/images/bicenter/9.3.2.5.png
@@ -1305,47 +1289,45 @@ print:"10cm,0cm,1em,0.5cm"，
 --------------------------
 数据源及报表运行环境由配置文件设置。该文件即是：安装目录\bicenterfin\WEB-INF \jdbcDomain.properties。
 该配置文件定义了报表运行过程中所需要的所有信息，包括：
-1.	数据源（必须设置）
-2.	表样存放地址（必须设置）
-3.	缓存存放地址（必须设置）
-4.	缓存控制项设置（必须设置）
-5.	数据更新时间获取方法设置（可选设置）
-6.	日志记录方案设置（可选设置）
-7.	预定义维度设置（可选设置）
-8.	预定义字典设置（可选设置）
-9.	预定义分析工具维度层次（可选设置）
-10.	预定义系统变量设置（可选设置）
-11.	当前用户信息获取方法设置（可选设置）
-12.	配置使用LOG4J记录日志
-13.	维度权限设置（可选设置）
-14.	统计图序列颜色设置（可选设置）
-15.	自定义组件插入设置（可选设置）
+ * 数据源（必须设置）
+ * 表样存放地址（必须设置）
+ * 缓存存放地址（必须设置）
+ * 缓存控制项设置（必须设置）
+ * 数据更新时间获取方法设置（可选设置）
+ * 日志记录方案设置（可选设置）
+ * 预定义维度设置（可选设置）
+ * 预定义字典设置（可选设置）
+ * 预定义分析工具维度层次（可选设置）
+ * 预定义系统变量设置（可选设置）
+ * 当前用户信息获取方法设置（可选设置）
+ * 配置使用LOG4J记录日志
+ * 维度权限设置（可选设置）
+ * 统计图序列颜色设置（可选设置）
+ * 自定义组件插入设置（可选设置）
 下面仔细讲解需要自己配置的信息
 
 10.1	数据源设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 我们要在配置文件中预先设置好数据源，以便报表获取数据库信息。一般，在jdbcDomain.properties的起始部分（data source setting部分）就是配置数据源的位置。接着，介绍三种常用的数据源配置：
-第一种：oracle数据源
-    如：SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+.. 第一种：oracle数据源::
+
+SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
 SW.jdbc.url=jdbc:oracle:thin:@192.168.198.123:1521:sw
 SW.jdbc.username=sw
 SW.jdbc.password=oracle
-具体含义见下表：
-名称	具体意义
-====        ================================
-SW	设置数据库的别名，以便报表在查询定义中引用
 
-192.168.198.123:1521:sw	192.168.198.123为数据库的IP地址，1521为数据库端口，sw为数据库名称
-SW.jdbc.username=sw	sw为数据库的用户名
-SW.jdbc.password=oracle	oracle为数据库的密码
-=======  ============================
-第二种：sql server数据源
-    如：JX.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+具体含义见下表：
+ .. image :: _static/images/bicenter/tab7.png
+ 
+.. 第二种：sql server数据源::
+
+JX.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
 JX.jdbc.url=jdbc:sqlserver://192.168.198.123:1433;databaseName=SW;SelectMethod=cursor
 JX.jdbc.username=sa
 JX.jdbc.password=123456
 具体含义与oracle数据源相似，只是数据库的名称在databaseName中设置
-第三种：mysql数据源
+
+.. 第三种：mysql数据源::
 ZZBB.jdbc.driverClassName=org.gjt.mm.mysql.Driver
 ZZBB.jdbc.url=jdbc:mysql://192.168.198.99:3306/tcpdev
 ZZBB.jdbc.username=root
@@ -1360,74 +1342,92 @@ ZZBB.jdbc.password=123456
 report.base.path=本地盘目录
 例：
 report.base.path=D:/FMT/rptdef5/tmpls  所有的表样都放在tmpls下面。
-注：1.表样的存放目录不宜太深，如tmpls下可以再有一层文件夹。
-    2.表样目录和下节的缓存目录必须放在应用外。
-3.	在配置目录下的tmpls下面可以有子目录。
+ -- 注：* 表样的存放目录不宜太深，如tmpls下可以再有一层文件夹。
+		* 表样目录和下节的缓存目录必须放在应用外。
+		* 在配置目录下的tmpls下面可以有子目录。
 
 10.2.2	缓存存放路径
 ...........................
 cache.report.path=本地盘目录
-例：
+例::
+
 cache.report.path=D:/FMT/rptdef5/tmp  访问报表后会自动在tmp文件夹下缓存报表信息。
 
 10.2.3	表样打包说明
 ...........................
 表样打包的意思是可以把我们的表样分成多个部分存放在不同的目录下，只要写明路径就可以。
 一．首先运行下到应用包目录的lib文件夹下。
-例:
+例::
+
 D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>
+
 二．目前有四个可用的命令
-1 , 表样编译：是把以前存放目录下的表样全部预先编译一次，这样在界面上打开报表时所花的解析表样时间更短。注意会自动为每个表样生成一个后缀为obj的文件。
-说明：
+ * 表样编译：是把以前存放目录下的表样全部预先编译一次，这样在界面上打开报表时所花的解析表样时间更短。注意会自动为每个表样生成一个后缀为obj的文件。
+说明::
+
      compile all report template files under a file folder:
      java -jar bicenter.jar -compile full-path-of-the-folder
-例：
+	 
+例::
+
 D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -compile D:\FMT\rptdef5\tmpls
 
-2 ,打包：是把某目录下的表样全部打包，变为一个文件，形成表样库，以便有多个表样库可以同时使用。注意后缀为brp。
-说明：
+ * 打包：是把某目录下的表样全部打包，变为一个文件，形成表样库，以便有多个表样库可以同时使用。注意后缀为brp。
+说明::
+
     put all report template files under a file folder into a package:
     java -jar bicenter.jar -pack full-path-of-the-folder the-package-name
-例：
+	
+例::
+
 D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -pack D:\FMT\rptdef5\tmpls D:\FMT\demo.brp
 
-3 ,包反编译为文件：把包内的文件解压出来，以便修改表样。
-说明：
+ * 包反编译为文件：把包内的文件解压出来，以便修改表样。
+说明::
+
     unpack all report template files from a package into a file folder:
     java -jar bicenter.jar -unpack the-package-name full-path-of-the-folder
-例：
+	
+例::
+
 D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -unpack D:\FMT\demo.brp D:\FMT\tmpls1
 
-4 , 把原来的包重新打一次：也许发版本后需要把原来的包重新打包一次。
-说明：
+ * 把原来的包重新打一次：也许发版本后需要把原来的包重新打包一次。
+说明::
+
      repack all report template files in a package into a new package:
      java -jar bicenter.jar -repack the-source-package-name the-new-package-name
-例：
+	 
+例::
+
 D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -repack D:\FMT\demo.brp d:\demo.brp
 
 三．表样库使用
-在jdbcDomain.properties文件内：
+.. 在jdbcDomain.properties文件内::
 ##################################
 #report template home setting
 ##################################
 report.base.path=D:/FMT/rptdef5/tmpls    -------这是原来的表样存放路径
 zhuxl.report.lib=D:/FMT/demo.brp         -------这是使用表样库的路径
 。。。。。。。。。                       -------多个库都这样写下来
-四．报表引用时
+
+四．报表引用时::
+
 http://localhost:8080/bicenterfin5/RegularReport?_type=zhuxl/mswgd.xls&_code=汉语      ---------在表样名前加上库的名字
 
 10.2.4	多配置方法
 .............................
 现在支持多个jdbcDomain.properties配置文件。下面具体介绍配置方法。
-一、	使用原来老的方式，表样文件放入tmpls文件夹下，安装目录\WEB-INF\jdbcDomain.properties下配置数据源，hierarchy，全局变量等信息。
-二、	如果需要把表样文件分成多分，每一个大的分类使用不同的数据源，全局变量，rundate等信息时（如金融T+0和T+1的区别）。可以采用以下配置方法，直接使用文件夹的方式（XX.lib）
-1.	如在服务器表样目录建立文件夹名------如sw.lib。
-2.	这里面存放N个表样。
-3.	这些表样使用的数据源，全局变量，rundate等信息放在和excel表样平级的jdbcDomain.properties内。
-4.	把这个目录信息配置到总的安装目录\WEB-INF\jdbcDomain.properties下。
+ * 使用原来老的方式，表样文件放入tmpls文件夹下，安装目录\WEB-INF\jdbcDomain.properties下配置数据源，hierarchy，全局变量等信息。
+ * 如果需要把表样文件分成多分，每一个大的分类使用不同的数据源，全局变量，rundate等信息时（如金融T+0和T+1的区别）。可以采用以下配置方法，直接使用文件夹的方式（XX.lib）
+	* 如在服务器表样目录建立文件夹名------如sw.lib。
+	* 这里面存放N个表样。
+	* 这些表样使用的数据源，全局变量，rundate等信息放在和excel表样平级的jdbcDomain.properties内。
+	* 把这个目录信息配置到总的安装目录\WEB-INF\jdbcDomain.properties下。
 例：目录结构
  .. image :: _static/images/bicenter/10.2.4.1.png
-这个jdbcDomain.properties存放的是sw.lib目录下所有表样的配置信息。
+这个jdbcDomain.properties存放的是sw.lib目录下所有表样的配置信息::
+
 ##############################
 #data source setting
 ##############################
@@ -1500,7 +1500,6 @@ sjhy.cache.durance=1H
 customer.var.value=未注册用户猪猪msw
  	swb.brp和mswb.brp是用表样打包的方法，内含各自的jdbcDomain.properties，同上。
  	表样配置好后，在全局的jdbcDomain.properties里配置上面的几个目录。
-
 ##################################
 #report template home setting
 ##################################
@@ -1512,6 +1511,7 @@ SWB.report.lib=D:/FMT/rptdef5/swb.brp   MSWB.report.lib=D:/FMT/rptdef5/mswb.brp
 #cache setting
 #########################################
 cache.report.path=D:/FMT/rptdef5/tmp
+
  .. image :: _static/images/bicenter/10.2.4.3.png
 url访问
 文件夹形式：
@@ -1522,14 +1522,18 @@ http://localhost:8080/bicenterfin5/RegularReport?_type=swb/sw1.xls&_code=汉语
 
 10.3	数据更新时间获取方法设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-当前数据更新时间来自业务数据库，需要通过配置告诉程序如何提取,语法如下：
+当前数据更新时间来自业务数据库，需要通过配置告诉程序如何提取,语法如下::
+
 rundate.datasource=数据源（第一步配置的数据源名称）
 rundate.sql=SQL查询语句（要求仅返回一列）
 rundate.format=日期字符串的格式
 日期字符串格式规范y表示年，M（大写）表示月，d表示日，示例如下： 
 yyyyMMdd ： 20110101   2011年1月1日
 yyyy-MM-dd :   2011-01-01 2011年1月1日
-   例：rundate.datasource=fin
+
+.. 例::   
+
+rundate.datasource=fin
 rundate.sql=select SYS_RUN_DATE from FIN_SYSTEM 
 rundate.format=yyyyMMdd
 
@@ -1544,7 +1548,8 @@ log.verbose=日志级别
  .. _dictionary:
 10.5	预定义字典设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-预定义字典设置定义了一个表中键值与其它值的对应关系，使用时可通过键值，获得相应的其它值，配置语法如下：
+预定义字典设置定义了一个表中键值与其它值的对应关系，使用时可通过键值，获得相应的其它值，配置语法如下::
+
 字典名称.dictionary.datasource=数据源（配置数据源名称）
 字典名称.dictionary.store.type=table（目前仅支持对数据库的表进行配置）
 #flat table xml sql
@@ -1561,14 +1566,12 @@ sjhy.dictionary.key.field=HY_DM
 sjhy.dictionary.name.field=HY_MC
 sjhy.dictionary.caption.pattern={id} - {name}
 sjhy.cache.durance=1H
+
 配置好的字典，在报表定义中有两种用途：
 其一，可通过语法： ${dic.字典名称[id][字段名]} 获取其值。
 上式的具体含义详情参见下表：
-名称	含义
-===        ======
-id	键值所在字段，即预定义字典中“字典名称.dictionary.key.field=字段名”的字段名
-字段名	表示要从预定义字典中取出的字段名，如果取出的字段刚好是预定义字典中“字典名称.dictionary.name.field=字段名”中的字段名，则可省略
-===       ======================================================================
+ .. image :: _static/images/bicenter/tab8.png
+
 如：${dic.sjhy[ds.SK.HY_DM][CY_MC]}，表示通过预定义数据字典sjhy取CY_MC字段，该字段对应于SK查询的HY_DM字段。
     ${dic.sjhy[ds.SK.HY_DM]}，表示通过预定义数据字典sjhy取出HY_MC字段，该字段对应于SK查询的HY_DM字段。
 其二，在查询条件中，可以为选择控件提供取值，在“数据范围”一栏以：dictionary（字典名称）格式定义即可。当作为选择控件时，缺省情况下，显示值默认为 “名称所在字段”，实际值默认为“键值所在字段”。如：
@@ -1591,7 +1594,9 @@ id	键值所在字段，即预定义字典中“字典名称.dictionary.key.fiel
 第一个配置：userid.pass.method : request/session， 若设为request 表示从http请求参数中取用户id，若设为session表示从http session变量中取用户id。
 第二个配置：userid.pass.key：设置用户ID的 http请求参数名或session属性名
 username.pass.key: 配置用户显示名的 http请求参数名或session属性名，可省略
-例：配置如下：
+例:
+.. 配置如下::
+
 userid.pass.method=request
 userid.pass.key=uid
 倘若用户通过url: http://localhost/bicenterfin/report?type=xxx&uid=liuxjg访问报表，则该配置指示程序从http request中取参数uid的值“liuxjg“作为用户ID。
@@ -1615,47 +1620,49 @@ log4j.appender.f.File=bicenter.info.log
 
 10.9	统计图序列颜色设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  在jdbcDomain.properties文件的直接以格式：色系名称.color = 背景色，色1，色2，色3 ...定义。如：
+在jdbcDomain.properties文件的直接以格式：色系名称.color = 背景色，色1，色2，色3 ...定义。如::
+
 dc.color=#ffffff,#ffe749,#bac53b,#ff914c,#45eeee,#f04a4a,#ff49f5,#49fa8c,#70bcf9,#8070f9
 zz.color=#ffffff,#cccc33,#db7a7a,#b6db7a,ffee75
 ll.color=#ffffff,#00ffff,#00ff36,#ff7500,e9f704
+
 假设报表定义的chart标签页需要引用定义的色系名称，直接在色系一行中填上预定义的色系名称即可，如（dc,zz，ll）。
 
 10.10	Tomcat安装及访问路径
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1.	将bicenterfin包部署到应用服务器下(TomcatHome/webapps)。
-2.	启动应用服务器。
-3.	网页访问http://ip:port/bicenterfin
+ * 将bicenterfin包部署到应用服务器下(TomcatHome/webapps)。
+ * 启动应用服务器。
+ * 网页访问http://ip:port/bicenterfin
 
 10.11	集成报表URL引用
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1.	启动应用服务器，浏览器访问：http://ip:port/bicenterfin
+ * 启动应用服务器，浏览器访问：http://ip:port/bicenterfin
 安装无误时，可以显示tmpls下所有报表。
  .. image :: _static/images/bicenter/10.11.1.png
-2.	直接通过URL看某张报表
+ * 直接通过URL看某张报表
 在BI-CENTER中支持用url直接访问报表。用户可以根据自身需要，遵循如下规则得到自己想要的效果。
-（1）	在显示界面中：显示录入条件区，报表内容空白，待点击查看报表后方才显示报表内容，则用如下url访问即可：
+	* 在显示界面中：显示录入条件区，报表内容空白，待点击查看报表后方才显示报表内容，则用如下url访问即可：
 http://服务器及端口/ bicenterfin/ RegularReport?_type=表样文件名
 例：
 http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls
-（2）	在显示界面中：显示录入条件区，并直接显示按缺省条件值查询出的报表相应的内容，则用如下url访问即可：
+	* 在显示界面中：显示录入条件区，并直接显示按缺省条件值查询出的报表相应的内容，则用如下url访问即可：
 http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名报表参数1=值&报表参数2=值...&_aal=queryreport
 这里的_aal=queryreport必须要加在url后面，不然只会显示录入条件区，不会显示报表内容。
 例：
 http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_aal=queryreport
-（3）	在显示界面中：不显示录入条件区，直接显示报表内容，则用如下url访问即可：
+	* 在显示界面中：不显示录入条件区，直接显示报表内容，则用如下url访问即可：
 http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名&报表参数1=值&报表参数2=值...&op=view
 例：
 http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&op=view
 条件录入区没有显示。如果录入条件区有必输的文本框或者必选控件时，要将必输项的参数全部赋值，不然会报错。如果事先不知道报表的参数情况，不推荐使用该方法。
-（4）	在显示界面中：隐藏查询条件选择区，点击确定后方才显示数据，用如下url访问：
+	* 在显示界面中：隐藏查询条件选择区，点击确定后方才显示数据，用如下url访问：
 http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名&报表参数1=值&报表参数2=值... &_hi=true
 例：
 http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_hi=true
 如果录入条件区有必输的文本框或者必选控件时，点击确定后会弹出一个提示框提示某个参数为必输项。
 例：
 http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqingdanguding.xls&day=20060302&_hi=true
-（5）	报表有图形时，只显示图形用如下url访问:http://服务器及端口/bicenterfin/Chart?_type=表样文件名
+	* 报表有图形时，只显示图形用如下url访问:http://服务器及端口/bicenterfin/Chart?_type=表样文件名
 例：
 http://10.6.10.213:8080/bicenterfin/Chart?type=nw_book_qingdan1.xls&day=19961001
  	需要注意的是：
@@ -1666,14 +1673,14 @@ http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code
 多选时：
 http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy= (1400),(1500)
 
-3.	如果是嵌入其他系统使用的，使用安全代理后的URL，安全代理使用方法参照安装部署手册。
+ * 如果是嵌入其他系统使用的，使用安全代理后的URL，安全代理使用方法参照安装部署手册。
 如：
 http:// ip:port /OtherApp/bicenterfin/RegularReport?_type=nw.xls
-4.	查看本系统的license信息：
+ * 查看本系统的license信息：
 http://ip:port/bicenterfin/RegularReport?op=license
-5.	查看最新版本新增修改的功能点说明：
+ * 查看最新版本新增修改的功能点说明：
 http:// ip:port /bicenterfin/RegularReport?op=releaseNotes
-6.	配置文件自检url：
+ * 配置文件自检url：
 http:// ip:port /bicenterfin/RegularReport?op=config
 
 
@@ -1701,27 +1708,27 @@ http:// ip:port /bicenterfin/RegularReport?op=config
 
 11.4	公司内部申请正式lisence
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1.	进入神州信息的主页http://home.dcits.com
-2.	协同办公平台——流程审批系统-软件研发网——流程申请——license申请
-3.	填写申请信息，把上面所采集的机器信息拷贝到备注栏，或用附件形式添加。
-4.	提交申请后等待审核。
-5.	申请通过后，BI-CENTER开发人员会返回用户一个user.dc的文件，用户替换试用版本XXXX/WEB-INF目录下的user.dc。
-6.	 替换完成后，清除应用服务器缓存，重启服务，在上面“取机器信息”的页面重新查看License信息，没有截止日期即成功。
+ * 进入神州信息的主页http://home.dcits.com
+ * 协同办公平台——流程审批系统-软件研发网——流程申请——license申请
+ * 填写申请信息，把上面所采集的机器信息拷贝到备注栏，或用附件形式添加。
+ * 提交申请后等待审核。
+ * 申请通过后，BI-CENTER开发人员会返回用户一个user.dc的文件，用户替换试用版本XXXX/WEB-INF目录下的user.dc。
+ * 替换完成后，清除应用服务器缓存，重启服务，在上面“取机器信息”的页面重新查看License信息，没有截止日期即成功。
 
 第12章	常见问题及使用技巧
 ---------------------------
-1.	屏幕显示（或打印、导出PDF）时，个别框线缺失。尽量使用Excel的田字框线工具画框线。
-2.	使用Excel的拖拽复制功能后，有可能使有的单元格标注信息不生效。使用拖拽复制功能后，程序无法读出复制到的单元格的标注信息，最好不使用拖拽复制功能避免。
-3.	在查询定义中编写SQL语句时，最好使用本地编辑器确定语句是正确的，然后再复制到EXCEL里。因为如使用远程终端复制过来的SQL语句，有可能把回车转为乱字符，而在EXCEL中是看不到这个字符。
-4.	Microsoft SQL Sever中的数据类型real在查询条件里面作数据转换时暂不支持，建议尽量使用numeric(n,m) 数据类型。
-5.	在“查询定义”页签的SQL语句结束时不需要使用“；”。
-6.	行表头和列表头不能为空，否则有时会提示查询错误。可以使用转义字符填充数据。
-7.	在使用rundate的时候，从数据库查出来的数据只有一个值，且需转换成日期格式或字符串格式，其他格式不支持。
-8.	清单型表由两张表组成，导出EXCEL时，只能一张一张的导出。不能两张一起导出到一个文件。
-9.	一张报表由多个section组成，导出PDF，后面section的表头可能因为左上表头定义不同而没有，可以在第一个section下加一个空行。
-10.	在使用导出EXCEL的功能，最大数值精度为千万亿加小数点后面两位，超出这个范围导出的数据小数可能有出入。
-11.	用户在使用BI-CENTER自由报表工具过程中，如果需要换新版本或正式license，请先删除应用服务器上的缓存，以免造成不必要的错误。
-12.	查询条件的值最好不要包含“（）”，会提示此查询条件含有攻击代码的错误。
-13.	表样文件目录务必配置到应用外，否则，将导致weblogic等应用服务器，将缓存文件作为资源，最终造成上线后，运行、启动越来越慢，严重时启动耗时达数小时之久。
-14.	如果表样用的mysql数据库，需要先将mysql的my.ini文件中的default-character-set全部设为utf8
+ * 屏幕显示（或打印、导出PDF）时，个别框线缺失。尽量使用Excel的田字框线工具画框线。
+ * 使用Excel的拖拽复制功能后，有可能使有的单元格标注信息不生效。使用拖拽复制功能后，程序无法读出复制到的单元格的标注信息，最好不使用拖拽复制功能避免。
+ * 在查询定义中编写SQL语句时，最好使用本地编辑器确定语句是正确的，然后再复制到EXCEL里。因为如使用远程终端复制过来的SQL语句，有可能把回车转为乱字符，而在EXCEL中是看不到这个字符。
+ * Microsoft SQL Sever中的数据类型real在查询条件里面作数据转换时暂不支持，建议尽量使用numeric(n,m) 数据类型。
+ * 在“查询定义”页签的SQL语句结束时不需要使用“；”。
+ * 行表头和列表头不能为空，否则有时会提示查询错误。可以使用转义字符填充数据。
+ * 在使用rundate的时候，从数据库查出来的数据只有一个值，且需转换成日期格式或字符串格式，其他格式不支持。
+ * 清单型表由两张表组成，导出EXCEL时，只能一张一张的导出。不能两张一起导出到一个文件。
+ * 一张报表由多个section组成，导出PDF，后面section的表头可能因为左上表头定义不同而没有，可以在第一个section下加一个空行。
+ * 在使用导出EXCEL的功能，最大数值精度为千万亿加小数点后面两位，超出这个范围导出的数据小数可能有出入。
+ * 用户在使用BI-CENTER自由报表工具过程中，如果需要换新版本或正式license，请先删除应用服务器上的缓存，以免造成不必要的错误。
+ * 查询条件的值最好不要包含“（）”，会提示此查询条件含有攻击代码的错误。
+ * 表样文件目录务必配置到应用外，否则，将导致weblogic等应用服务器，将缓存文件作为资源，最终造成上线后，运行、启动越来越慢，严重时启动耗时达数小时之久。
+ * 如果表样用的mysql数据库，需要先将mysql的my.ini文件中的default-character-set全部设为utf8
 
