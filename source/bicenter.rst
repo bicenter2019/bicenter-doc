@@ -117,7 +117,7 @@ BICENTER 自由报表帮助手册
 2.3.4	变量名
 ..................
 必须填写，用户录入的参数，可通过“${var.变量名}”方式在报表上下文中引用。
-如在查询定义中的SQL使用::
+ 如在查询定义中的SQL使用::
 
 SELECT SUM(RKSE) AS Z,HY_DM FROM CDQ_RKSK WHERE FSRQ='${var.day}'  GROUP BY  HY_DM
 
@@ -164,7 +164,7 @@ Public static SelectableValue[] getBranches(HttpServletRequest request, String b
 '''''''''''''''''''''''''''''''''''
 可以通过一个select语句定义下拉选择框的备选项，要求select语句具备如下规范::
 
-Select  caption, value from … where …
+	 Select  caption, value from … where …
 
 即：返回数据集中，每行含两列数据，其中，第一列为显示值，第二列为值，每行数据代表一个备选项。
 Select语句统一在“查询定义”标签页中定义，“取值范围”单元格中，只需填写查询名称：QUERY（查询名称）。例： 
@@ -361,8 +361,9 @@ ${var.被依赖的变量名}
 ....................................
 可填，用户可以根据自身的需要控制在界面显示的控件的长度。只需要在查询条件中增加一列“控件属性”，在控件属性一列填上：width:数字+em即可。表示控件显示为多长的字符宽度。假设在查询条件中定义如下:
  .. image :: _static/images/bicenter/2.3.9.1.png 
-除此之外，还可以在控件属性中设置多选自动选择所有子成员功能，在控件属性中，填写：checkboxType:autocheckChildren即可，如果在控件属性中既需要设置width又要设置多选自动选择所有子成员，中间用分号隔开即可。
-	如：width:20em;checkboxType:autocheckChildren
+除此之外，还可以在控件属性中设置多选自动选择所有子成员功能，在控件属性中，填写：checkboxType:autocheckChildren即可，如果在控件属性中既需要设置width又要设置多选自动选择所有子成员，中间用分号隔开即可。如::
+
+		width:20em;checkboxType:autocheckChildren
 
 2.3.10	只读
 ....................................
@@ -460,8 +461,8 @@ rwa.jdbc.password=123456
 
 报表上下文变量是指由报表引擎传入的参数，以“${var.变量名}”引用。需要注意的是，无论变量的数据类型如何，报表引擎都只能将其替换为文本串，因此，用户需自行决定是否需要加引号。如::
  
-select * from people where name=’${var.name}’   (${var.name}为字符串，需加‘’)
-select * from people where age=${var.age}      (${var.age} 为数值)
+     select * from people where name=’${var.name}’   (${var.name}为字符串，需加‘’)
+	 select * from people where age=${var.age}      (${var.age} 为数值)
 
 
 2.4.2	用法
@@ -470,11 +471,11 @@ Sql查询语句可有如下用法：``“数据查询”、“前置处理”及
  * 用于“数据查询”的SQL语句用于从数据库中提取数据，填写到报表中.
  * “前置处理”须在所有查询发生之前率先进行查询，它通常用于执行一个或多个存储过程，其书写语法如下::
  
-{ call 存储过程名称(${var.参数1}，${var.参数2}…)}
+		{ call 存储过程名称(${var.参数1}，${var.参数2}…)}
 例::
 
-{call SYMBOLS.TP_AM_REPORT.TP_AM_SUBJECT_LIMIT ( ${var.branch}, 
-${var.subcode}, ${var.userid})}
+		{call SYMBOLS.TP_AM_REPORT.TP_AM_SUBJECT_LIMIT ( ${var.branch}, 
+		${var.subcode}, ${var.userid})}
 
  * “参数值”查询用于填充报表查询条件中某参数的备选项，在 ``“查询条件”`` 标签页中，相应变量通过查询名称对其进行引用。
 
@@ -546,14 +547,14 @@ ${ds.ORDER.Quantity}等于${ds.ORDER[Quantity]}
 变量引用是通过内置对象var 标示查询条件变量实现的。变量引用格式： ``${var.varName}`` 
 如::
 
-select  b.SWJG_3_JC as JC,a.NSRMC as NS,c.ZSXM_JC as XM,a.RKSE as SE from dbo.CDQ_RKSK a 
-inner join dbo.DIM_DM_SWJG b on a.SWJG_DM=b.SWJG_DM 
-inner join dbo.DIM_DM_ZSXM c on a.ZSXM_DM=c.ZSXM_DM
-where a.FSYF='${var.day}' and f.CY_MC='${var.cy}'
+		select  b.SWJG_3_JC as JC,a.NSRMC as NS,c.ZSXM_JC as XM,a.RKSE as SE from dbo.CDQ_RKSK a 
+		inner join dbo.DIM_DM_SWJG b on a.SWJG_DM=b.SWJG_DM 
+		inner join dbo.DIM_DM_ZSXM c on a.ZSXM_DM=c.ZSXM_DM
+		where a.FSYF='${var.day}' and f.CY_MC='${var.cy}'
 
 例在参数依赖关系中::
 
-select distinct hyml_mc,hyml_dm from dim_dm_hy where cy_dm='${var.cy}'
+		select distinct hyml_mc,hyml_dm from dim_dm_hy where cy_dm='${var.cy}'
 
 这个控件的取值是依赖于变量名为cy条件的值
 
@@ -569,7 +570,7 @@ ${ds.dataSetName[field1=1][field2=2][fieldName]}
 同上。
 如::
 
-select  SWJG_5_JC WHERE SWJG_4_JC ='${ds.HZ[SWJG4]}'
+		select  SWJG_5_JC WHERE SWJG_4_JC ='${ds.HZ[SWJG4]}'
 
 
 2.5.3.4	字典引用
@@ -582,7 +583,7 @@ ${dic.字典名[键值][字段名]}
 '''''''''''''''''''''''''''''''''''''
 混合运算一般即是指四则运算，例::
 
-${(ds.oa[CY_MC=第一产业][RKSE]-ds.od[CY_MC=第一产业][RKSE])/ds.od[CY_MC=第一产业][RKSE]
+		${(ds.oa[CY_MC=第一产业][RKSE]-ds.od[CY_MC=第一产业][RKSE])/ds.od[CY_MC=第一产业][RKSE]
 
 
 2.5.3.6	url请求参数引用
@@ -768,6 +769,7 @@ A列时间作为横坐标，B列入库税额作为纵坐标。这里的色系ll�
 由于在chart标签页中“图上是否显示数据原始值”设置为是，所以值显示在图上。单位设的从千元到亿，则小于1千的数据保持原值，其余数据均会转换成相应单位。由于数据精度设为0，则图上所有数据均会是整数
  
 .. _line:
+
 3.6.2.2	线图实例
 ''''''''''''''''''''''''''''''''''''''
  * 把chart标签页柱状图改为线图
@@ -784,7 +786,7 @@ A列（时间）作为横坐标，B（入库税额）、C（提退税额）列�
  * 把chart标签页改为散点图
  .. image :: _static/images/bicenter/3.6.2.3.1.png
 数据点名称可以不定义，A列时间作为横坐标，B列，C列数量作为纵坐标。
-* :ref:define标签页同`线图实例 <line>`
+ * :ref:define标签页同`线图实例 <line>`
  * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.3.2.png 
 由于在chart标签页中“图上是否显示数据原始值”设置为否，所以值不显示在图上。单位没有设，则默认转成K、M类数据。由于数据精度没设，则图上所有数据默认均会保留两位显示。
@@ -794,7 +796,7 @@ A列（时间）作为横坐标，B（入库税额）、C（提退税额）列�
  * 把chart标签页改为饼图
  .. image :: _static/images/bicenter/3.6.2.4.1.png
 A列时间作为每个分瓣的名称，B列入库税额作为每个分瓣的大小。
-* :ref:define标签页同`线图实例 <line>`
+ * :ref:define标签页同`线图实例 <line>`
  * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.4.2.png
 由于在chart标签页中“图上是否显示数据原始值”设置为是，所以值不显示在图上。单位设的10000000|千万，则小于1千万的数据保持原值，大于1千万的数据转换成千万数据显示。由于数据精度为0，则图上所有数据均是整数。图例位置设为无，则不在图上显示图例。
@@ -804,7 +806,7 @@ A列时间作为每个分瓣的名称，B列入库税额作为每个分瓣的大
  * 把chart标签页改为条形图
  .. image :: _static/images/bicenter/3.6.2.5.1.png
 B列时间作为纵坐标，B列入库税额和C列提退税额作为横坐标。
-* :ref:define标签页同`线图实例 <line>`
+ * :ref:define标签页同`线图实例 <line>`
  * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.5.2.png
 由于在chart标签页中“图上是否显示数据原始值”设置为是，所以值不显示在图上。单位设的10000000|千万，则小于1千万的数据保持原值，大于1千万的数据转换成千万数据显示。由于数据精度为0，则图上所有数据均是整数。图例位置设为右，则显示在图形的右边，由于三维显示设为否，则图形不进行三维展示。
@@ -937,10 +939,10 @@ editableAreas:["C13","E6:F9"]，表示在浏览页面此处的单元格是可以
 
 3.	在jdbcDomain.properties新加的数据连接信息::
 
- fin.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
- fin.jdbc.url=jdbc:oracle:thin:@192.168.198.123:1521:sw
- fin.jdbc.username=sw
- fin.jdbc.password=oracle
+		fin.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+		fin.jdbc.url=jdbc:oracle:thin:@192.168.198.123:1521:sw
+		fin.jdbc.username=sw
+		fin.jdbc.password=oracle
  
 补录的数据就存放在FIN_REPORT_MODIFY表里，这里的表名不可以更改。
 
@@ -1071,9 +1073,11 @@ style:"topLeft-bottomRight-line",captioins:[“右上显示值”,”左下显�
  在一定的条件下，隐藏指定的列。
 如下图，可在列表头区中，相应单元格中标注::
 
-	hideIf：条件表达式
-		replaceVal:0
+		hideIf：条件表达式
+			replaceVal:0
 		
+		
+ 
  .. image :: _static/images/bicenter/8.4.1.png
 当条件表达式为真时，隐藏报表中相应的列。
 条件表达式以字符串形式定义，支持如下逻辑操作符：=、!=、> 、 >=、  <、  <= 。条件表达式中，可引用查询条件。
@@ -1327,29 +1331,32 @@ print:"10cm,0cm,1em,0.5cm"，
 10.1	数据源设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 我们要在配置文件中预先设置好数据源，以便报表获取数据库信息。一般，在jdbcDomain.properties的起始部分（data source setting部分）就是配置数据源的位置。接着，介绍三种常用的数据源配置：
- 第一种：oracle数据源::
+第一种：oracle数据源::
 
-SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
-SW.jdbc.url=jdbc:oracle:thin:@192.168.198.123:1521:sw
-SW.jdbc.username=sw
-SW.jdbc.password=oracle
+		SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+		SW.jdbc.url=jdbc:oracle:thin:@192.168.198.123:1521:sw
+		SW.jdbc.username=sw
+		SW.jdbc.password=oracle
 
 具体含义见下表：
  .. image :: _static/images/bicenter/tab7.png
  
- 第二种：sql server数据源::
+第二种：sql server数据源::
 
-JX.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
-JX.jdbc.url=jdbc:sqlserver://192.168.198.123:1433;databaseName=SW;SelectMethod=cursor
-JX.jdbc.username=sa
-JX.jdbc.password=123456
+		JX.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+		JX.jdbc.url=jdbc:sqlserver://192.168.198.123:1433;databaseName=SW;SelectMethod=cursor
+		JX.jdbc.username=sa
+		JX.jdbc.password=123456
+		
 具体含义与oracle数据源相似，只是数据库的名称在databaseName中设置
 
- 第三种：mysql数据源::
-ZZBB.jdbc.driverClassName=org.gjt.mm.mysql.Driver
-ZZBB.jdbc.url=jdbc:mysql://192.168.198.99:3306/tcpdev
-ZZBB.jdbc.username=root
-ZZBB.jdbc.password=123456
+第三种：mysql数据源::
+
+		ZZBB.jdbc.driverClassName=org.gjt.mm.mysql.Driver
+		ZZBB.jdbc.url=jdbc:mysql://192.168.198.99:3306/tcpdev
+		ZZBB.jdbc.username=root
+		ZZBB.jdbc.password=123456
+		
 具体含义与oracle数据库相同。
 
 
@@ -1358,7 +1365,8 @@ ZZBB.jdbc.password=123456
 10.2.1	表样存放路径
 ...........................
 report.base.path=本地盘目录
-例：
+例::
+
 report.base.path=D:/FMT/rptdef5/tmpls  所有的表样都放在tmpls下面。
  -- 注：* 表样的存放目录不宜太深，如tmpls下可以再有一层文件夹。
 		* 表样目录和下节的缓存目录必须放在应用外。
@@ -1388,17 +1396,17 @@ D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>
 	 
 例::
 
-D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -compile D:\FMT\rptdef5\tmpls
+		D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -compile D:\FMT\rptdef5\tmpls
 
  * 打包：是把某目录下的表样全部打包，变为一个文件，形成表样库，以便有多个表样库可以同时使用。注意后缀为brp。
 说明::
 
-    put all report template files under a file folder into a package:
-    java -jar bicenter.jar -pack full-path-of-the-folder the-package-name
+		put all report template files under a file folder into a package:
+		java -jar bicenter.jar -pack full-path-of-the-folder the-package-name
 	
 例::
 
-D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -pack D:\FMT\rptdef5\tmpls D:\FMT\demo.brp
+	D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -pack D:\FMT\rptdef5\tmpls D:\FMT\demo.brp
 
  * 包反编译为文件：把包内的文件解压出来，以便修改表样。
 说明::
@@ -1422,6 +1430,7 @@ D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicent
 
 三．表样库使用
 .. 在jdbcDomain.properties文件内::
+
 ##################################
 #report template home setting
 ##################################
@@ -1478,9 +1487,11 @@ rundate.datasource=SW
 rundate.sql=select original.TM1 from (SELECT rownum no,TM1 FROM ftime) original where original.no = 2
 #if the field data type is String, then tell me it's format
 rundate.format=yyyyMMdd
- 	目录结构2
+
+目录结构2
  .. image :: _static/images/bicenter/10.2.4.2.png
- 在msw.lib下的jdbcDomain.properties存放的是msw.lib目录下所有表样的配置信息。
+在msw.lib下的jdbcDomain.properties存放的是msw.lib目录下所有表样的配置信息::
+
 ##############################
 #data source setting
 ##############################
@@ -1516,8 +1527,8 @@ sjhy.cache.durance=1H
 #system variable define
 ###################################
 customer.var.value=未注册用户猪猪msw
- 	swb.brp和mswb.brp是用表样打包的方法，内含各自的jdbcDomain.properties，同上。
- 	表样配置好后，在全局的jdbcDomain.properties里配置上面的几个目录。
+swb.brp和mswb.brp是用表样打包的方法，内含各自的jdbcDomain.properties，同上。
+表样配置好后，在全局的jdbcDomain.properties里配置上面的几个目录。
 ##################################
 #report template home setting
 ##################################
@@ -1549,11 +1560,11 @@ rundate.format=日期字符串的格式
 yyyyMMdd ： 20110101   2011年1月1日
 yyyy-MM-dd :   2011-01-01 2011年1月1日
 
-.. 例::   
+例::   
 
-rundate.datasource=fin
-rundate.sql=select SYS_RUN_DATE from FIN_SYSTEM 
-rundate.format=yyyyMMdd
+		rundate.datasource=fin
+		rundate.sql=select SYS_RUN_DATE from FIN_SYSTEM 
+		rundate.format=yyyyMMdd
 
 10.4	日志记录方案设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1568,22 +1579,22 @@ log.verbose=日志级别
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 预定义字典设置定义了一个表中键值与其它值的对应关系，使用时可通过键值，获得相应的其它值，配置语法如下::
 
-字典名称.dictionary.datasource=数据源（配置数据源名称）
-字典名称.dictionary.store.type=table（目前仅支持对数据库的表进行配置）
-#flat table xml sql
-字典名称.dictionary.table.name= sql 查询语句（通过sql语句，取出需要的字段，支持用select * from table的形式取出表中所有的字段）
-字典名称.dictionary.key.field=字段名（键值所在字段名）
-字典名称.dictionary.name.field=字段名（名称所在字段名）
-字典名称.dictionary.caption.pattern={id} - {name}（显示名称的模式）
-字典名称.cache.durance=1H（缓存时长）
-如：sjhy.dictionary.datasource=MSW
-sjhy.dictionary.store.type=table
-#flat table xml sql
-sjhy.dictionary.table.name=select * from DIM_DM_HY
-sjhy.dictionary.key.field=HY_DM
-sjhy.dictionary.name.field=HY_MC
-sjhy.dictionary.caption.pattern={id} - {name}
-sjhy.cache.durance=1H
+		字典名称.dictionary.datasource=数据源（配置数据源名称）
+		字典名称.dictionary.store.type=table（目前仅支持对数据库的表进行配置）
+		#flat table xml sql
+		字典名称.dictionary.table.name= sql 查询语句（通过sql语句，取出需要的字段，支持用select * from table的形式取出表中所有的字段）
+		字典名称.dictionary.key.field=字段名（键值所在字段名）
+		字典名称.dictionary.name.field=字段名（名称所在字段名）
+		字典名称.dictionary.caption.pattern={id} - {name}（显示名称的模式）
+		字典名称.cache.durance=1H（缓存时长）
+		如：sjhy.dictionary.datasource=MSW
+		sjhy.dictionary.store.type=table
+		#flat table xml sql
+		sjhy.dictionary.table.name=select * from DIM_DM_HY
+		sjhy.dictionary.key.field=HY_DM
+		sjhy.dictionary.name.field=HY_MC
+		sjhy.dictionary.caption.pattern={id} - {name}
+		sjhy.cache.durance=1H
 
 配置好的字典，在报表定义中有两种用途：
 其一，可通过语法： ${dic.字典名称[id][字段名]} 获取其值。
@@ -1599,7 +1610,7 @@ sjhy.cache.durance=1H
 
 10.6	预定义系统变量设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 系统参数是全局可用的变量，可在仍何需要的地方通过${var.变量名}引用。其配置语法如下：
+系统参数是全局可用的变量，可在仍何需要的地方通过${var.变量名}引用。其配置语法如下：
 变量名.var.value=变量值
 报表引用时，直接以格式：${var.变量名}引用即可。如：
 配置文件中配置系统参数：customer.var.value=未注册用户猪猪
@@ -1618,11 +1629,13 @@ username.pass.key: 配置用户显示名的 http请求参数名或session属性�
 userid.pass.method=request
 userid.pass.key=uid
 倘若用户通过url: http://localhost/bicenterfin/report?type=xxx&uid=liuxjg访问报表，则该配置指示程序从http request中取参数uid的值“liuxjg“作为用户ID。
-	有的，应用程序使用session中的一个javaBean来存储用户信息，这就需要配置javaBean的信息：
+有的，应用程序使用session中的一个javaBean来存储用户信息，这就需要配置javaBean的信息::
+
 userid.session.bean=java类全名
 userid.session.bean.id.method=获取用户Id的方法名， 如：getId()
 userid.session.bean.name.method=获取用户显示名称的方法名， 如：getName()
-如：userid.session.bean=com.datawise.opencrud.web.logon.UserSession
+如：
+userid.session.bean=com.datawise.opencrud.web.logon.UserSession
 userid.session.bean.id.method=getUsername()
 userid.session.bean.name.method=getName()
 
@@ -1640,9 +1653,9 @@ log4j.appender.f.File=bicenter.info.log
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 在jdbcDomain.properties文件的直接以格式：色系名称.color = 背景色，色1，色2，色3 ...定义。如::
 
-dc.color=#ffffff,#ffe749,#bac53b,#ff914c,#45eeee,#f04a4a,#ff49f5,#49fa8c,#70bcf9,#8070f9
-zz.color=#ffffff,#cccc33,#db7a7a,#b6db7a,ffee75
-ll.color=#ffffff,#00ffff,#00ff36,#ff7500,e9f704
+      dc.color=#ffffff,#ffe749,#bac53b,#ff914c,#45eeee,#f04a4a,#ff49f5,#49fa8c,#70bcf9,#8070f9
+      zz.color=#ffffff,#cccc33,#db7a7a,#b6db7a,ffee75
+      ll.color=#ffffff,#00ffff,#00ff36,#ff7500,e9f704
 
 假设报表定义的chart标签页需要引用定义的色系名称，直接在色系一行中填上预定义的色系名称即可，如（dc,zz，ll）。
 
@@ -1657,48 +1670,60 @@ ll.color=#ffffff,#00ffff,#00ff36,#ff7500,e9f704
  * 启动应用服务器，浏览器访问：http://ip:port/bicenterfin
 安装无误时，可以显示tmpls下所有报表。
  .. image :: _static/images/bicenter/10.11.1.png
- * 直接通过URL看某张报表
-在BI-CENTER中支持用url直接访问报表。用户可以根据自身需要，遵循如下规则得到自己想要的效果。
-	* 在显示界面中：显示录入条件区，报表内容空白，待点击查看报表后方才显示报表内容，则用如下url访问即可：
-http://服务器及端口/ bicenterfin/ RegularReport?_type=表样文件名
-例：
+ * 直接通过URL看某张报表在BI-CENTER中支持用url直接访问报表。用户可以根据自身需要，遵循如下规则得到自己想要的效果。
+ * 在显示界面中：显示录入条件区，报表内容空白，待点击查看报表后方才显示报表内容，则用如下url访问即可：http://服务器及端口/ bicenterfin/ RegularReport?_type=表样文件名
+
+例::
+
 http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls
-	* 在显示界面中：显示录入条件区，并直接显示按缺省条件值查询出的报表相应的内容，则用如下url访问即可：
-http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名报表参数1=值&报表参数2=值...&_aal=queryreport
-这里的_aal=queryreport必须要加在url后面，不然只会显示录入条件区，不会显示报表内容。
-例：
+
+ * 在显示界面中：显示录入条件区，并直接显示按缺省条件值查询出的报表相应的内容，则用如下url访问即可：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名报表参数1=值&报表参数2=值...&_aal=queryreport这里的_aal=queryreport必须要加在url后面，不然只会显示录入条件区，不会显示报表内容。
+例::
+
 http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_aal=queryreport
-	* 在显示界面中：不显示录入条件区，直接显示报表内容，则用如下url访问即可：
-http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名&报表参数1=值&报表参数2=值...&op=view
-例：
+
+ *  在显示界面中：不显示录入条件区，直接显示报表内容，则用如下url访问即可：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名&报表参数1=值&报表参数2=值...&op=view
+例::
+
 http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&op=view
+
 条件录入区没有显示。如果录入条件区有必输的文本框或者必选控件时，要将必输项的参数全部赋值，不然会报错。如果事先不知道报表的参数情况，不推荐使用该方法。
 	* 在显示界面中：隐藏查询条件选择区，点击确定后方才显示数据，用如下url访问：
 http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名&报表参数1=值&报表参数2=值... &_hi=true
-例：
+例::
+
 http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_hi=true
+
 如果录入条件区有必输的文本框或者必选控件时，点击确定后会弹出一个提示框提示某个参数为必输项。
 例：
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqingdanguding.xls&day=20060302&_hi=true
-	* 报表有图形时，只显示图形用如下url访问:http://服务器及端口/bicenterfin/Chart?_type=表样文件名
-例：
-http://10.6.10.213:8080/bicenterfin/Chart?type=nw_book_qingdan1.xls&day=19961001
- 	需要注意的是：
-在url传参的过程中，如果条件控件为单选，变量名=value或变量名=(value)都可以；如果条件控件为多选，变量名=(value)。因为单选不可能会同名，多选不同层次的成员有可能会出现同名现象。
-例：
-单选时：
-http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy=1400 
-多选时：
-http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy= (1400),(1500)
 
- * 如果是嵌入其他系统使用的，使用安全代理后的URL，安全代理使用方法参照安装部署手册。
-如：
+http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqingdanguding.xls&day=20060302&_hi=true
+
+ * 报表有图形时，只显示图形用如下url访问:http://服务器及端口/bicenterfin/Chart?_type=表样文件名
+例：
+
+http://10.6.10.213:8080/bicenterfin/Chart?type=nw_book_qingdan1.xls&day=19961001
+
+需要注意的是：
+在url传参的过程中，如果条件控件为单选，变量名=value或变量名=(value)都可以；如果条件控件为多选，变量名=(value)。因为单选不可能会同名，多选不同层次的成员有可能会出现同名现象。
+例::
+
+单选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy=1400 
+多选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy= (1400),(1500)
+
+ * 如果是嵌入其他系统使用的，使用安全代理后的URL，安全代理使用方法参照安装部署手册。如::
+
 http:// ip:port /OtherApp/bicenterfin/RegularReport?_type=nw.xls
- * 查看本系统的license信息：
+
+ * 查看本系统的license信息::
 http://ip:port/bicenterfin/RegularReport?op=license
- * 查看最新版本新增修改的功能点说明：
+ 
+ * 查看最新版本新增修改的功能点说明::
+  
 http:// ip:port /bicenterfin/RegularReport?op=releaseNotes
- * 配置文件自检url：
+
+ * 配置文件自检url::
+ 
 http:// ip:port /bicenterfin/RegularReport?op=config
 
 
@@ -1706,7 +1731,10 @@ http:// ip:port /bicenterfin/RegularReport?op=config
 --------------------
 11.1	试用版本
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-在使用bicenterfin试用版本期间，没有使用代理时，可以在页面直接查看License信息：http://ip:port/bicenterfin/RegularReport?op=license
+在使用bicenterfin试用版本期间，没有使用代理时，可以在页面直接查看License信息::
+
+http://ip:port/bicenterfin/RegularReport?op=license
+
 获得页面“授权”信息：
  .. image :: _static/images/bicenter/11.1.1.png
  
