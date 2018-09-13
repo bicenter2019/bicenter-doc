@@ -1476,46 +1476,48 @@ cache.report.path=本地盘目录
 	rundate.format=yyyyMMdd
 
 目录结构2
- .. image :: _static/images/bicenter/10.2.4.2.png 在msw.lib下的jdbcDomain.properties存放的是msw.lib目录下所有表样的配置信息::
+ .. image :: _static/images/bicenter/10.2.4.2.png 
+在msw.lib下的jdbcDomain.properties存放的是msw.lib目录下所有表样的配置信息::
 
- ##############################
- #data source setting
- ##############################
- SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
- SW.jdbc.url=jdbc:oracle:thin:@10.126.3.96:1521:sw
- SW.jdbc.username=sw
- SW.jdbc.password=oracle
- ##################################
- #hierarchy define
- ##################################
- shuiwujigou.hierarchy.datasource=SW
- shuiwujigou.hierarchy.store.type=flat.table
- shuiwujigou.hierarchy.cache.durance=1H
- shuiwujigou.hierarchy.table.name=dim_dm_hy
- shuiwujigou.hierarchy.access.control=no
- #yes no 
- shuiwujigou.hierarchy.level.name=产业,行业,三级机构
- shuiwujigou.hierarchy.level.member.id=cy_dm,hyml_dm,hy_dm
- shuiwujigou.hierarchy.level.member.name=cy_dm,hyml_dm,hy_dm
- ##################################
- #system variable define
- ###################################
- customer.var.value=未注册用户猪猪msw
- swb.brp和mswb.brp是用表样打包的方法，内含各自的jdbcDomain.properties，同上。
- 表样配置好后，在全局的jdbcDomain.properties里配置上面的几个目录。
- ##################################
- #report template home setting
- ##################################
- report.base.path=D:/FMT/rptdef5/tmpls --------  原来的存放路径方式
- zhuxl.report.lib=D:/FMT/rptdef5/demo.brp ------报表库
- SWL.report.lib=D:/FMT/rptdef5/sw.lib -------文件夹MSWL.report.lib=D:/FMT/rptdef5/msw.lib
- SWB.report.lib=D:/FMT/rptdef5/swb.brp -------MSWB.report.lib=D:/FMT/rptdef5/mswb.brp   
- #########################################
- #cache setting
- #########################################
- cache.report.path=D:/FMT/rptdef5/tmp
+	##############################
+	#data source setting
+	##############################
+	SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+	SW.jdbc.url=jdbc:oracle:thin:@10.126.3.96:1521:sw
+	SW.jdbc.username=sw
+	SW.jdbc.password=oracle
+	##################################
+	#hierarchy define
+	##################################
+	shuiwujigou.hierarchy.datasource=SW
+	shuiwujigou.hierarchy.store.type=flat.table
+	shuiwujigou.hierarchy.cache.durance=1H
+	shuiwujigou.hierarchy.table.name=dim_dm_hy
+	shuiwujigou.hierarchy.access.control=no
+	#yes no 
+	shuiwujigou.hierarchy.level.name=产业,行业,三级机构
+	shuiwujigou.hierarchy.level.member.id=cy_dm,hyml_dm,hy_dm
+	shuiwujigou.hierarchy.level.member.name=cy_dm,hyml_dm,hy_dm
+	##################################
+	#system variable define
+	###################################
+	customer.var.value=未注册用户猪猪msw
+	swb.brp和mswb.brp是用表样打包的方法，内含各自的jdbcDomain.properties，同上。
+	表样配置好后，在全局的jdbcDomain.properties里配置上面的几个目录。
+	##################################
+	#report template home setting
+	##################################
+	report.base.path=D:/FMT/rptdef5/tmpls --------  原来的存放路径方式
+	zhuxl.report.lib=D:/FMT/rptdef5/demo.brp ------报表库
+	SWL.report.lib=D:/FMT/rptdef5/sw.lib -------文件夹MSWL.report.lib=D:/FMT/rptdef5/msw.lib
+	SWB.report.lib=D:/FMT/rptdef5/swb.brp -------MSWB.report.lib=D:/FMT/rptdef5/mswb.brp   
+	#########################################
+	#cache setting
+	#########################################
+	cache.report.path=D:/FMT/rptdef5/tmp
 
- .. image :: _static/images/bicenter/10.2.4.3.png 
+.. image :: _static/images/bicenter/10.2.4.3.png
+ 
 url访问文件夹形式::
 
 		http://localhost:8080/bicenterfin5/RegularReport?_type=swl/sw1.xls&_code=汉语
