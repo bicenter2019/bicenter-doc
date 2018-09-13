@@ -1382,38 +1382,33 @@ cache.report.path=本地盘目录
 10.2.3	表样打包说明
 ...........................
 表样打包的意思是可以把我们的表样分成多个部分存放在不同的目录下，只要写明路径就可以。
-一．首先运行下到应用包目录的lib文件夹下。
-例::
+一．首先运行下到应用包目录的lib文件夹下。例::
 
 		D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>
 
 二．目前有四个可用的命令
- * 表样编译：是把以前存放目录下的表样全部预先编译一次，这样在界面上打开报表时所花的解析表样时间更短。注意会自动为每个表样生成一个后缀为obj的文件。
-说明::
+ * 表样编译：是把以前存放目录下的表样全部预先编译一次，这样在界面上打开报表时所花的解析表样时间更短。注意会自动为每个表样生成一个后缀为obj的文件。说明::
 
      compile all report template files under a file folder:
      java -jar bicenter.jar -compile full-path-of-the-folder	 
 	 例:
 	 D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -compile D:\FMT\rptdef5\tmpls
 
- * 打包：是把某目录下的表样全部打包，变为一个文件，形成表样库，以便有多个表样库可以同时使用。注意后缀为brp。
-说明::
+ * 打包：是把某目录下的表样全部打包，变为一个文件，形成表样库，以便有多个表样库可以同时使用。注意后缀为brp。说明::
 
-		put all report template files under a file folder into a package:
-		java -jar bicenter.jar -pack full-path-of-the-folder the-package-name	
-		例:
-	    D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -pack D:\FMT\rptdef5\tmpls D:\FMT\demo.brp
+	put all report template files under a file folder into a package:
+	java -jar bicenter.jar -pack full-path-of-the-folder the-package-name	
+	例:
+	 D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -pack D:\FMT\rptdef5\tmpls D:\FMT\demo.brp
 
- * 包反编译为文件：把包内的文件解压出来，以便修改表样。
-说明::
+ * 包反编译为文件：把包内的文件解压出来，以便修改表样。说明::
 
     unpack all report template files from a package into a file folder:
     java -jar bicenter.jar -unpack the-package-name full-path-of-the-folder
 	例:
 	D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -unpack D:\FMT\demo.brp D:\FMT\tmpls1
 
- * 把原来的包重新打一次：也许发版本后需要把原来的包重新打包一次。
-说明::
+ * 把原来的包重新打一次：也许发版本后需要把原来的包重新打包一次。说明::
 
      repack all report template files in a package into a new package:
      java -jar bicenter.jar -repack the-source-package-name the-new-package-name	 
@@ -1484,55 +1479,54 @@ cache.report.path=本地盘目录
  .. image :: _static/images/bicenter/10.2.4.2.png
 在msw.lib下的jdbcDomain.properties存放的是msw.lib目录下所有表样的配置信息::
 
-	##############################
-	#data source setting
-	#############################
-	MSW.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
-	MSW.jdbc.url=jdbc:sqlserver://10.126.3.96:1433;databaseName=SW;SelectMethod=cursor
-	MSW.jdbc.username=sa
-	MSW.jdbc.password=123456
-	##################################
-	#hierarchy define
-	##################################
-	shuiwuhy.hierarchy.datasource=MSW
-	shuiwuhy.hierarchy.store.type=flat.table
-	shuiwuhy.hierarchy.cache.durance=1H
-	shuiwuhy.hierarchy.table.name=dim_dm_hy
-	shuiwuhy.hierarchy.access.control=no
-	#yes no 
-	shuiwuhy.hierarchy.level.name=产业,行业,三级机构
-	shuiwuhy.hierarchy.level.member.id=cy_dm,hyml_dm,hy_dm
-	shuiwuhy.hierarchy.level.member.name=cy_mc,hyml_mc,hy_mc
-    shuiwuhy.hierarchy.caption.pattern={id} - {name}
-	##################################
-	#dictionary define
-	##################################
-	sjhy.dictionary.datasource=MSW
-	sjhy.dictionary.store.type=table
-	#flat table xml sql
-	sjhy.dictionary.table.name=select * from DIM_DM_HY
-	sjhy.dictionary.key.field=HY_DM
-	sjhy.dictionary.name.field=HY_MC
-	sjhy.dictionary.caption.pattern={id} - {name}
-	sjhy.cache.durance=1H
-	##################################
-	#system variable define
-	###################################
-	customer.var.value=未注册用户猪猪msw
-	swb.brp和mswb.brp是用表样打包的方法，内含各自的jdbcDomain.properties，同上。
-	表样配置好后，在全局的jdbcDomain.properties里配置上面的几个目录。
-	##################################
-	#report template home setting
-	##################################
-	report.base.path=D:/FMT/rptdef5/tmpls --------  原来的存放路径方式
-	zhuxl.report.lib=D:/FMT/rptdef5/demo.brp ------报表库
-	SWL.report.lib=D:/FMT/rptdef5/sw.lib -------文件夹   MSWL.report.lib=D:/FMT/rptdef5/msw.lib
-	SWB.report.lib=D:/FMT/rptdef5/swb.brp   MSWB.report.lib=D:/FMT/rptdef5/mswb.brp   
-	#########################################
-	#cache setting
-	#########################################
-	cache.report.path=D:/FMT/rptdef5/tmp
-
+##############################
+#data source setting
+#############################
+MSW.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+MSW.jdbc.url=jdbc:sqlserver://10.126.3.96:1433;databaseName=SW;SelectMethod=cursor
+MSW.jdbc.username=sa
+MSW.jdbc.password=123456
+##################################
+#hierarchy define
+##################################
+shuiwuhy.hierarchy.datasource=MSW
+shuiwuhy.hierarchy.store.type=flat.table
+shuiwuhy.hierarchy.cache.durance=1H
+shuiwuhy.hierarchy.table.name=dim_dm_hy
+shuiwuhy.hierarchy.access.control=no
+#yes no 
+shuiwuhy.hierarchy.level.name=产业,行业,三级机构
+shuiwuhy.hierarchy.level.member.id=cy_dm,hyml_dm,hy_dm
+shuiwuhy.hierarchy.level.member.name=cy_mc,hyml_mc,hy_mc
+shuiwuhy.hierarchy.caption.pattern={id} - {name}
+##################################
+#dictionary define
+#################################
+sjhy.dictionary.datasource=MSW
+sjhy.dictionary.store.type=table
+#flat table xml sql
+sjhy.dictionary.table.name=select * from DIM_DM_HY
+sjhy.dictionary.key.field=HY_DM
+sjhy.dictionary.name.field=HY_MC
+sjhy.dictionary.caption.pattern={id} - {name}
+sjhy.cache.durance=1H
+##################################
+#system variable define
+###################################
+customer.var.value=未注册用户猪猪msw
+swb.brp和mswb.brp是用表样打包的方法，内含各自的jdbcDomain.properties，同上。
+表样配置好后，在全局的jdbcDomain.properties里配置上面的几个目录。
+##################################
+#report template home setting
+##################################
+report.base.path=D:/FMT/rptdef5/tmpls --------  原来的存放路径方式
+zhuxl.report.lib=D:/FMT/rptdef5/demo.brp ------报表库
+SWL.report.lib=D:/FMT/rptdef5/sw.lib -------文件夹   MSWL.report.lib=D:/FMT/rptdef5/msw.lib
+SWB.report.lib=D:/FMT/rptdef5/swb.brp   MSWB.report.lib=D:/FMT/rptdef5/mswb.brp   
+#########################################
+#cache setting
+#########################################
+cache.report.path=D:/FMT/rptdef5/tmp
 
  .. image :: _static/images/bicenter/10.2.4.3.png
 url访问文件夹形式::
@@ -1671,56 +1665,57 @@ log4j.appender.f.File=bicenter.info.log
 安装无误时，可以显示tmpls下所有报表。
  .. image :: _static/images/bicenter/10.11.1.png
  * 直接通过URL看某张报表在BI-CENTER中支持用url直接访问报表。用户可以根据自身需要，遵循如下规则得到自己想要的效果。
- * 在显示界面中：显示录入条件区，报表内容空白，待点击查看报表后方才显示报表内容，则用如下url访问即可：http://服务器及端口/ bicenterfin/ RegularReport?_type=表样文件名,例::
+ * 在显示界面中：显示录入条件区，报表内容空白，待点击查看报表后方才显示报表内容，则用如下url访问即可：
+http://服务器及端口/ bicenterfin/RegularReport?_type=表样文件名,例::
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls
+	http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls
 
  * 在显示界面中：显示录入条件区，并直接显示按缺省条件值查询出的报表相应的内容，则用如下url访问即可:
 http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名报表& 参数1=值&报表参数2=值...&_aal=queryreport这里的_aal=queryreport必须要加在url后面，
 不然只会显示录入条件区，不会显示报表内容。例::
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_aal=queryreport
+	http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_aal=queryreport
 
 * 在显示界面中：不显示录入条件区，直接显示报表内容，则用如下url访问即可：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名
 &报表参数1=值&报表参数2=值...&op=view例::
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&op=view
+		http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&op=view
 
 条件录入区没有显示。如果录入条件区有必输的文本框或者必选控件时，要将必输项的参数全部赋值，不然会报错。如果事先不知道报表的参数情况，不推荐使用该方法。
  * 在显示界面中：隐藏查询条件选择区，点击确定后方才显示数据，用如下url访问：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名
 &报表参数1=值&报表参数2=值... &_hi=true，例::
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_hi=true
+		http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_hi=true
 
 如果录入条件区有必输的文本框或者必选控件时，点击确定后会弹出一个提示框提示某个参数为必输项。例::
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqingdanguding.xls&day=20060302&_hi=true
+		http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqingdanguding.xls&day=20060302&_hi=true
 
  * 报表有图形时，只显示图形用如下url访问:http://服务器及端口/bicenterfin/Chart?_type=表样文件名。例::
 
-http://10.6.10.213:8080/bicenterfin/Chart?type=nw_book_qingdan1.xls&day=19961001
+		http://10.6.10.213:8080/bicenterfin/Chart?type=nw_book_qingdan1.xls&day=19961001
 
 需要注意的是：
 在url传参的过程中，如果条件控件为单选，变量名=value或变量名=(value)都可以；如果条件控件为多选，变量名=(value)。因为单选不可能会同名，多选不同层次的成员有可能会出现同名现象。例::
 
-单选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy=1400 
-多选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy= (1400),(1500)
+		单选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy=1400 
+		多选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy= (1400),(1500)
 
  * 如果是嵌入其他系统使用的，使用安全代理后的URL，安全代理使用方法参照安装部署手册。如::
 
-http:// ip:port /OtherApp/bicenterfin/RegularReport?_type=nw.xls
+		http:// ip:port /OtherApp/bicenterfin/RegularReport?_type=nw.xls
 
  * 查看本系统的license信息::
  
-http://ip:port/bicenterfin/RegularReport?op=license
+		http://ip:port/bicenterfin/RegularReport?op=license
  
  * 查看最新版本新增修改的功能点说明::
   
-http:// ip:port /bicenterfin/RegularReport?op=releaseNotes
+		http:// ip:port /bicenterfin/RegularReport?op=releaseNotes
 
  * 配置文件自检url::
  
-http:// ip:port /bicenterfin/RegularReport?op=config
+		http:// ip:port /bicenterfin/RegularReport?op=config
 
 
 第11章	授权
