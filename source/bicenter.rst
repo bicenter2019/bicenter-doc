@@ -1671,61 +1671,56 @@ log4j.appender.f.File=bicenter.info.log
 安装无误时，可以显示tmpls下所有报表。
  .. image :: _static/images/bicenter/10.11.1.png
  * 直接通过URL看某张报表在BI-CENTER中支持用url直接访问报表。用户可以根据自身需要，遵循如下规则得到自己想要的效果。
- * 在显示界面中：显示录入条件区，报表内容空白，待点击查看报表后方才显示报表内容，则用如下url访问即可：http://服务器及端口/ bicenterfin/ RegularReport?_type=表样文件名
+ * 在显示界面中：显示录入条件区，报表内容空白，待点击查看报表后方才显示报表内容，则用如下url访问即可：http://服务器及端口/ bicenterfin/ RegularReport?_type=表样文件名,例::
 
-例::
+http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls
 
-	http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls
+ * 在显示界面中：显示录入条件区，并直接显示按缺省条件值查询出的报表相应的内容，则用如下url访问即可:
+http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名报表& 参数1=值&报表参数2=值...&_aal=queryreport这里的_aal=queryreport必须要加在url后面，
+不然只会显示录入条件区，不会显示报表内容。例::
 
- * 在显示界面中：显示录入条件区，并直接显示按缺省条件值查询出的报表相应的内容，则用如下url访问即可：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名报表参数1=值&报表参数2=值...&_aal=queryreport这里的_aal=queryreport必须要加在url后面，不然只会显示录入条件区，不会显示报表内容。
-例::
+http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_aal=queryreport
 
-	http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_aal=queryreport
+* 在显示界面中：不显示录入条件区，直接显示报表内容，则用如下url访问即可：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名
+&报表参数1=值&报表参数2=值...&op=view例::
 
- *  在显示界面中：不显示录入条件区，直接显示报表内容，则用如下url访问即可：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名&报表参数1=值&报表参数2=值...&op=view
-例::
-
-	http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&op=view
+http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&op=view
 
 条件录入区没有显示。如果录入条件区有必输的文本框或者必选控件时，要将必输项的参数全部赋值，不然会报错。如果事先不知道报表的参数情况，不推荐使用该方法。
-	* 在显示界面中：隐藏查询条件选择区，点击确定后方才显示数据，用如下url访问：
-http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名&报表参数1=值&报表参数2=值... &_hi=true
-例::
+ * 在显示界面中：隐藏查询条件选择区，点击确定后方才显示数据，用如下url访问：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名
+&报表参数1=值&报表参数2=值... &_hi=true，例::
 
-	http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_hi=true
+http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_hi=true
 
-如果录入条件区有必输的文本框或者必选控件时，点击确定后会弹出一个提示框提示某个参数为必输项。
-例::
+如果录入条件区有必输的文本框或者必选控件时，点击确定后会弹出一个提示框提示某个参数为必输项。例::
 
-	http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqingdanguding.xls&day=20060302&_hi=true
+http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqingdanguding.xls&day=20060302&_hi=true
 
- * 报表有图形时，只显示图形用如下url访问:http://服务器及端口/bicenterfin/Chart?_type=表样文件名
-例::
+ * 报表有图形时，只显示图形用如下url访问:http://服务器及端口/bicenterfin/Chart?_type=表样文件名。例::
 
-	http://10.6.10.213:8080/bicenterfin/Chart?type=nw_book_qingdan1.xls&day=19961001
+http://10.6.10.213:8080/bicenterfin/Chart?type=nw_book_qingdan1.xls&day=19961001
 
 需要注意的是：
-在url传参的过程中，如果条件控件为单选，变量名=value或变量名=(value)都可以；如果条件控件为多选，变量名=(value)。因为单选不可能会同名，多选不同层次的成员有可能会出现同名现象。
-例::
+在url传参的过程中，如果条件控件为单选，变量名=value或变量名=(value)都可以；如果条件控件为多选，变量名=(value)。因为单选不可能会同名，多选不同层次的成员有可能会出现同名现象。例::
 
-	单选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy=1400 
-	多选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy= (1400),(1500)
+单选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy=1400 
+多选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy= (1400),(1500)
 
  * 如果是嵌入其他系统使用的，使用安全代理后的URL，安全代理使用方法参照安装部署手册。如::
 
-	http:// ip:port /OtherApp/bicenterfin/RegularReport?_type=nw.xls
+http:// ip:port /OtherApp/bicenterfin/RegularReport?_type=nw.xls
 
  * 查看本系统的license信息::
  
-	http://ip:port/bicenterfin/RegularReport?op=license
+http://ip:port/bicenterfin/RegularReport?op=license
  
  * 查看最新版本新增修改的功能点说明::
   
-	http:// ip:port /bicenterfin/RegularReport?op=releaseNotes
+http:// ip:port /bicenterfin/RegularReport?op=releaseNotes
 
  * 配置文件自检url::
  
-	http:// ip:port /bicenterfin/RegularReport?op=config
+http:// ip:port /bicenterfin/RegularReport?op=config
 
 
 第11章	授权
