@@ -1377,7 +1377,7 @@ report.base.path=D:/FMT/rptdef5/tmpls  所有的表样都放在tmpls下面。
 cache.report.path=本地盘目录
 例::
 
-cache.report.path=D:/FMT/rptdef5/tmp  访问报表后会自动在tmp文件夹下缓存报表信息。
+		cache.report.path=D:/FMT/rptdef5/tmp  访问报表后会自动在tmp文件夹下缓存报表信息。
 
 10.2.3	表样打包说明
 ...........................
@@ -1385,62 +1385,54 @@ cache.report.path=D:/FMT/rptdef5/tmp  访问报表后会自动在tmp文件夹下
 一．首先运行下到应用包目录的lib文件夹下。
 例::
 
-D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>
+		D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>
 
 二．目前有四个可用的命令
  * 表样编译：是把以前存放目录下的表样全部预先编译一次，这样在界面上打开报表时所花的解析表样时间更短。注意会自动为每个表样生成一个后缀为obj的文件。
 说明::
 
      compile all report template files under a file folder:
-     java -jar bicenter.jar -compile full-path-of-the-folder
-	 
-例::
-
-		D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -compile D:\FMT\rptdef5\tmpls
+     java -jar bicenter.jar -compile full-path-of-the-folder	 
+	 例:
+	 D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -compile D:\FMT\rptdef5\tmpls
 
  * 打包：是把某目录下的表样全部打包，变为一个文件，形成表样库，以便有多个表样库可以同时使用。注意后缀为brp。
 说明::
 
 		put all report template files under a file folder into a package:
-		java -jar bicenter.jar -pack full-path-of-the-folder the-package-name
-	
-例::
-
-	D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -pack D:\FMT\rptdef5\tmpls D:\FMT\demo.brp
+		java -jar bicenter.jar -pack full-path-of-the-folder the-package-name	
+		例:
+	    D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -pack D:\FMT\rptdef5\tmpls D:\FMT\demo.brp
 
  * 包反编译为文件：把包内的文件解压出来，以便修改表样。
 说明::
 
     unpack all report template files from a package into a file folder:
     java -jar bicenter.jar -unpack the-package-name full-path-of-the-folder
-	
-例::
-
-D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -unpack D:\FMT\demo.brp D:\FMT\tmpls1
+	例:
+	D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -unpack D:\FMT\demo.brp D:\FMT\tmpls1
 
  * 把原来的包重新打一次：也许发版本后需要把原来的包重新打包一次。
 说明::
 
      repack all report template files in a package into a new package:
-     java -jar bicenter.jar -repack the-source-package-name the-new-package-name
-	 
-例::
-
-D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -repack D:\FMT\demo.brp d:\demo.brp
+     java -jar bicenter.jar -repack the-source-package-name the-new-package-name	 
+	 例:
+	 D:\ruanjiananzhuang\Tomcat 6.0\webapps\bicenterfin5\WEB-INF\lib>java -jar bicenter.jar -repack D:\FMT\demo.brp d:\demo.brp
 
 三．表样库使用
 .. 在jdbcDomain.properties文件内::
 
-##################################
-#report template home setting
-##################################
-report.base.path=D:/FMT/rptdef5/tmpls    -------这是原来的表样存放路径
-zhuxl.report.lib=D:/FMT/demo.brp         -------这是使用表样库的路径
-。。。。。。。。。                       -------多个库都这样写下来
+		##################################
+		#report template home setting
+		##################################
+		report.base.path=D:/FMT/rptdef5/tmpls    -------这是原来的表样存放路径
+		zhuxl.report.lib=D:/FMT/demo.brp         -------这是使用表样库的路径
+		。。。。。。。。。                       -------多个库都这样写下来
 
 四．报表引用时::
 
-http://localhost:8080/bicenterfin5/RegularReport?_type=zhuxl/mswgd.xls&_code=汉语      ---------在表样名前加上库的名字
+		http://localhost:8080/bicenterfin5/RegularReport?_type=zhuxl/mswgd.xls&_code=汉语      ---------在表样名前加上库的名字
 
 10.2.4	多配置方法
 .............................
@@ -1455,110 +1447,115 @@ http://localhost:8080/bicenterfin5/RegularReport?_type=zhuxl/mswgd.xls&_code=汉
  .. image :: _static/images/bicenter/10.2.4.1.png
 这个jdbcDomain.properties存放的是sw.lib目录下所有表样的配置信息::
 
-##############################
-#data source setting
-##############################
-SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
-SW.jdbc.url=jdbc:oracle:thin:@10.126.3.96:1521:sw
-SW.jdbc.username=sw
-SW.jdbc.password=oracle
-##################################
-#hierarchy define
-##################################
-shuiwujigou.hierarchy.datasource=SW
-shuiwujigou.hierarchy.store.type=flat.table
-shuiwujigou.hierarchy.cache.durance=1H
-shuiwujigou.hierarchy.table.name=dim_dm_hy
-shuiwujigou.hierarchy.access.control=no
-#yes no 
-shuiwujigou.hierarchy.level.name=产业,行业,三级机构
-shuiwujigou.hierarchy.level.member.id=cy_dm,hyml_dm,hy_dm
-shuiwujigou.hierarchy.level.member.name=cy_dm,hyml_dm,hy_dm
-##################################
-#system variable define
-###################################
-customer.var.value=未注册用户猪猪sw
-####################################
-#rundate setting
-####################################
-#for fsd
-rundate.datasource=SW
-#I just know one column query, and only fetch the first row from result
-rundate.sql=select original.TM1 from (SELECT rownum no,TM1 FROM ftime) original where original.no = 2
-#if the field data type is String, then tell me it's format
-rundate.format=yyyyMMdd
+	##############################
+	#data source setting
+	##############################
+	SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+	SW.jdbc.url=jdbc:oracle:thin:@10.126.3.96:1521:sw
+	SW.jdbc.username=sw
+	SW.jdbc.password=oracle
+	##################################
+	#hierarchy define
+	##################################
+	shuiwujigou.hierarchy.datasource=SW
+	shuiwujigou.hierarchy.store.type=flat.table
+	shuiwujigou.hierarchy.cache.durance=1H
+	shuiwujigou.hierarchy.table.name=dim_dm_hy
+	shuiwujigou.hierarchy.access.control=no
+	#yes no 
+	shuiwujigou.hierarchy.level.name=产业,行业,三级机构
+	shuiwujigou.hierarchy.level.member.id=cy_dm,hyml_dm,hy_dm
+	shuiwujigou.hierarchy.level.member.name=cy_dm,hyml_dm,hy_dm
+	##################################
+	#system variable define
+	###################################
+	customer.var.value=未注册用户猪猪sw
+	####################################
+	#rundate setting
+	####################################
+	#for fsd
+	rundate.datasource=SW
+	#I just know one column query, and only fetch the first row from result
+	rundate.sql=select original.TM1 from (SELECT rownum no,TM1 FROM ftime) original where original.no = 2
+	#if the field data type is String, then tell me it's format
+	rundate.format=yyyyMMdd
 
 目录结构2
  .. image :: _static/images/bicenter/10.2.4.2.png
 在msw.lib下的jdbcDomain.properties存放的是msw.lib目录下所有表样的配置信息::
 
-##############################
-#data source setting
-##############################
-MSW.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
-MSW.jdbc.url=jdbc:sqlserver://10.126.3.96:1433;databaseName=SW;SelectMethod=cursor
-MSW.jdbc.username=sa
-MSW.jdbc.password=123456
-##################################
-#hierarchy define
-##################################
-shuiwuhy.hierarchy.datasource=MSW
-shuiwuhy.hierarchy.store.type=flat.table
-shuiwuhy.hierarchy.cache.durance=1H
-shuiwuhy.hierarchy.table.name=dim_dm_hy
-shuiwuhy.hierarchy.access.control=no
-#yes no 
-shuiwuhy.hierarchy.level.name=产业,行业,三级机构
-shuiwuhy.hierarchy.level.member.id=cy_dm,hyml_dm,hy_dm
-shuiwuhy.hierarchy.level.member.name=cy_mc,hyml_mc,hy_mc
-shuiwuhy.hierarchy.caption.pattern={id} - {name}
-##################################
-#dictionary define
-##################################
-sjhy.dictionary.datasource=MSW
-sjhy.dictionary.store.type=table
-#flat table xml sql
-sjhy.dictionary.table.name=select * from DIM_DM_HY
-sjhy.dictionary.key.field=HY_DM
-sjhy.dictionary.name.field=HY_MC
-sjhy.dictionary.caption.pattern={id} - {name}
-sjhy.cache.durance=1H
-##################################
-#system variable define
-###################################
-customer.var.value=未注册用户猪猪msw
-swb.brp和mswb.brp是用表样打包的方法，内含各自的jdbcDomain.properties，同上。
-表样配置好后，在全局的jdbcDomain.properties里配置上面的几个目录。
-##################################
-#report template home setting
-##################################
-report.base.path=D:/FMT/rptdef5/tmpls --------  原来的存放路径方式
-zhuxl.report.lib=D:/FMT/rptdef5/demo.brp ------报表库
-SWL.report.lib=D:/FMT/rptdef5/sw.lib -------文件夹   MSWL.report.lib=D:/FMT/rptdef5/msw.lib
-SWB.report.lib=D:/FMT/rptdef5/swb.brp   MSWB.report.lib=D:/FMT/rptdef5/mswb.brp   
-#########################################
-#cache setting
-#########################################
-cache.report.path=D:/FMT/rptdef5/tmp
+		##############################
+		#data source setting
+		#############################
+		MSW.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+		MSW.jdbc.url=jdbc:sqlserver://10.126.3.96:1433;databaseName=SW;SelectMethod=cursor
+		MSW.jdbc.username=sa
+		MSW.jdbc.password=123456
+		##################################
+		#hierarchy define
+		##################################
+		shuiwuhy.hierarchy.datasource=MSW
+		shuiwuhy.hierarchy.store.type=flat.table
+		shuiwuhy.hierarchy.cache.durance=1H
+		shuiwuhy.hierarchy.table.name=dim_dm_hy
+		shuiwuhy.hierarchy.access.control=no
+		#yes no 
+		shuiwuhy.hierarchy.level.name=产业,行业,三级机构
+		shuiwuhy.hierarchy.level.member.id=cy_dm,hyml_dm,hy_dm
+		shuiwuhy.hierarchy.level.member.name=cy_mc,hyml_mc,hy_mc
+        shuiwuhy.hierarchy.caption.pattern={id} - {name}
+		##################################
+		#dictionary define
+		##################################
+		sjhy.dictionary.datasource=MSW
+		sjhy.dictionary.store.type=table
+		#flat table xml sql
+		sjhy.dictionary.table.name=select * from DIM_DM_HY
+		sjhy.dictionary.key.field=HY_DM
+		sjhy.dictionary.name.field=HY_MC
+		sjhy.dictionary.caption.pattern={id} - {name}
+		sjhy.cache.durance=1H
+		##################################
+		#system variable define
+		###################################
+		customer.var.value=未注册用户猪猪msw
+		swb.brp和mswb.brp是用表样打包的方法，内含各自的jdbcDomain.properties，同上。
+		表样配置好后，在全局的jdbcDomain.properties里配置上面的几个目录。
+		##################################
+		#report template home setting
+		##################################
+		report.base.path=D:/FMT/rptdef5/tmpls --------  原来的存放路径方式
+		zhuxl.report.lib=D:/FMT/rptdef5/demo.brp ------报表库
+		SWL.report.lib=D:/FMT/rptdef5/sw.lib -------文件夹   MSWL.report.lib=D:/FMT/rptdef5/msw.lib
+		SWB.report.lib=D:/FMT/rptdef5/swb.brp   MSWB.report.lib=D:/FMT/rptdef5/mswb.brp   
+		#########################################
+		#cache setting
+		#########################################
+		cache.report.path=D:/FMT/rptdef5/tmp
 
  .. image :: _static/images/bicenter/10.2.4.3.png
-url访问
-文件夹形式：
-http://localhost:8080/bicenterfin5/RegularReport?_type=swl/sw1.xls&_code=汉语
-报表库形式：
-http://localhost:8080/bicenterfin5/RegularReport?_type=swb/sw1.xls&_code=汉语
+url访问文件夹形式::
+
+		http://localhost:8080/bicenterfin5/RegularReport?_type=swl/sw1.xls&_code=汉语
+		
+报表库形式::
+
+		http://localhost:8080/bicenterfin5/RegularReport?_type=swb/sw1.xls&_code=汉语
+
 不管打包形式还是文件夹形式，都是在表名前加上位置一定的路径即可
 
 10.3	数据更新时间获取方法设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 当前数据更新时间来自业务数据库，需要通过配置告诉程序如何提取,语法如下::
 
-rundate.datasource=数据源（第一步配置的数据源名称）
-rundate.sql=SQL查询语句（要求仅返回一列）
-rundate.format=日期字符串的格式
-日期字符串格式规范y表示年，M（大写）表示月，d表示日，示例如下： 
-yyyyMMdd ： 20110101   2011年1月1日
-yyyy-MM-dd :   2011-01-01 2011年1月1日
+		rundate.datasource=数据源（第一步配置的数据源名称）
+		rundate.sql=SQL查询语句（要求仅返回一列）
+		rundate.format=日期字符串的格式
+		
+日期字符串格式规范y表示年，M（大写）表示月，d表示日，示例如下::
+ 
+		yyyyMMdd ： 20110101   2011年1月1日
+		yyyy-MM-dd :   2011-01-01 2011年1月1日
 
 例::   
 
@@ -1623,28 +1620,30 @@ log.verbose=日志级别
 第一个配置：userid.pass.method : request/session， 若设为request 表示从http请求参数中取用户id，若设为session表示从http session变量中取用户id。
 第二个配置：userid.pass.key：设置用户ID的 http请求参数名或session属性名
 username.pass.key: 配置用户显示名的 http请求参数名或session属性名，可省略
-例:
-.. 配置如下::
+例::
+     配置如下:
+	 userid.pass.method=request
+     userid.pass.key=uid
 
-userid.pass.method=request
-userid.pass.key=uid
 倘若用户通过url: http://localhost/bicenterfin/report?type=xxx&uid=liuxjg访问报表，则该配置指示程序从http request中取参数uid的值“liuxjg“作为用户ID。
 有的，应用程序使用session中的一个javaBean来存储用户信息，这就需要配置javaBean的信息::
 
-userid.session.bean=java类全名
-userid.session.bean.id.method=获取用户Id的方法名， 如：getId()
-userid.session.bean.name.method=获取用户显示名称的方法名， 如：getName()
-如：
-userid.session.bean=com.datawise.opencrud.web.logon.UserSession
-userid.session.bean.id.method=getUsername()
-userid.session.bean.name.method=getName()
+		userid.session.bean=java类全名
+		userid.session.bean.id.method=获取用户Id的方法名， 如：getId()
+		userid.session.bean.name.method=获取用户显示名称的方法名， 如：getName()
+		如：
+		userid.session.bean=com.datawise.opencrud.web.logon.UserSession
+		userid.session.bean.id.method=getUsername()
+		userid.session.bean.name.method=getName()
 
 10.8	配置使用LOG4J记录日志
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 添加如下配置项，同时将 log4j.properties 配置文件放在jdbcDomain.properties的同一目录下。然后打开log4j.properties文件，文件中有：
 log4j.appender.f.File=bicenter.info.log
- 等号后面配置bicenter.info.log存放的路径。
-如：log4j.appender.f.File=f:/bicenter.log/bicenter.info.log
+等号后面配置bicenter.info.log存放的路径。
+如::
+		log4j.appender.f.File=f:/bicenter.log/bicenter.info.log
+	
 表示生成的记录日志文件bicenter.info.log存放在f盘bicenter.log文件夹下。
 
 .. _color:
@@ -1675,56 +1674,56 @@ log4j.appender.f.File=bicenter.info.log
 
 例::
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls
+		http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls
 
  * 在显示界面中：显示录入条件区，并直接显示按缺省条件值查询出的报表相应的内容，则用如下url访问即可：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名报表参数1=值&报表参数2=值...&_aal=queryreport这里的_aal=queryreport必须要加在url后面，不然只会显示录入条件区，不会显示报表内容。
 例::
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_aal=queryreport
+		http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_aal=queryreport
 
  *  在显示界面中：不显示录入条件区，直接显示报表内容，则用如下url访问即可：http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名&报表参数1=值&报表参数2=值...&op=view
 例::
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&op=view
+		http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&op=view
 
 条件录入区没有显示。如果录入条件区有必输的文本框或者必选控件时，要将必输项的参数全部赋值，不然会报错。如果事先不知道报表的参数情况，不推荐使用该方法。
 	* 在显示界面中：隐藏查询条件选择区，点击确定后方才显示数据，用如下url访问：
 http://服务器及端口/bicenterfin/RegularReport?_type=表样文件名&报表参数1=值&报表参数2=值... &_hi=true
 例::
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_hi=true
+		http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqing2.xls&day=200601&_hi=true
 
 如果录入条件区有必输的文本框或者必选控件时，点击确定后会弹出一个提示框提示某个参数为必输项。
 例：
 
-http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqingdanguding.xls&day=20060302&_hi=true
+		http://10.6.10.213:8080/bicenterfin/RegularReport?type=mswqingdanguding.xls&day=20060302&_hi=true
 
  * 报表有图形时，只显示图形用如下url访问:http://服务器及端口/bicenterfin/Chart?_type=表样文件名
 例：
 
-http://10.6.10.213:8080/bicenterfin/Chart?type=nw_book_qingdan1.xls&day=19961001
+		http://10.6.10.213:8080/bicenterfin/Chart?type=nw_book_qingdan1.xls&day=19961001
 
 需要注意的是：
 在url传参的过程中，如果条件控件为单选，变量名=value或变量名=(value)都可以；如果条件控件为多选，变量名=(value)。因为单选不可能会同名，多选不同层次的成员有可能会出现同名现象。
 例::
 
-单选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy=1400 
-多选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy= (1400),(1500)
+		单选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy=1400 
+		多选时：http://10.6.10.213:8080/bicenterfin/RegularReport?_type=msw/mswduoxuan.xls&_code=汉语&day=200608&swhy= (1400),(1500)
 
  * 如果是嵌入其他系统使用的，使用安全代理后的URL，安全代理使用方法参照安装部署手册。如::
 
-http:// ip:port /OtherApp/bicenterfin/RegularReport?_type=nw.xls
+		http:// ip:port /OtherApp/bicenterfin/RegularReport?_type=nw.xls
 
  * 查看本系统的license信息::
-http://ip:port/bicenterfin/RegularReport?op=license
+		http://ip:port/bicenterfin/RegularReport?op=license
  
  * 查看最新版本新增修改的功能点说明::
   
-http:// ip:port /bicenterfin/RegularReport?op=releaseNotes
+		http:// ip:port /bicenterfin/RegularReport?op=releaseNotes
 
  * 配置文件自检url::
  
-http:// ip:port /bicenterfin/RegularReport?op=config
+		http:// ip:port /bicenterfin/RegularReport?op=config
 
 
 第11章	授权
@@ -1733,7 +1732,7 @@ http:// ip:port /bicenterfin/RegularReport?op=config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 在使用bicenterfin试用版本期间，没有使用代理时，可以在页面直接查看License信息::
 
-http://ip:port/bicenterfin/RegularReport?op=license
+		http://ip:port/bicenterfin/RegularReport?op=license
 
 获得页面“授权”信息：
  .. image :: _static/images/bicenter/11.1.1.png
