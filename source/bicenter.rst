@@ -389,7 +389,7 @@ String：字符串，Number：数值，Date：日期
 +表示当前时间加，-表示当前时间减。
 n 为数值。
 d表示天，t表示旬，m表示月，q表示季，s表示半年，y表示年。
-.. seealso::
+例::
 
  ${today("-1d")} 表示当前时间上一天， ${today("-2t")}表示上一旬， ${today("-3m")}表示三个月前……
  
@@ -410,11 +410,11 @@ d表示天，t表示旬，m表示月，q表示季，s表示半年，y表示年�
 
 2.3.13	数据格式
 ....................................
-1.Calendar控件的数据格式
+Calendar控件的数据格式
 按需填写。 对于日历控件，可在此栏定义格式。默认格式为yymmdd，格式串含义如下：
 yymmdd  一个y（11）表示两位年，两个y表示4位年（2011）
 一个m表示一位月份，两个m表示两位月份， 一个d表示一位日期，两位d表示两位日期。
-.. 例:: 
+例:: 
 
 yymmdd        20110101
 
@@ -463,6 +463,7 @@ rwa.jdbc.password=123456
 select * from people where name=’${var.name}’   (${var.name}为字符串，需加‘’)
 select * from people where age=${var.age}      (${var.age} 为数值)
 
+
 2.4.2	用法
 ..............................
 Sql查询语句可有如下用法：``“数据查询”、“前置处理”及“参数值”`` 
@@ -470,7 +471,7 @@ Sql查询语句可有如下用法：``“数据查询”、“前置处理”及
  * “前置处理”须在所有查询发生之前率先进行查询，它通常用于执行一个或多个存储过程，其书写语法如下::
  
 { call 存储过程名称(${var.参数1}，${var.参数2}…)}
-.. seealso::
+例::
 
 {call SYMBOLS.TP_AM_REPORT.TP_AM_SUBJECT_LIMIT ( ${var.branch}, 
 ${var.subcode}, ${var.userid})}
@@ -542,26 +543,34 @@ ${ds.ORDER.Quantity}等于${ds.ORDER[Quantity]}
 
 2.5.3.2	变量引用
 '''''''''''''''''''''''''''''''''''''
-变量引用是通过内置对象var 标示查询条件变量实现的。变量引用格式：
-${var.varName}  
-如：select  b.SWJG_3_JC as JC,a.NSRMC as NS,c.ZSXM_JC as XM,a.RKSE as SE from dbo.CDQ_RKSK a inner join dbo.DIM_DM_SWJG b on a.SWJG_DM=b.SWJG_DM 
+变量引用是通过内置对象var 标示查询条件变量实现的。变量引用格式： ``${var.varName}`` 
+如::
+
+select  b.SWJG_3_JC as JC,a.NSRMC as NS,c.ZSXM_JC as XM,a.RKSE as SE from dbo.CDQ_RKSK a 
+inner join dbo.DIM_DM_SWJG b on a.SWJG_DM=b.SWJG_DM 
 inner join dbo.DIM_DM_ZSXM c on a.ZSXM_DM=c.ZSXM_DM
 where a.FSYF='${var.day}' and f.CY_MC='${var.cy}'
-例在参数依赖关系中：
+
+例在参数依赖关系中::
+
 select distinct hyml_mc,hyml_dm from dim_dm_hy where cy_dm='${var.cy}'
+
 这个控件的取值是依赖于变量名为cy条件的值
 
 2.5.3.3	查询数据集中数据的引用
 '''''''''''''''''''''''''''''''''''''
 数据引用是通过内置对象ds 标示查询数据集实现的。查询数据引用格式：
 ${ds.dataSetName.filedName}
-如：${ds.oa.HY}，取出查询名为oa的HY字段。
+如：``${ds.oa.HY}`` ，取出查询名为oa的HY字段。
 对于有条件限制的查询数据，引用时只需遵循下面格式即可：
 ${ds.dataSetName[field1=1][field2=2][fieldName]}
 如：${ds.oa[CY_MC=第一产业][NSRMC]}，取出查询名为oa且CY_MC是第一产业的NSRMC字段。
 不仅支持在define标签页引用查询数据，也支持在sql语句中引用查询数据，格式
 同上。
-如：select  SWJG_5_JC WHERE SWJG_4_JC ='${ds.HZ[SWJG4]}'
+如::
+
+select  SWJG_5_JC WHERE SWJG_4_JC ='${ds.HZ[SWJG4]}'
+
 
 2.5.3.4	字典引用
 '''''''''''''''''''''''''''''''''''''
@@ -571,7 +580,10 @@ ${dic.字典名[键值][字段名]}
 
 2.5.3.5	混合运算
 '''''''''''''''''''''''''''''''''''''
-混合运算一般即是指四则运算，例：${(ds.oa[CY_MC=第一产业][RKSE]-ds.od[CY_MC=第一产业][RKSE])/ds.od[CY_MC=第一产业][RKSE]
+混合运算一般即是指四则运算，例::
+
+${(ds.oa[CY_MC=第一产业][RKSE]-ds.od[CY_MC=第一产业][RKSE])/ds.od[CY_MC=第一产业][RKSE]
+
 
 2.5.3.6	url请求参数引用
 '''''''''''''''''''''''''''''''''''''
@@ -632,7 +644,7 @@ session参数引用格式：${session[paraName]}
  .. image :: _static/images/bicenter/tab4.png
 其中，上下文敏感的函数，是指根据其出现位置的不同，会得到不同结果的函数，如：当分组求和函数出现在分组尾时，得到的是该分组所有行的和；当其出现在查询语句所在行时，其结果是从第一行到当前行的和；当其出现在表头时，得到的是第一行的值。其它上下文敏感函数的行为也是同样的。例如：
  .. image :: _static/images/bicenter/3.2.1.3.1.png
- 界面显示：
+界面显示：
  .. image :: _static/images/bicenter/3.2.1.3.2.png
 
 3.2.1.4	数据集聚合函数
@@ -771,8 +783,8 @@ A列（时间）作为横坐标，B（入库税额）、C（提退税额）列�
 ''''''''''''''''''''''''''''''''''''''
  * 把chart标签页改为散点图
  .. image :: _static/images/bicenter/3.6.2.3.1.png
- 数据点名称可以不定义，A列时间作为横坐标，B列，C列数量作为纵坐标。
- * :ref:define标签页同`线图实例 <line>`
+数据点名称可以不定义，A列时间作为横坐标，B列，C列数量作为纵坐标。
+* :ref:define标签页同`线图实例 <line>`
  * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.3.2.png 
 由于在chart标签页中“图上是否显示数据原始值”设置为否，所以值不显示在图上。单位没有设，则默认转成K、M类数据。由于数据精度没设，则图上所有数据默认均会保留两位显示。
@@ -782,7 +794,7 @@ A列（时间）作为横坐标，B（入库税额）、C（提退税额）列�
  * 把chart标签页改为饼图
  .. image :: _static/images/bicenter/3.6.2.4.1.png
 A列时间作为每个分瓣的名称，B列入库税额作为每个分瓣的大小。
- * :ref:define标签页同`线图实例 <line>`
+* :ref:define标签页同`线图实例 <line>`
  * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.4.2.png
 由于在chart标签页中“图上是否显示数据原始值”设置为是，所以值不显示在图上。单位设的10000000|千万，则小于1千万的数据保持原值，大于1千万的数据转换成千万数据显示。由于数据精度为0，则图上所有数据均是整数。图例位置设为无，则不在图上显示图例。
@@ -792,7 +804,7 @@ A列时间作为每个分瓣的名称，B列入库税额作为每个分瓣的大
  * 把chart标签页改为条形图
  .. image :: _static/images/bicenter/3.6.2.5.1.png
 B列时间作为纵坐标，B列入库税额和C列提退税额作为横坐标。
- * :ref:define标签页同`线图实例 <line>`
+* :ref:define标签页同`线图实例 <line>`
  * 界面图形效果
  .. image :: _static/images/bicenter/3.6.2.5.2.png
 由于在chart标签页中“图上是否显示数据原始值”设置为是，所以值不显示在图上。单位设的10000000|千万，则小于1千万的数据保持原值，大于1千万的数据转换成千万数据显示。由于数据精度为0，则图上所有数据均是整数。图例位置设为右，则显示在图形的右边，由于三维显示设为否，则图形不进行三维展示。
@@ -813,8 +825,10 @@ embed:{col:1,row:2}
  .. image :: _static/images/bicenter/3.8.1.png
 界面显示：
  .. image :: _static/images/bicenter/3.8.2.png
-在需要合并的单元格上做如下标注：
+在需要合并的单元格上做如下标注::
+
    mergeRow:true 
+   
 就可以实现相同区域的合并。上例标注改为：
  .. image :: _static/images/bicenter/3.8.3.png
 界面显示：
@@ -830,8 +844,10 @@ mergeRowBy:-4   这句是以哪一行为合并列的标准。如“-4”就是�
 3.9	清单型报表填充值设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 在清单型报表中，查询的报表数据区为空白没有值时，可以使用如下函数进行设置。
-例：
+例::
+
 ${iif(ds.HZ[NSRSBH=ds.SK[NSRSBH]][Y]="",0,ds.HZ[NSRSBH=ds.SK[NSRSBH]][Y])}
+
     如果查询为空，使用0填充，不为空时用查询出的数据填充。
 	
 第4章	特殊清单+自由布局报表（凭证）
@@ -840,7 +856,7 @@ ${iif(ds.HZ[NSRSBH=ds.SK[NSRSBH]][Y]="",0,ds.HZ[NSRSBH=ds.SK[NSRSBH]][Y])}
  .. image :: _static/images/bicenter/4.1.png
 上图由多个客户信息分段组成凭证式报表。如果实现上图效果，基本标注为：左上表头，右下单元格，分组处写法，分页处写法。
  .. image :: _static/images/bicenter/4.2.png
-“ 纳税人缴税清单”和“缴税日期”的“bindTo:'ds.SK'”批注意思： “ 纳税人缴税清单”和“缴税日期”这两行连接下面“SK”查询出的数据在每个凭证上都有。    “应缴税额”的“break:'line'”批注意思：每个凭证在此分开，不会出现一个凭证只有一半就分开的情况，这里的break:'line'可以用break:'inOnePage'或者break:'Page'替换，用break:'inOnePage'或者break:'Page'时，必须与bindTo:'ds.SK'一起批注。
+“ 纳税人缴税清单”和“缴税日期”的 ``bindTo:'ds.SK'`` 批注意思： “ 纳税人缴税清单”和“缴税日期”这两行连接下面“SK”查询出的数据在每个凭证上都有。    “应缴税额”的 ``break:'line'`` 批注意思：每个凭证在此分开，不会出现一个凭证只有一半就分开的情况，这里的 ``break:'line'`` 可以用 ``break:'inOnePage'`` 或者break:'Page'替换，用 ``break:'inOnePage'`` 或者 ``break:'Page'`` 时，必须与 ``bindTo:'ds.SK'`` 一起批注。
 
  
 第5章	固定行列型报表定义的说明
@@ -909,15 +925,15 @@ editableAreas:["C13","E6:F9"]，表示在浏览页面此处的单元格是可以
     USER_ID      VARCHAR2(50 CHAR),
     STATUS      NUMBER,
     LAST_MODIFY_DATE  DATE); 
-CREATE  INDEX  FIN_REPORT_MODIFY_01  ON FIN_REPORT_MODIFY(REPORT_CODE)；
-CREATE  INDEX  FIN_REPORT_MODIFY_02  ON FIN_REPORT_MODIFY(REPORT_DATE);
-CREATE  INDEX  FIN_REPORT_MODIFY_03  ON FIN_REPORT_MODIFY(BRANCH);
-CREATE  INDEX  F IN_REPORT_MODIFY_04  ON FIN_REPORT_MODIFY(FREQ);
-CREATE  INDEX  F IN_REPORT_MODIFY_05  ON FIN_REPORT_MODIFY(SECTION_IDX);
-CREATE  INDEX  FIN_REPORT_MODIFY_06  ON FIN_REPORT_MODIFY(PAGE);
-CREATE  INDEX  FIN_REPORT_MODIFY_07  ON FIN_REPORT_MODIFY(CHUNK_IDX);
-CREATE  INDEX  FIN_REPORT_MODIFY_08  ON FIN_REPORT_MODIFY(USER_ID);
-CREATE  INDEX  F IN_REPORT_MODIFY_09  ON FIN_REPORT_MODIFY(STATUS);
+	CREATE  INDEX  FIN_REPORT_MODIFY_01  ON FIN_REPORT_MODIFY(REPORT_CODE)；
+	CREATE  INDEX  FIN_REPORT_MODIFY_02  ON FIN_REPORT_MODIFY(REPORT_DATE);
+	CREATE  INDEX  FIN_REPORT_MODIFY_03  ON FIN_REPORT_MODIFY(BRANCH);
+	CREATE  INDEX  F IN_REPORT_MODIFY_04  ON FIN_REPORT_MODIFY(FREQ);
+	CREATE  INDEX  F IN_REPORT_MODIFY_05  ON FIN_REPORT_MODIFY(SECTION_IDX);
+	CREATE  INDEX  FIN_REPORT_MODIFY_06  ON FIN_REPORT_MODIFY(PAGE);
+	CREATE  INDEX  FIN_REPORT_MODIFY_07  ON FIN_REPORT_MODIFY(CHUNK_IDX);
+	CREATE  INDEX  FIN_REPORT_MODIFY_08  ON FIN_REPORT_MODIFY(USER_ID);
+	CREATE  INDEX  F IN_REPORT_MODIFY_09  ON FIN_REPORT_MODIFY(STATUS);
 
 3.	在jdbcDomain.properties新加的数据连接信息::
 
@@ -1027,16 +1043,16 @@ ${  bicenter支持的运算公式 }
 
 8.2.1	人民币中文大写
 ...............................
- 第一步设置单元格为“数值”类型 
- 第二步做如下标注：money:{format:”chineseNumber”} 例：
+第一步设置单元格为“数值”类型 ,
+第二步做如下标注：money:{format:”chineseNumber”} 例：
  .. image :: _static/images/bicenter/8.2.1.1.png
 界面显示：
  .. image :: _static/images/bicenter/8.2.1.2.png
 
 8.2.2	人民币金额网格
 ...............................
- 第一步设置单元格为“数值”类型
- 第二步做如下标注：money:{format:”grid”} 例:
+第一步设置单元格为“数值”类型,
+第二步做如下标注：money:{format:”grid”} 例:
  .. image :: _static/images/bicenter/8.2.2.1.png
 界面显示：
  .. image :: _static/images/bicenter/8.2.2.2.png
@@ -1053,9 +1069,11 @@ style:"topLeft-bottomRight-line",captioins:[“右上显示值”,”左下显�
 8.4	隐藏指定列
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
  在一定的条件下，隐藏指定的列。
-如下图，可在列表头区中，相应单元格中标注：
-hideIf：条件表达式
-replaceVal:0
+如下图，可在列表头区中，相应单元格中标注::
+
+	hideIf：条件表达式
+		replaceVal:0
+		
  .. image :: _static/images/bicenter/8.4.1.png
 当条件表达式为真时，隐藏报表中相应的列。
 条件表达式以字符串形式定义，支持如下逻辑操作符：=、!=、> 、 >=、  <、  <= 。条件表达式中，可引用查询条件。
@@ -1243,7 +1261,7 @@ print:"10cm,0cm,1em,0.5cm"，
  .. image :: _static/images/bicenter/9.3.2.4.png
  在产品名称的标注需要注意的是::
  
- printRow:{
+	printRow:{
             pos:'1.5cm',
             height:'0.5cm'
            }
@@ -1251,13 +1269,13 @@ print:"10cm,0cm,1em,0.5cm"，
 表示在离纸张上端1.5cm处，高度0.5cm的范围打印这一行。上面标注该行字段的打印范围是为了实现在套打中，这一行能在该位置上被打印出来。
 在打印柜员：小明批注需要注意的是：
  .. image :: _static/images/bicenter/9.3.2.5.png
- 这里的break:'page'必须要与bindTo: "group.data"一起批注，代表打印时从这里开始分页，保证打印出来不会出现半截分页的现象。这里的break:'page'可以用break:'inOnePage'替换，但是也必须与bindTo: "group.data"一起批注。
+这里的break:'page'必须要与bindTo: "group.data"一起批注，代表打印时从这里开始分页，保证打印出来不会出现半截分页的现象。这里的break:'page'可以用break:'inOnePage'替换，但是也必须与bindTo: "group.data"一起批注。
 套打时，在定义的位置显示：打印柜员和打印时间。
 根据查询结果，套打时，倘若只想在每页只显示十二条查询结果，并且想把第几页显示到界面上。结合这里的例子讲解实现的步骤：
-	首先，我们要把Page字段做“前置处理”或者预先存在数据库中，使它能根据查询结果的顺序在套打时显示正确的页码。
+ * 首先，我们要把Page字段做“前置处理”或者预先存在数据库中，使它能根据查询结果的顺序在套打时显示正确的页码。
 在这个例子当中我们把page这个字段放在dbo.Table_Test1这个表里，然后通过sql语句：Update  dbo.Table_Test1 set Page =(ProductID-1)/12+1对Page赋值。
-	接着，我们用分组聚合函数将数据库中Page值取出来。这里用的是${group.data.AggrFirstRow(Page)}，注意：分组中必须要有分组字段“Page”才能应用这个函数。
-	需要套打的地方都要填写批注。如下所示：
+ * 接着，我们用分组聚合函数将数据库中Page值取出来。这里用的是${group.data.AggrFirstRow(Page)}，注意：分组中必须要有分组字段“Page”才能应用这个函数。
+需要套打的地方都要填写批注。如下所示：
  .. image :: _static/images/bicenter/9.3.2.6.png
 界面显示效果：
  .. image :: _static/images/bicenter/9.3.2.7.png
@@ -1274,7 +1292,7 @@ print:"10cm,0cm,1em,0.5cm"，
 有printRow的标注，故行列固定的单元格套打标注可以省略。
 界面显示效果：
  .. image :: _static/images/bicenter/9.3.3.3.png
- 套打效果如下：
+套打效果如下：
  .. image :: _static/images/bicenter/9.3.3.4.png
 如果行列固定型单元格在其他地方，则需要添加标注才能套打。如：
  .. image :: _static/images/bicenter/9.3.3.5.png
@@ -1309,7 +1327,7 @@ print:"10cm,0cm,1em,0.5cm"，
 10.1	数据源设置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 我们要在配置文件中预先设置好数据源，以便报表获取数据库信息。一般，在jdbcDomain.properties的起始部分（data source setting部分）就是配置数据源的位置。接着，介绍三种常用的数据源配置：
-第一种：oracle数据源::
+ 第一种：oracle数据源::
 
 SW.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
 SW.jdbc.url=jdbc:oracle:thin:@192.168.198.123:1521:sw
@@ -1319,7 +1337,7 @@ SW.jdbc.password=oracle
 具体含义见下表：
  .. image :: _static/images/bicenter/tab7.png
  
-第二种：sql server数据源::
+ 第二种：sql server数据源::
 
 JX.jdbc.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
 JX.jdbc.url=jdbc:sqlserver://192.168.198.123:1433;databaseName=SW;SelectMethod=cursor
@@ -1327,7 +1345,7 @@ JX.jdbc.username=sa
 JX.jdbc.password=123456
 具体含义与oracle数据源相似，只是数据库的名称在databaseName中设置
 
-第三种：mysql数据源::
+ 第三种：mysql数据源::
 ZZBB.jdbc.driverClassName=org.gjt.mm.mysql.Driver
 ZZBB.jdbc.url=jdbc:mysql://192.168.198.99:3306/tcpdev
 ZZBB.jdbc.username=root
