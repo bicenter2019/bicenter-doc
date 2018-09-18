@@ -372,4 +372,10 @@ HTML片段
 例如设计好的看板展示：
  .. image :: _static/images/datashow/3.1.png
 
+附件
+=====================================
+bicenter-datashow 视频演示
+-----------------------------
+链接：https://pan.baidu.com/s/1BHfeXvNZCNJkdZ5SCoW6qg 密码：v8pn
+
 												   
