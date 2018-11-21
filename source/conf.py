@@ -14,7 +14,8 @@
 
 import sys
 import os
-
+import re
+import sphinx
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -220,8 +221,31 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [(master_doc, 'sphinx-doc.tex', u'sphinx-doc Documentation',
-     u'zhom', 'manual',1)]
+latex_documents = [
+    (master_doc, 'sphinx-doc.tex', u'sphinx-doc Documentation',
+     u'zhom', 'manual'),
+]
+latex_documents = [('contents', 'sphinx.tex', 'Sphinx Documentation',
+                    'Georg Brandl', 'manual', 1)]
+latex_logo = '_static/sphinx.png'
+latex_elements = {
+    'fontpkg': r'''
+\usepackage[sc]{mathpazo}
+\usepackage[scaled]{helvet}
+\usepackage{courier}
+''',
+    'passoptionstopackages': '\\PassOptionsToPackage{svgnames}{xcolor}',
+    'preamble': '\\DeclareUnicodeCharacter{229E}{\\ensuremath{\\boxplus}}',
+    'fvset': '\\fvset{fontsize=auto}',
+    # fix missing index entry due to RTD doing only once pdflatex after makeindex
+    'printindex': r'''
+\IfFileExists{\jobname.ind}
+             {\footnotesize\raggedright\printindex}
+             {\begin{sphinxtheindex}\end{sphinxtheindex}}
+''',
+}
+latex_show_urls = 'footnote'
+latex_use_xindy = True
 
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -233,16 +257,16 @@ latex_documents = [(master_doc, 'sphinx-doc.tex', u'sphinx-doc Documentation',
 #latex_use_parts = False
 
 # If true, show page references after internal links.
-#latex_show_pagerefs = true
+#latex_show_pagerefs = False
 
 # If true, show URL addresses after external links.
-#latex_show_urls = true
+#latex_show_urls = False
 
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []
 
 # If false, no module index is generated.
-latex_domain_indices = True
+#latex_domain_indices = True
 
 
 # -- Options for manual page output ---------------------------------------
