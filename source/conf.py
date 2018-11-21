@@ -220,7 +220,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [('index', 'sphinx-doc.tex', u'sphinx-doc Documentation',
+latex_documents = [(master_doc, 'sphinx-doc.tex', u'sphinx-doc Documentation',
      u'zhom', 'manual',1)]
 
 
@@ -250,7 +250,7 @@ latex_domain_indices = True
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'sphinx-doc', u'sphinx-doc Documentation',
+    (master_doc, 'sphinx-doc', u'sphinx-doc Documentation',
      [author], 1)
 ]
 
@@ -264,7 +264,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'sphinx-doc', u'sphinx-doc Documentation',
+    (master_doc, 'sphinx-doc', u'sphinx-doc Documentation',
      author, 'sphinx-doc', 'One line description of project.',
      'Miscellaneous'),
 ]
