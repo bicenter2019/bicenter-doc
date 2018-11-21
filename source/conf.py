@@ -220,28 +220,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (contents, 'sphinx-doc.tex', u'sphinx-doc Documentation',
-     u'zhom', 'manual',1),
-]
-latex_elements = {
-    'fontpkg': r'''
-\usepackage[sc]{mathpazo}
-\usepackage[scaled]{helvet}
-\usepackage{courier}
-''',
-    'passoptionstopackages': '\\PassOptionsToPackage{svgnames}{xcolor}',
-    'preamble': '\\DeclareUnicodeCharacter{229E}{\\ensuremath{\\boxplus}}',
-    'fvset': '\\fvset{fontsize=auto}',
-    # fix missing index entry due to RTD doing only once pdflatex after makeindex
-    'printindex': r'''
-\IfFileExists{\jobname.ind}
-             {\footnotesize\raggedright\printindex}
-             {\begin{sphinxtheindex}\end{sphinxtheindex}}
-''',
-}
-latex_show_urls = 'footnote'
-latex_use_xindy = True
+latex_documents = [('index', 'sphinx-doc.tex', u'sphinx-doc Documentation',
+     u'zhom', 'manual',1]
 
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -253,16 +233,16 @@ latex_use_xindy = True
 #latex_use_parts = False
 
 # If true, show page references after internal links.
-#latex_show_pagerefs = False
+latex_show_pagerefs = true
 
 # If true, show URL addresses after external links.
-#latex_show_urls = False
+latex_show_urls = true
 
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []
 
 # If false, no module index is generated.
-#latex_domain_indices = True
+latex_domain_indices = True
 
 
 # -- Options for manual page output ---------------------------------------
@@ -270,7 +250,7 @@ latex_use_xindy = True
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'sphinx-doc', u'sphinx-doc Documentation',
+    ('index', 'sphinx-doc', u'sphinx-doc Documentation',
      [author], 1)
 ]
 
@@ -284,7 +264,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'sphinx-doc', u'sphinx-doc Documentation',
+    ('index', 'sphinx-doc', u'sphinx-doc Documentation',
      author, 'sphinx-doc', 'One line description of project.',
      'Miscellaneous'),
 ]
