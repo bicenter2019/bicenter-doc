@@ -221,9 +221,28 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'sphinx-doc.tex', u'sphinx-doc Documentation',
-     u'zhom', 'manual'),
+    (contents, 'sphinx-doc.tex', u'sphinx-doc Documentation',
+     u'zhom', 'manual',1),
 ]
+latex_elements = {
+    'fontpkg': r'''
+\usepackage[sc]{mathpazo}
+\usepackage[scaled]{helvet}
+\usepackage{courier}
+''',
+    'passoptionstopackages': '\\PassOptionsToPackage{svgnames}{xcolor}',
+    'preamble': '\\DeclareUnicodeCharacter{229E}{\\ensuremath{\\boxplus}}',
+    'fvset': '\\fvset{fontsize=auto}',
+    # fix missing index entry due to RTD doing only once pdflatex after makeindex
+    'printindex': r'''
+\IfFileExists{\jobname.ind}
+             {\footnotesize\raggedright\printindex}
+             {\begin{sphinxtheindex}\end{sphinxtheindex}}
+''',
+}
+latex_show_urls = 'footnote'
+latex_use_xindy = True
+
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
