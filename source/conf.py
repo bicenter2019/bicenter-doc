@@ -221,7 +221,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [('index', 'sphinx-doc.tex', u'sphinx-doc Documentation',
-     u'zhom', 'manual',1]
+     u'zhom', 'manual',1)]
 
 
 # The name of an image file (relative to this directory) to place at the top of
