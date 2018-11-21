@@ -236,7 +236,7 @@ latex_documents = [('index', 'sphinx-doc.tex', u'sphinx-doc Documentation',
 #latex_show_pagerefs = true
 
 # If true, show URL addresses after external links.
-latex_show_urls = true
+#latex_show_urls = true
 
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []
