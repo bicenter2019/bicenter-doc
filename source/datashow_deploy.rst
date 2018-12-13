@@ -41,9 +41,9 @@ BICENTER-DataShow支持两种部署方式，对应两种部署包，都是以.zi
 #############################
 #部署服务器地址
 host=0.0.0.0   
-#端口号，任意指定（未被占用）           
+#端口号，任意指定(未被占用)           
 port=8888	
-#前端项目地址，即部署包中webcontent文件夹坐在目录				
+#前端项目地址,即部署包中webcontent文件夹坐在目录				
 webroot=E:/datashow2.0/front/datashowfront  
 #模板文件存放目录，即部署包中workroot文件夹所在目录；也可以任意指定，需要把workroot目录下的.js文件拷贝进去
 workfolder=F:/tmp/boardbackend       
@@ -100,7 +100,6 @@ orac.jdbc.url=jdbc:oracle:thin:@10.6.10.96:1521:oracl
 orac.jdbc.username=oracl
 orac.jdbc.password=oracl
 sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
-
 #sqlserver数据源配置
 sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
 sqlser.jdbc.username=sa
