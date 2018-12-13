@@ -35,40 +35,37 @@ BICENTER-DataShow支持两种部署方式，对应两种部署包，都是以.zi
  * 数据源，可配置多个数据源
 例如：详细配置如下::
 
-#############################
-# nessensory setting
-#############################
-#部署服务器地址
-host=0.0.0.0   
-#端口号，任意指定(未被占用)
-::
-
-port=8888	
-#前端项目地址,即部署包中webcontent文件夹坐在目录				
-webroot=E:/datashow2.0/front/datashowfront  
-#模板文件存放目录，即部署包中workroot文件夹所在目录；也可以任意指定，需要把workroot目录下的.js文件拷贝进去
-workfolder=F:/tmp/boardbackend       
-##############################
-#data source setting
-##############################
-#mysql数据源配置
-itsm451.jdbc.driverClassName=com.mysql.jdbc.Driver
-itsm451.jdbc.url=jdbc:mysql://192.168.9.115:3306/itsm_451?useUnicode=true&characterEncoding=utf8&autoReconnect=true
-itsm451.jdbc.username=root
-itsm451.jdbc.password=123456
-#oracle数据源配置
-orac.jdbc.url=jdbc:oracle:thin:@10.6.10.96:1521:oracl
-orac.jdbc.username=oracl
-orac.jdbc.password=oracl
-sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
-#sqlserver数据源配置
-sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
-sqlser.jdbc.username=sa
-sqlser.jdbc.password=123456#orcle.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
-#verbose only for inner simple logger
-#off, error, warn, info, debug, all ;default info
-log.verbose=debug
-
+		#############################
+		# nessensory setting
+		#############################
+		#部署服务器地址
+		host=0.0.0.0   
+		#端口号，任意指定(未被占用)::
+		port=8888	
+		#前端项目地址,即部署包中webcontent文件夹坐在目录				
+		webroot=E:/datashow2.0/front/datashowfront  
+		#模板文件存放目录，即部署包中workroot文件夹所在目录；也可以任意指定，需要把workroot目录下的.js文件拷贝进去
+		workfolder=F:/tmp/boardbackend       
+		##############################
+		#data source setting
+		##############################
+		#mysql数据源配置
+		itsm451.jdbc.driverClassName=com.mysql.jdbc.Driver
+		itsm451.jdbc.url=jdbc:mysql://192.168.9.115:3306/itsm_451?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+		itsm451.jdbc.username=root
+		itsm451.jdbc.password=123456
+		#oracle数据源配置
+		orac.jdbc.url=jdbc:oracle:thin:@10.6.10.96:1521:oracl
+		orac.jdbc.username=oracl
+		orac.jdbc.password=oracl
+		sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
+		#sqlserver数据源配置
+		sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
+		sqlser.jdbc.username=sa
+		sqlser.jdbc.password=123456#orcle.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+		#verbose only for inner simple logger
+		#off, error, warn, info, debug, all ;default info
+		log.verbose=debug
 
 
 2.2	启动
@@ -83,52 +80,38 @@ log.verbose=debug
  * 报表文件存放目录（webroot）
 例如：详细配置如下::
 
-#############################
-# nessensory setting
-#############################
-#模板文件存放目录，即部署包中workroot文件夹所在目录；也可以任意指定，需要把workroot目录下的.js文件拷贝进去
-::
-
-workfolder=F:/tmp/boardbackend       
-##############################
-#data source setting
-##############################
-#mysql数据源配置
-itsm451.jdbc.driverClassName=com.mysql.jdbc.Driver
-itsm451.jdbc.url=jdbc:mysql://192.168.9.115:3306/itsm_451?useUnicode=true&characterEncoding=utf8&autoReconnect=true
-itsm451.jdbc.username=root
-itsm451.jdbc.password=123456
-#oracle数据源配置
-orac.jdbc.url=jdbc:oracle:thin:@10.6.10.96:1521:oracl
-orac.jdbc.username=oracl
-orac.jdbc.password=oracl
-sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
-#sqlserver数据源配置
-sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
-sqlser.jdbc.username=sa
-sqlser.jdbc.password=123456#orcle.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
-#verbose only for inner simple logger
-#off, error, warn, info, debug, all ;default info
-log.verbose=debug
+		#############################
+		# nessensory setting
+		#############################
+		#模板文件存放目录，即部署包中workroot文件夹所在目录；也可以任意指定，需要把workroot目录下的.js文件拷贝进去::
+		workfolder=F:/tmp/boardbackend       
+		##############################
+		#data source setting
+		##############################
+		#mysql数据源配置
+		itsm451.jdbc.driverClassName=com.mysql.jdbc.Driver
+		itsm451.jdbc.url=jdbc:mysql://192.168.9.115:3306/itsm_451?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+		itsm451.jdbc.username=root
+		itsm451.jdbc.password=123456
+		#oracle数据源配置
+		orac.jdbc.url=jdbc:oracle:thin:@10.6.10.96:1521:oracl
+		orac.jdbc.username=oracl
+		orac.jdbc.password=oracl
+		sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
+		#sqlserver数据源配置
+		sqlser.jdbc.url=jdbc:sqlserver://10.126.3.106:1433;databaseName=Northwind;SelectMethod=cursor
+		sqlser.jdbc.username=sa
+		sqlser.jdbc.password=123456#orcle.jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+		#verbose only for inner simple logger
+		#off, error, warn, info, debug, all ;default info
+		log.verbose=debug
 
 
 
 3.2	集成其他应用
 -------------------
-将应用安装包\WEB-INF\lib目录下所有jar文件拷贝到本地应用的lib目录，将web.xml文件里的servlet配置加入本地的web.xml配置文件::
-
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-<display-name>temp</display-name>
-<welcome-file-list>
-<welcome-file>index.html</welcome-file>
-<welcome-file>index.htm</welcome-file>
-<welcome-file>index.jsp</welcome-file>
-<welcome-file>default.html</welcome-file>
-<welcome-file>default.htm</welcome-file>
-<welcome-file>default.jsp</welcome-file>
-</welcome-file-list>
-#将以下sevlet加入本地web.xml配置文件
+将应用安装包\WEB-INF\lib目录下所有jar文件拷贝到本地应用的lib目录，将web.xml文件里的servlet配置加入本地的web.xml配置文件
+将以下sevlet加入本地web.xml配置文件
 ::
 
 <servlet>
