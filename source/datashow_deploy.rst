@@ -21,7 +21,6 @@ BICENTER-DataShow支持两种部署方式，对应两种部署包，都是以.zi
   .. image :: _static/images/datashow/deploy/1.2.1.png 
  * 嵌入模式
 可作为一个Servlet，嵌入其它于 JSP容器的应用。这种模式支持一般web应用服务器启动，例如tomcat，使用的安装包是“Bicenter_DataShow_war.zip”，解压以后文件文件如下：
-
   .. image :: _static/images/datashow/deploy/1.2.2.png 
 
 第2章	独立部署
