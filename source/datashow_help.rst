@@ -240,7 +240,7 @@ HTML片段
  .. image :: _static/images/datashow/2.4.7.3.png
 样式列，支持自定义显示样式，分为通用样式和对数据进行标记，分别对应css语法和json字符串语法两种写法。
 例如：标记标题列为蓝色：color:#07e2ff
-标记状态列中的数据，显示已解决为绿色，处理中为红色，已分派为黄色，添加如下jsos串::
+标记状态列中的数据，显示已解决为绿色，处理中为红色，已分派为黄色，添加如下json串::
 
 	 [{"value":"已解决" ,"style":"color:#fff;background:#007aff;padding:1px  5px;border-radius: 2px;"},
 	 {"value":"处理中" ,"style":"color:#fff;background:red;padding:1px 5px;border-radius: 2px;"}, 
