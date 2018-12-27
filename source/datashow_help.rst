@@ -360,7 +360,19 @@ HTML片段
  
 事件联动
 --------------------
-暂无 
+目前支持的动作有弹出页面，播放提示音，弹出错误信息，并且支持扩展。事件联动是针对每个事件的设置，比如要实现点击某个数据项，跳转到数据的详情页，或者设置数据达到报警值时，播放提示音等都可以使用事件联动来完成。
+	下面举例详细说明，比如，实现一个下钻功能，需要以下几步
+第一步，点击全局文件列表的【动作】按钮，添加动作
+ .. image :: _static/images/datashow/3.1.2.1.png.png 
+第二步，在动作设置列表点击【添加】按钮，添加动作参数
+ .. image :: _static/images/datashow/3.1.2.2.png
+第三步，新增触发器动作页面，配置动作参数
+ .. image :: _static/images/datashow/3.1.2.3.png
+其中，触发器就是选择哪个组件触发那种时间，目前触发器有数据加载完成，数据项点击，定时触发器，标题点击等触发事件
+条件，支持直接写表达式，表示事件触发的条件。
+动作，直接选择要执行的动作，根据选择的动作不同，参数不一样
+作用范围，一般针对数据加载完成和定时触发器有意义，根据实际情况勾选就。
+
 
 删除组件
 =====================
@@ -382,6 +394,44 @@ HTML片段
 在浏览器输入地址http://[host]:[port]访问，查看保存好的看板，点击看板后面对应的【查看】，或者【全屏查看】按钮查看设计好的看板，如果有需要调整，点击【编辑】按钮，可以进行重新设计。
 例如设计好的看板展示：
  .. image :: _static/images/datashow/3.1.png
+ 
+常见问题解决
+=====================================
+1.	当部署在Linux环境时，注意需要给启动脚本startup.sh文件赋予可执行权限，否则脚本可能不能执行
+2.	每次启动前，注意kill之前启动的进程，否则可能启动失败
+3.	每次重新部署注意要清除浏览器客户端缓存
+4.	其他说明::
+
+http请求说明：
+1、配置config.properties
+[http请求名称]..http.url=ip:port //http的基地址
+例如：testhttp.http.url=http://192.168.9.117:8888
+
+2、查询语句是json写法
+{"method": vaule,"path":value,"param"(可选):{}}
+
+例如：{"method":"post" , "path":"/data/query.ds" ,"param":{"op":"jdbc","sql":"select * from  testgeo1","dataSrc":"itsm451"}}
+
+es请求说明：
+1、配置config.properties
+[es名称].elasticsearch.url=ip:port[,ip:port] //多个逗号分隔。
+例如：testes1.elasticsearch.url=192.168.9.114:9200
+
+2、查询语句，包含两个json：
+	header（index/indices，可搜索的可选（mapping）types，search_type，preference和routing）
+	body（包括 query, aggregations, from, size 等）
+
+	例如，查询框中输入：
+	{"index": "bank"} 
+	{
+		"query": {
+			"match": {"state": "TN"}
+		},
+		"size": 2,
+		"from": 10,
+		"sort": [{"account_number": "asc"}]
+	}
+
 
 附件
 =====================================
