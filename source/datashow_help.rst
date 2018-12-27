@@ -363,7 +363,7 @@ HTML片段
 目前支持的动作有弹出页面，播放提示音，弹出错误信息，并且支持扩展。事件联动是针对每个事件的设置，比如要实现点击某个数据项，跳转到数据的详情页，或者设置数据达到报警值时，播放提示音等都可以使用事件联动来完成。
 	下面举例详细说明，比如，实现一个下钻功能，需要以下几步
 第一步，点击全局文件列表的【动作】按钮，添加动作
- .. image :: _static/images/datashow/3.1.2.1.png.png 
+ .. image :: _static/images/datashow/3.1.2.1.png
 第二步，在动作设置列表点击【添加】按钮，添加动作参数
  .. image :: _static/images/datashow/3.1.2.2.png
 第三步，新增触发器动作页面，配置动作参数
@@ -402,35 +402,36 @@ HTML片段
 3.	每次重新部署注意要清除浏览器客户端缓存
 4.	其他说明::
 
-http请求说明：
-1、配置config.properties
-[http请求名称]..http.url=ip:port //http的基地址
-例如：testhttp.http.url=http://192.168.9.117:8888
 
-2、查询语句是json写法
-{"method": vaule,"path":value,"param"(可选):{}}
+		http请求说明:
+		1、配置config.properties
+		[http请求名称]..http.url=ip:port //http的基地址
+	    例如：testhttp.http.url=http://192.168.9.117:8888
 
-例如：{"method":"post" , "path":"/data/query.ds" ,"param":{"op":"jdbc","sql":"select * from  testgeo1","dataSrc":"itsm451"}}
+		2、查询语句是json写法
+		{"method": vaule,"path":value,"param"(可选):{}}
 
-es请求说明：
-1、配置config.properties
-[es名称].elasticsearch.url=ip:port[,ip:port] //多个逗号分隔。
-例如：testes1.elasticsearch.url=192.168.9.114:9200
+		例如：{"method":"post" , "path":"/data/query.ds" ,"param":{"op":"jdbc","sql":"select * from  testgeo1","dataSrc":"itsm451"}}
 
-2、查询语句，包含两个json：
-	header（index/indices，可搜索的可选（mapping）types，search_type，preference和routing）
-	body（包括 query, aggregations, from, size 等）
+		es请求说明：
+		1、配置config.properties
+		[es名称].elasticsearch.url=ip:port[,ip:port] //多个逗号分隔。
+		例如：testes1.elasticsearch.url=192.168.9.114:9200
 
-	例如，查询框中输入：
-	{"index": "bank"} 
-	{
+		2、查询语句，包含两个json：
+			header（index/indices，可搜索的可选（mapping）types，search_type，preference和routing）
+			body（包括 query, aggregations, from, size 等）
+
+			例如，查询框中输入：
+			{"index": "bank"} 
+		{
 		"query": {
 			"match": {"state": "TN"}
 		},
 		"size": 2,
 		"from": 10,
 		"sort": [{"account_number": "asc"}]
-	}
+		}
 
 
 附件
