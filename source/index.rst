@@ -19,6 +19,7 @@ Indices and tables
 * :ref:`BICENTER_DataShow安装部署手册 <dataShow_deploy>`
 * :ref:`BICENTER帮助手册 <bicenter>`
 * :ref:`BICENTER常见问题解决方法 <bicenter_list>`
+* :ref:`BICENTER文档中心 <bicenter_doc>`
 
 
 
