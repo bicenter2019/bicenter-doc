@@ -402,7 +402,7 @@ bicenter-datashow目前新增了elasticsearch数据源。需要注意该数据�
 EEL内置函数
 ==================================
 目前支持的eel函数参考一下连接：
-https://github.com/ 
+https://mathjs.org
 使用方法直接是${方法名}，例如：${abs(-1)}结果为1
  
 查看
