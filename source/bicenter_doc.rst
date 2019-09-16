@@ -22,6 +22,13 @@ BICENTER授权信息（试用版，通常有效期为半年）
 
  * 下载链接：https://pan.baidu.com/s/1DgFDS8sBloVczj0oEOq8iQ 提取码：9yal 
 
+BICENTER文档下载
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+ * bicenter自由报表相关手册：https://pan.baidu.com/s/16rEvvLf-lkXbgAmWyANcIw 提取码：ydsr 
+ * bicenter-datahshow相关手册：https://pan.baidu.com/s/119I1YmcgUJ9hR4rH8ZtAJg 提取码：q678 
+
+
+
 
 
  
